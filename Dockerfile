@@ -25,6 +25,6 @@ RUN tar xzvf ./${SWIG_ARCHIVE}.tar.gz \
     && make \
     && make install \
     && cd .. \
-    && rm ./${SWIG_ARCHIVE}.tar.gz
+    && rm ./${SWIG_ARCHIVE}.tar.gz \
     && rm -r ./swig-${SWIG_ARCHIVE}
 
