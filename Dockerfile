@@ -1,7 +1,7 @@
-FROM golang:1.7.4
-MAINTAINER iimuz
+FROM golang:1.9.1
+LABEL maintainer "iimuz"
 
-ENV SWIG_VERSION 3.0.11
+ENV SWIG_VERSION 3.0.12
 ENV SWIG_DOWNLOAD_PATH https://github.com/swig/swig/archive
 ENV SWIG_ARCHIVE rel-${SWIG_VERSION}
 
