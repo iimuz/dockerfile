@@ -1,5 +1,9 @@
 # golang develop tools
 
+* dep
 * golang
-* glide
 * swig
+
+## deprecatd
+
+* glide

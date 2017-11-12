@@ -3,31 +3,36 @@ LABEL maintainer iimuz
 
 arg binpath=/usr/local/bin
 
-arg ghq_version=v0.8.0
-arg ghq_download_path=https://github.com/motemen/ghq.git
-arg ghq_local_path=/go/src/github.com/motemen/ghq 
-RUN git clone --depth=1 -b ${ghq_version} ${ghq_download_path} ${ghq_local_path} \
-  && cd ${ghq_local_path} \
+# ghq
+ENV GHQ_VERSION=v0.8.0
+RUN mkdir -p /go/src/github.com/motemen/ghq && cd /go/src/github.com/motemen \
+  && git clone --depth=1 -b ${GHQ_VERSION} https://github.com/motemen/ghq.git ./ghq && cd ./ghq \
   && make build \
   && mv ./ghq ${binpath} \
   && git config --global ghq.root /go/src \
   && cd ~ \
   && rm -rf /go/src/* /go/bin/*
 
-arg glide_version=v0.13.1
-arg glide_download_path=Masterminds/glide
-arg glide_local_path=/go/src/github.com/${glide_download_path}
-RUN ghq get ${glide_download_path} \
-  && cd ${glide_local_path} \
-  && git checkout refs/tags/${glide_version} \
+# dep
+ENV DEP_VERSION=v0.3.2
+RUN mkdir -p /go/src/github.com/golang/dep && cd /go/src/github.com/golang \
+  && git clone --depth=1 -b ${DEP_VERSION} https://github.com/golang/dep.git ./dep && cd ./dep \
+  && go build -o dep ./cmd/dep \
+  && mv ./dep ${binpath} \
+  && cd ~ \
+  && rm -rf /go/src/* /go/bin/*
+
+# glide(deprecated)
+ENV GLIDE_VERSION=v0.13.1
+RUN mkdir -p /go/src/github.com/Masterminds/glide && cd /go/src/github.com/Masterminds \
+  && git clone --depth=1 -b ${GLIDE_VERSION} https://github.com/Masterminds/glide.git ./glide && cd ./glide \
   && make build \
   && mv ./glide ${binpath} \
   && cd ~ \
   && rm -rf /go/src/* /go/bin/*
 
-arg swig_version=rel-3.0.12
-arg swig_download_path=swig/swig
-arg swig_local_path=/go/src/github.com/${swig_download_path}
+# swig
+ENV SWIG_VERSION=rel-3.0.12
 RUN apt-get update \
   && apt-get install -y \
     autoconf \
@@ -39,9 +44,8 @@ RUN apt-get update \
     bison \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
-RUN ghq get ${swig_download_path} \
-  && cd ${swig_local_path} \
-  && git checkout refs/tags/${swig_version} \
+RUN mkdir -p /go/src/github.com/swig/swig && cd /go/src/github.com/swig \
+  && git clone --depth=1 -b ${SWIG_VERSION} https://github.com/swig/swig.git ./swig && cd ./swig \
   && sh autogen.sh \
   && ./configure \
   && make \
