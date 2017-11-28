@@ -26,7 +26,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     global \
     libc-dev \
-    make \
     vim \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
@@ -37,7 +36,6 @@ RUN adduser dev --disabled-password --gecos "" \
   && chown -R dev:dev /home/dev
 USER dev
 ENV HOME /home/dev
-ENV LANG en_US.UTF-8
 
 # install dein.vim
 RUN mkdir -p ${HOME}/.cache/dein \
@@ -51,6 +49,10 @@ COPY .vimrc $HOME/.vimrc
 COPY dein.toml $HOME/.vim/rc/dein.toml
 COPY dein_lazy.toml $HOME/.vim/rc/dein_lazy.toml
 RUN vim +":silent! call dein#install()" +qall
+
+# bash
+COPY .bashrc $HOME/.bashrc
+COPY .bash_profile $HOME/.bash_profile
 
 WORKDIR ${HOME}
 
