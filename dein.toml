@@ -41,7 +41,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
-depends = ['Shougo/neoinclude.vim', 'Shougo/context_filetype.vim']
+depends = ['neoinclude', 'context_filetype']
 on_i = 1
 hook_add = '''
   let g:neocomplete#enable_at_startup = 1
