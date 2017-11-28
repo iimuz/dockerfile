@@ -22,7 +22,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # vim
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    ctags \
     gcc \
+    global \
     libc-dev \
     make \
     vim \
@@ -32,10 +34,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # add dev user
 RUN adduser dev --disabled-password --gecos "" \
   && echo "ALL ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers \
-  && mkdir /home/dev/src /home/dev/bin /home/dev/pkg \
   && chown -R dev:dev /home/dev
-ENV HOME /home/dev
 USER dev
+ENV HOME /home/dev
+ENV LANG en_US.UTF-8
 
 # install dein.vim
 RUN mkdir -p ${HOME}/.cache/dein \
@@ -43,7 +45,7 @@ RUN mkdir -p ${HOME}/.cache/dein \
   && sh $HOME/installer.sh $HOME/.cache/dein \
   && rm $HOME/installer.sh
 
-# install plugins for vim
+# install plugins
 RUN mkdir -p $HOME/.vim/rc
 COPY .vimrc $HOME/.vimrc
 COPY dein.toml $HOME/.vim/rc/dein.toml
