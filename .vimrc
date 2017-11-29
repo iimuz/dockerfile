@@ -117,5 +117,9 @@ syntax enable
 " カラースキームです
 colorscheme elflord
 
+" CUDA
+autocmd BufNewFile,BufRead *.cu set filetype=cpp
+autocmd BufNewFile,BufRead *.cuh set filetype=cpp
+
 filetype plugin indent on
 

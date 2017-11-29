@@ -46,6 +46,7 @@ RUN mkdir -p ${HOME}/.cache/dein \
 # install plugins
 RUN mkdir -p $HOME/.vim/rc
 COPY .vimrc $HOME/.vimrc
+COPY .globalrc $HOME/.globalrc
 COPY dein.toml $HOME/.vim/rc/dein.toml
 COPY dein_lazy.toml $HOME/.vim/rc/dein_lazy.toml
 RUN vim +":silent! call dein#install()" +qall

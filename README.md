@@ -18,6 +18,6 @@ create global tags.
 
 ```bash
 $ export GTAGSFORCECPP=1
-$ global -v
+$ gtags -v
 ```
 
