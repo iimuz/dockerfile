@@ -22,13 +22,31 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # vim
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libc-dev \
+    lua5.2 \
+    lua5.2-dev \
+    luajit \
     ctags \
     gcc \
     global \
-    libc-dev \
-    vim \
+    ncurses-dev \
   && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  && cd /opt/ \
+  && git clone --depth=1 -b v8.0.1365 https://github.com/vim/vim vim \
+  && cd ./vim \
+  && ./configure \
+    --with-features=huge \
+    --enable-multibyte \
+    --enable-luainterp=dynamic \
+    --enable-gpm \
+    --enable-cscope \
+    --enable-fontset \
+    --enable-fail-if-missing \
+    --prefix=/usr/local \
+  && make && make install \
+  && vim --version
 
 # add dev user
 RUN adduser dev --disabled-password --gecos "" \
