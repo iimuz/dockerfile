@@ -11,6 +11,7 @@ cpp development tools
   * ctags
   * global
   * libc-dev
+  * lua
 
 ## global
 
