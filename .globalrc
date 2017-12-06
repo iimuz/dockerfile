@@ -34,7 +34,7 @@ default:\
 # See gtags(1).
 #---------------------------------------------------------------------
 common:\
-    :skip=GPATH,GTAGS,GRTAGS,GSYMS,HTML/,HTML.pub/,html/,tags,TAGS,ID,y.tab.c,y.tab.h,cscope.out,cscope.po.out,cscope.in.out,SCCS/,RCS/,CVS/,CVSROOT/,{arch}/,autom4te.cache/,.pdb/,.dll/:
+    :skip=GPATH,GTAGS,GRTAGS,GSYMS,HTML/,HTML.pub/,html/,tags,TAGS,ID,y.tab.c,y.tab.h,cscope.out,cscope.po.out,cscope.in.out,SCCS/,RCS/,CVS/,CVSROOT/,{arch}/,autom4te.cache/,pdb/,dll/:
 gtags:\
     :tc=common:\
     :langmap=c\:.c,yacc\:.y,asm\:.s.S,java\:.java,cpp\:.c++.cc.cpp.cxx.hxx.hpp.h.C.H.cu.cuh,php\:.php.php3.phtml:

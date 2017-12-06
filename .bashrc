@@ -1,4 +1,4 @@
-﻿PS1="[\u@\h \W]\$"
+PS1="[\u \w]\$"
 
 # alias
 alias ls='ls -G'
