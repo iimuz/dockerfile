@@ -77,7 +77,7 @@ RUN adduser dev --disabled-password --gecos "" \
 ENV HOME /home/dev
 # copyfiles
 ## vim
-COPY init.vim $HOME/.vimrc
+COPY .vimrc $HOME/.vimrc
 ## neovim
 COPY init.vim $HOME/.config/nvim/init.vim
 COPY dein.toml $HOME/.vim/rc/dein.toml
@@ -92,6 +92,11 @@ USER dev
 RUN mkdir -p ${HOME}/.cache/dein \
   && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh \
   && sh $HOME/installer.sh $HOME/.cache/dein \
+  && rm $HOME/installer.sh
+# install dein.vim to neodein folder
+RUN mkdir -p ${HOME}/.cache/neodein \
+  && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh \
+  && sh $HOME/installer.sh $HOME/.cache/neodein \
   && rm $HOME/installer.sh
 
 # install plugins
