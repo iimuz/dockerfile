@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # opencv
 RUN apt-get -qq remove ffmpeg x264 libx264-dev \
-  apt-get update && apt-get install -y --no-install-recommends \
+  && apt-get update && apt-get install -y --no-install-recommends \
     libopencv-dev \
     build-essential \
     checkinstall \
@@ -156,10 +156,10 @@ RUN apt-get -qq remove ffmpeg x264 libx264-dev \
     -D WITH_XIMEA=OFF \
     -D WITH_XINE=OFF \
     .. \
-  make -j4 \
-  make install \
-  ldconfig \
-  opencv_version
+  && make -j4 \
+  && make install \
+  && ldconfig \
+  && opencv_version
 
 # vim
 RUN apt-get update && apt-get install -y --no-install-recommends \
