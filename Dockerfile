@@ -58,9 +58,9 @@ RUN  apt-get update && apt-get install -y --no-install-recommends \
     v4l-utils \
     unzip \
   && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* \
-  && cd /opt \
-  && git clone --depth 1 -b 3.3.1 https://github.com/opencv/opencv.git
+  && rm -rf /var/lib/apt/lists/*
+#  && cd /opt \
+#  && git clone --depth 1 -b 3.3.1 https://github.com/opencv/opencv.git
 #  && mkdir -p opencv/build \
 #  && cd ./opencv/build \
 #  && cmake \
