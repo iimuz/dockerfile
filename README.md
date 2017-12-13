@@ -21,4 +21,11 @@ python development tools
   * Vimjas/vim-python-pep8-indent
   * w0rp/ale
   * zchee/deoplete-jedi
+* vim
+  * cespare/vim-toml
+  * scrooloose/nerdtree
+  * Shougo/dein.vim
+  * Shougo/neocomplete.vim
+  * Vimjas/vim-python-pep8-indent
+  * w0rp/ale
 
