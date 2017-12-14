@@ -27,30 +27,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     checkinstall \
     cmake \
     pkg-config \
-    yasm \
     libtiff5-dev \
     libjpeg-dev \
-    libavcodec-dev \
-    libavformat-dev \
-    libswscale-dev \
-    libdc1394-22-dev \
-    libxine2-dev \
-    libv4l-dev \
-    python-dev \
-    python-numpy \
     libtbb-dev \
-    libqt5x11extras5 \
-    libqt5opengl5 \
-    libqt5opengl5-dev \
-    libgtk2.0-dev \
-    libmp3lame-dev \
-    libopencore-amrnb-dev \
-    libopencore-amrwb-dev \
-    libtheora-dev \
-    libvorbis-dev \
-    libxvidcore-dev \
-    x264 \
-    v4l-utils \
     unzip \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
@@ -77,8 +56,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     -D BUILD_WITH_DEBUG_INFO=ON \
     -D BUILD_ZLIB=OFF \
     -D BUILD_WEBP=OFF \
-    -D BUILD_opencv_apps=ON \
-    -D BUILD_opencv_calib3d=ON \
+    -D BUILD_opencv_apps=OFF \
+    -D BUILD_opencv_calib3d=OFF \
     -D BUILD_opencv_core=ON \
     -D BUILD_opencv_cudaarithm=OFF \
     -D BUILD_opencv_cudabgsegm=OFF \
@@ -92,55 +71,55 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     -D BUILD_opencv_cudastereo=OFF \
     -D BUILD_opencv_cudawarping=OFF \
     -D BUILD_opencv_cudev=OFF \
-    -D BUILD_opencv_features2d=ON \
-    -D BUILD_opencv_flann=ON \
+    -D BUILD_opencv_features2d=OFF \
+    -D BUILD_opencv_flann=OFF \
     -D BUILD_opencv_highgui=ON \
     -D BUILD_opencv_imgcodecs=ON \
     -D BUILD_opencv_imgproc=ON \
     -D BUILD_opencv_java=OFF \
-    -D BUILD_opencv_ml=ON \
-    -D BUILD_opencv_objdetect=ON \
-    -D BUILD_opencv_photo=ON \
+    -D BUILD_opencv_ml=OFF \
+    -D BUILD_opencv_objdetect=OFF \
+    -D BUILD_opencv_photo=OFF \
     -D BUILD_opencv_python2=OFF \
-    -D BUILD_opencv_python3=ON \
-    -D BUILD_opencv_shape=ON \
-    -D BUILD_opencv_stitching=ON \
-    -D BUILD_opencv_superres=ON \
-    -D BUILD_opencv_ts=ON \
-    -D BUILD_opencv_video=ON \
-    -D BUILD_opencv_videoio=ON \
-    -D BUILD_opencv_videostab=ON \
+    -D BUILD_opencv_python3=OFF \
+    -D BUILD_opencv_shape=OFF \
+    -D BUILD_opencv_stitching=OFF \
+    -D BUILD_opencv_superres=OFF \
+    -D BUILD_opencv_ts=OFF \
+    -D BUILD_opencv_video=OFF \
+    -D BUILD_opencv_videoio=OFF \
+    -D BUILD_opencv_videostab=OFF \
     -D BUILD_opencv_viz=OFF \
     -D BUILD_opencv_world=OFF \
     -D CMAKE_BUILD_TYPE=RELEASE \
-    -D WITH_1394=ON \
+    -D WITH_1394=OFF \
     -D WITH_CUBLAS=OFF \
     -D WITH_CUDA=OFF \
     -D WITH_CUFFT=OFF \
     -D WITH_EIGEN=ON \
-    -D WITH_FFMPEG=ON \
+    -D WITH_FFMPEG=OFF \
     -D WITH_GDAL=OFF \
     -D WITH_GPHOTO2=OFF \
-    -D WITH_GIGEAPI=ON \
+    -D WITH_GIGEAPI=OFF \
     -D WITH_GSTREAMER=OFF \
-    -D WITH_GTK=ON \
+    -D WITH_GTK=OFF \
     -D WITH_INTELPERC=OFF \
     -D WITH_IPP=ON \
     -D WITH_IPP_A=OFF \
     -D WITH_JASPER=OFF \
     -D WITH_JPEG=ON \
-    -D WITH_LIBV4L=ON \
+    -D WITH_LIBV4L=OFF \
     -D WITH_OPENCL=ON \
     -D WITH_OPENCLAMDBLAS=OFF \
     -D WITH_OPENCLAMDFFT=OFF \
     -D WITH_OPENCL_SVM=OFF \
-    -D WITH_OPENEXR=ON \
-    -D WITH_OPENGL=ON \
+    -D WITH_OPENEXR=OFF \
+    -D WITH_OPENGL=OFF \
     -D WITH_OPENMP=OFF \
     -D WITH_OPENNI=OFF \
     -D WITH_PNG=ON \
     -D WITH_PTHREADS_PF=OFF \
-    -D WITH_PVAPI=ON \
+    -D WITH_PVAPI=OFF \
     -D WITH_QT=OFF \
     -D WITH_TBB=ON \
     -D WITH_TIFF=ON \
@@ -153,8 +132,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     .. \
   && make -j4 \
   && make install \
-  && ldconfig \
-  && opencv_version
+  && ldconfig
 
 # vim
 RUN apt-get update && apt-get install -y --no-install-recommends \
