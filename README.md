@@ -2,6 +2,15 @@
 
 cpp development tools
 
+## tags
+
+images come in these flavors:
+
+* latest: basic tools
+* dev: development tag for latest
+* opencv: add opencv to basic tools
+* opencv-dev: develepment tag for opencv
+
 ## tools
 
 * clang
@@ -25,24 +34,31 @@ $ gtags -v
 
 ## opencv
 
-sample code:
+get flags:
+
+```bash
+$ pkg-config --cflags opencv
+$ pkg-config --libs opencv
+```
+
+example:
 
 ```cpp
+#include <iostream>
 #include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
-#include <iostream>
+#include <string>
 
-int main(int argc, const char* argv[])
+int main()
 {
-    cv::Mat src = cv::imread("hoge.jpg", cv::IMREAD_COLOR);
-    if (src.empty()) {
-        std::cerr << "Failed to open image file.\n";
-        return EXIT_FAILURE;
-    }
+  const std::string FILEPATH("lenna.jpg");
+  cv::Mat src = cv::imread(FILEPATH, cv::IMREAD_COLOR);
+  if (src.empty()) {
+    std::cerr << "Failed to open image file: " << FILEPATH;
+    return EXIT_FAILURE;
+  }
 
-    cv::imwrite("hoge2.jpg", src);
-
-    return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }
 ```
+
