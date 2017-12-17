@@ -7,6 +7,8 @@
   tool = vimdiff
 [difftool]
   prompt = false
+[include]
+  path = .gitconfig.local
 [merge]
   tool = vimdiff
 [mergetool]
