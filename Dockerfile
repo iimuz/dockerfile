@@ -48,6 +48,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     --enable-fail-if-missing \
     --prefix=/usr/local \
   && make && make install \
+  && cd .. \
+  && rm -rf vim \
   && vim --version
 
 # neovim
@@ -72,20 +74,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && pip3 install neovim
 
 # add dev user
-RUN adduser dev --disabled-password --gecos "" \
-  && echo "ALL ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers
 ENV HOME /home/dev
-# copyfiles
-## vim
-COPY .vimrc $HOME/.vimrc
-## neovim
-COPY init.vim $HOME/.config/nvim/init.vim
-COPY dein.toml $HOME/.vim/rc/dein.toml
-COPY dein_lazy.toml $HOME/.vim/rc/dein_lazy.toml
-## bash
-COPY .bashrc $HOME/.bashrc
-COPY .bash_profile $HOME/.bash_profile
-RUN chown -R dev:dev /home/dev
+COPY ./home $HOME
+RUN adduser dev --disabled-password --gecos "" \
+  && echo "ALL ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers \
+  && chown -R dev:dev /home/dev
 USER dev
 
 # install dein.vim
@@ -93,15 +86,13 @@ RUN mkdir -p ${HOME}/.cache/dein \
   && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh \
   && sh $HOME/installer.sh $HOME/.cache/dein \
   && rm $HOME/installer.sh
+  && vim +":silent! call dein#install()" +qall
 # install dein.vim to neodein folder
 RUN mkdir -p ${HOME}/.cache/neodein \
   && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh \
   && sh $HOME/installer.sh $HOME/.cache/neodein \
   && rm $HOME/installer.sh
-
-# install plugins
-RUN vim +":silent! call dein#install()" +qall
-RUN nvim +":silent! call dein#install()" +qall
+  && nvim +":silent! call dein#install()" +qall
 
 WORKDIR ${HOME}
 
