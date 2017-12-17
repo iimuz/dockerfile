@@ -22,7 +22,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # opencv
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libopencv-dev \
     build-essential \
     checkinstall \
     cmake \
@@ -132,6 +131,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     .. \
   && make -j4 \
   && make install \
+  && cd .. \
+  && rm -rf opencv \
   && ldconfig
 
 # vim
