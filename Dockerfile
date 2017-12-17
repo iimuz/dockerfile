@@ -85,13 +85,13 @@ USER dev
 RUN mkdir -p ${HOME}/.cache/dein \
   && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh \
   && sh $HOME/installer.sh $HOME/.cache/dein \
-  && rm $HOME/installer.sh
+  && rm $HOME/installer.sh \
   && vim +":silent! call dein#install()" +qall
 # install dein.vim to neodein folder
 RUN mkdir -p ${HOME}/.cache/neodein \
   && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh \
   && sh $HOME/installer.sh $HOME/.cache/neodein \
-  && rm $HOME/installer.sh
+  && rm $HOME/installer.sh \
   && nvim +":silent! call dein#install()" +qall
 
 WORKDIR ${HOME}
