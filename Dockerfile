@@ -81,25 +81,20 @@ RUN apt-get update \
   && rm -rf /go/bin/* /go/pkg/* /go/src/*
 
 # add dev user
+ENV HOME /home/dev
+COPY ./home $HOME
 RUN adduser dev --disabled-password --gecos "" \
   && echo "ALL ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers \
-  && chown -R dev:dev /go /home/dev
+  && chown -R dev:dev /go $HOME
 USER dev
-ENV HOME /home/dev
 ENV LANG en_US.UTF-8
 
 # install dein.vim
 RUN mkdir -p ${HOME}/.cache/dein \
   && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh \
   && sh $HOME/installer.sh $HOME/.cache/dein \
-  && rm $HOME/installer.sh
-
-# install plugins
-RUN mkdir -p $HOME/.vim/rc
-COPY .vimrc $HOME/.vimrc
-COPY dein.toml $HOME/.vim/rc/dein.toml
-COPY dein_lazy.toml $HOME/.vim/rc/dein_lazy.toml
-RUN vim +":silent! call dein#install()" +qall
+  && rm $HOME/installer.sh \
+  && vim +":silent! call dein#install()" +qall
 
 WORKDIR /go
 
