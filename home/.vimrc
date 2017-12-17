@@ -33,6 +33,7 @@ endif
 "文字コードをUFT-8に設定
 scriptencoding utf-8
 set fenc=utf-8
+set fencs=utf-8,cp932
 " バックアップファイルを作らない
 set nobackup
 " スワップファイルを作らない
@@ -111,8 +112,6 @@ set hlsearch
 
 " タイトルを表示
 set title
-" カーソル行をハイライト表示します
-set cursorline
 " syntax
 syntax enable
 " カラースキームです

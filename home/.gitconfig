@@ -1,0 +1,14 @@
+[alias]
+  lg = log --graph --oneline --decorate=full --branches --tags --remotes
+[core]
+	editor = vim
+	quotepath = false
+[diff]
+  tool = vimdiff
+[difftool]
+  prompt = false
+[merge]
+  tool = vimdiff
+[mergetool]
+  keepBackup = false
+

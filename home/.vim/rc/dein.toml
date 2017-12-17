@@ -35,6 +35,3 @@ hook_add = '''
   map <C-n> :NERDTreeToggle<CR>
 '''
 
-[[plugins]]
-repo = 'tpope/vim-markdown'
-on_ft = 'md'

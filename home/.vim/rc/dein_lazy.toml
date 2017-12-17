@@ -1,0 +1,4 @@
+[[plugins]]
+repo = 'tpope/vim-markdown'
+on_ft = 'md'
+
