@@ -1,0 +1,37 @@
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+  map <C-n> :NERDTreeToggle<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+depends = ['vimproc']
+hook_add = '''
+  let g:unite_enable_start_insert = 0
+  let g:unite_enable_ignore_case = 1
+  let g:unite_enable_smart_case = 1
+  let g:unite_split_rule = 'botright'
+
+  nnoremap [unite] <Nop>
+  nmap <Space>u [unite]
+  nnoremap <silent> [unite]f :Unite -vertical -winheight=80 file_rec/git<CR>
+  nnoremap <silent> [unite]g :Unite -vertical -winheight=80 grep:.<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/unite-outline'
+depends = ['unite']
+hook_add = '''
+  nnoremap <silent> [unite]o :Unite outline -winheight=80<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+hook_post_update = '''
+  let g:dein#plugin.build = 'make CC=gcc'
+'''
+
