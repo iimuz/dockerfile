@@ -53,6 +53,12 @@ RUN mkdir -p /go/src/github.com/swig/swig && cd /go/src/github.com/swig \
   && cd ~ \
   && rm -rf /go/src/* /go/bin/*
 
+# tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    && tmux \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
 # vim
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
