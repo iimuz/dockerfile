@@ -55,7 +55,7 @@ RUN mkdir -p /go/src/github.com/swig/swig && cd /go/src/github.com/swig \
 
 # tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    && tmux \
+    tmux \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
