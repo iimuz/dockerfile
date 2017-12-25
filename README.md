@@ -3,7 +3,9 @@ golang development tools in docker
 
 * dep
 * golang
+* nvim
 * swig
+* tmux
 * vim
 
 ## deprecated

@@ -85,6 +85,29 @@ RUN apt-get update \
   && go get golang.org/x/tools/cmd/guru \
   && mv /go/bin/* ${binpath} \
   && rm -rf /go/bin/* /go/pkg/* /go/src/*
+# neovim
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    autoconf \
+    automake \
+    cmake \
+    g++ \
+    libtool \
+    libtool-bin \
+    pkg-config \
+    python3 \
+    python3-pip \
+    python3-setuptools \
+    unzip \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* \
+  && cd /opt/ \
+  && git clone --depth=1 -b v0.2.2 https://github.com/neovim/neovim.git neovim \
+  && cd ./neovim \
+  && make && make install \
+  && cd .. \
+  && rm -rf ./neovim \
+  && nvim --version \
+  && pip3 install neovim
 
 # add dev user
 ENV HOME /home/dev
@@ -101,6 +124,12 @@ RUN mkdir -p ${HOME}/.cache/dein \
   && sh $HOME/installer.sh $HOME/.cache/dein \
   && rm $HOME/installer.sh \
   && vim +":silent! call dein#install()" +qall
+# install dein.vim to neodein folder
+RUN mkdir -p ${HOME}/.cache/neodein \
+  && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh \
+  && sh $HOME/installer.sh $HOME/.cache/neodein \
+  && rm $HOME/installer.sh \
+  && nvim +":silent! call dein#install()" +qall
 
 WORKDIR /go
 
