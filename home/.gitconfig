@@ -1,8 +1,8 @@
 [alias]
   lg = log --graph --oneline --decorate=full --branches --tags --remotes
 [core]
-	editor = vim
-	quotepath = false
+  editor = vim
+  quotepath = false
 [diff]
   tool = vimdiff
 [difftool]
