@@ -1,7 +1,7 @@
 FROM java:8-jre
 LABEL maintainer iimuz
 
-ENV GITBUCKET_VERSION 4.19.3
+ENV GITBUCKET_VERSION 4.20.0
 ADD https://github.com/gitbucket/gitbucket/releases/download/${GITBUCKET_VERSION}/gitbucket.war /opt/gitbucket.war
 
 RUN ln -s /gitbucket /root/.gitbucket

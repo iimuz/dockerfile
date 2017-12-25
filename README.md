@@ -2,7 +2,7 @@
 
 container for using gitbucket
 
-* [GitBucket][https://github.com/gitbucket/gitbucket]
+* [GitBucket](https://github.com/gitbucket/gitbucket)
 
 ## usage
 
