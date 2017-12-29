@@ -16,6 +16,17 @@ ENV LANG en_US.UTF-8
 
 USER $NB_USER
 
+# add packages
+RUN conda install --quiet --yes \
+    pandas-datareader \
+    tqdm \
+  && conda remove --quiet --yes --force qt pyqt \
+  && conda clean -tipsy \
+  && npm cache clean \
+  && rm -rf $CONDA_DIR/share/jupyter/lab/staging \
+  && fix-permissions $CONDA_DIR
+
+# extensions
 RUN conda install --quiet --yes -c conda-forge jupyter_cms \
   && conda install --quiet --yes -c conda-forge jupyter_contrib_nbextensions \
   && conda remove --quiet --yes --force qt pyqt \
