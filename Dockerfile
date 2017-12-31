@@ -13,9 +13,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV LANG en_US.UTF-8
 
 # hugo
-ENV HUGO_VERSION=0.31 \
-  HUGO_ARCHIVE=hugo_${HUGO_VERSION}_Linux-64bit.tar.gz \
-  HUGO_BINARY=hugo_${HUGO_VERSION}_linux_amd64
+ENV HUGO_VERSION=0.31
+ENV HUGO_ARCHIVE=hugo_${HUGO_VERSION}_Linux-64bit.tar.gz
 ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_ARCHIVE} /usr/local
 RUN tar xzf /usr/local/${HUGO_ARCHIVE} -C /usr/local/bin/ \
   && rm /usr/local/bin/*.md \
