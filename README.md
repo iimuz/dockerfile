@@ -1,6 +1,6 @@
 # jupyter-science
 
-This jupyter is based from jupyter-scient-notebook.
+This jupyter is based from jupyter-scipy-notebook.
 This container includes any packages and extensions.
 
 * based container
@@ -12,7 +12,7 @@ This container includes any packages and extensions.
 
 ## added packages
 
-These packaged added in this container.
+These packages add in this container.
 
 * [pandas-datareader][pdr]
   * [docs][pdr-docs]
@@ -24,7 +24,7 @@ These packaged added in this container.
 
 ## added nbextensions
 
-These nbextensions added in this container.
+These nbextensions add in this container.
 
 * [jupyter_cms][cms]
 * [jupyter_contrib_nbextensions][contrib]
@@ -51,7 +51,7 @@ These nbextensions is enabled.
 * table_beautifier
 * toc2
 * toggle_all_line_numbers
-* tree-filter\
+* tree-filter
 * varInspector
 * zenmode
 
