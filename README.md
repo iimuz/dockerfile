@@ -1,7 +1,7 @@
 # jupyter-science
 
 This jupyter is based from jupyter-scipy-notebook.
-This container includes any packages and extensions.
+This container includes some packages and extensions.
 
 * based container
   * [jupyter/scipy-notebook][scipy-nb]
