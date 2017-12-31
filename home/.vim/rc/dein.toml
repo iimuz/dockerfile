@@ -12,8 +12,9 @@ hook_add = '''
 
   nnoremap [unite] <Nop>
   nmap <Space>u [unite]
-  nnoremap <silent> [unite]f :Unite -vertical -winwidth=40 file_rec/git<CR>
-  nnoremap <silent> [unite]g :Unite -vertical -winwidth=40 grep:.<CR>
+  nnoremap <silent> [unite]f :Unite -vertical -winwidth=80 file_rec/git<CR>
+  nnoremap <silent> [unite]g :Unite grep:.<CR>
+  nnoremap <silent> [unite]gg :Unite grep/git:.<CR>
 '''
 
 [[plugins]]
