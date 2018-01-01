@@ -1,0 +1,38 @@
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+  map <C-n> :NERDTreeToggle<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_cmd = 'Denite'
+depends = ['neomru.vim', 'neoinclude.vim']
+hook_add = '''
+  " Prefix key
+  nnoremap [denite] <Nop>
+  nmap <Space>d [denite]
+
+  " Current direcotry files
+  nmap <silent> [denite]p :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
+  " Buffer files
+  nmap <silent> [denite]b :<C-u>Denite buffer -highlight-mode-insert=Search<CR>
+  " Outline current file
+  nmap <silent> [denite]o :<C-u>Denite outline -highlight-mode-insert=Search<CR>
+  " Reccent file
+  nmap <silent> [denite]r :<C-u>Denite file_mru -highlight-mode-insert=Search<CR>
+  " Command history
+  nmap <silent> [denite]h :<C-u>Denite command_history -highlight-mode-insert=Search<CR>
+  " Grep
+  nmap <silent> [denite]g :<C-u>Denite -buffer-name=search -mode=normal grep<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/neoinclude.vim'
+
