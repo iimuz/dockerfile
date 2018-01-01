@@ -23,13 +23,13 @@ RUN mkdir -p /go/src/github.com/motemen/ghq && cd /go/src/github.com/motemen \
   && mv ./ghq ${binpath} \
   && git config --global ghq.root /go/src \
   && cd ~ \
-  && rm -rf /go/src/* /go/bin/*
+  && rm -rf /go/src/* /go/bin/* \
   && mkdir -p /go/src/github.com/golang/dep && cd /go/src/github.com/golang \
   && git clone --depth=1 -b ${DEP_VERSION} https://github.com/golang/dep.git ./dep && cd ./dep \
   && go build -o dep ./cmd/dep \
   && mv ./dep ${binpath} \
   && cd ~ \
-  && rm -rf /go/src/* /go/bin/*
+  && rm -rf /go/src/* /go/bin/* \
   && mkdir -p /go/src/github.com/Masterminds/glide && cd /go/src/github.com/Masterminds \
   && git clone --depth=1 -b ${GLIDE_VERSION} https://github.com/Masterminds/glide.git ./glide && cd ./glide \
   && make build \
@@ -49,7 +49,7 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     bison \
   && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /go/src/github.com/swig/swig && cd /go/src/github.com/swig \
   && git clone --depth=1 -b ${SWIG_VERSION} https://github.com/swig/swig.git ./swig && cd ./swig \
   && sh autogen.sh \

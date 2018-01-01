@@ -109,8 +109,6 @@ set hlsearch
 
 " タイトルを表示
 set title
-" カーソル行をハイライト表示します
-set cursorline
 " syntax
 syntax enable
 " カラースキームです
