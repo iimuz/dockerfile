@@ -1,5 +1,5 @@
 FROM buildpack-deps:stretch-scm
-LABEL maintainer "iimuz"
+LABEL maintainer iimuz
 
 # set locale
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -22,26 +22,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
 # add dev user
+ENV HOME /home/dev
+COPY ./home $HOME
 RUN adduser dev --disabled-password --gecos "" \
   && echo "ALL ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers \
-  && chown -R dev:dev /home/dev \
-  && mkdir /src \
-  && chown -R dev:dev /src
+  && mkdir $HOME/src \
+  && chown -R dev:dev $HOME
 USER dev
-ENV HOME /home/dev
 
 # install dein.vim
-RUN mkdir -p /home/dev/.cache/dein \
-  && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /home/dev/installer.sh \
-  && sh /home/dev/installer.sh /home/dev/.cache/dein \
-  && rm /home/dev/installer.sh
-
-# install plugins
-RUN mkdir -p /home/dev/.vim/rc
-COPY .vimrc /home/dev/.vimrc
-COPY dein.toml /home/dev/.vim/rc/dein.toml
-COPY dein_lazy.toml /home/dev/.vim/rc/dein_lazy.toml
-RUN vim +":silent! call dein#install()" +qall
+RUN mkdir -p ${HOME}/.cache/dein \
+  && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ${HOME}/installer.sh \
+  && sh ${HOME}/installer.sh ${HOME}/.cache/dein \
+  && rm ${HOME}/installer.sh \
+  && vim +":silent! call dein#install()" +qall
 
 WORKDIR /src
 ENTRYPOINT ["vim"]
