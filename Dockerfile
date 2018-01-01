@@ -37,6 +37,6 @@ RUN mkdir -p ${HOME}/.cache/dein \
   && rm ${HOME}/installer.sh \
   && vim +":silent! call dein#install()" +qall
 
-WORKDIR /src
+WORKDIR ${HOME}/src
 ENTRYPOINT ["vim"]
 
