@@ -2,9 +2,9 @@
 repo = 'hewes/unite-gtags'
 depends = ['unite']
 hook_add = '''
-  nnoremap <silent> [unite]r :Unite -winwidth=80 gtags/ref:<CR>
-  nnoremap <silent> [unite]d :Unite -winwidth=80 gtags/def:<CR>
-  nnoremap <silent> [unite]g :Unite -winwidth=80 gtags/grep:<CR>
+  nnoremap <silent> [unite]r :Unite gtags/ref:<CR>
+  nnoremap <silent> [unite]d :Unite gtags/def:<CR>
+  nnoremap <silent> [unite]gp :Unite gtags/grep:<CR>
 '''
 
 [[plugins]]
@@ -28,19 +28,20 @@ hook_add = '''
   nnoremap [unite] <Nop>
   nmap <Space>u [unite]
   nnoremap <silent> [unite]f :Unite -vertical -winwidth=80 file_rec/git<CR>
-  nnoremap <silent> [unite]g :Unite -vertical -winwidth=80 grep:.<CR>
+  nnoremap <silent> [unite]g :Unite grep:.<CR>
+  nnoremap <silent> [unite]gg :Unite grep/git:.<CR>
 '''
 
 [[plugins]]
 repo = 'Shougo/unite-outline'
 depends = ['unite']
 hook_add = '''
-  nnoremap <silent> [unite]o :Unite outline -winwidth=80<CR>
+  nnoremap <silent> [unite]o :Unite outline<CR>
 '''
 
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 hook_post_update = '''
-  let g:dein#plugin.build = 'make CC=gcc'
+  let g:dein#plugin.build = 'make'
 '''
 
