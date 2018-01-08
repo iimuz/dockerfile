@@ -13,14 +13,12 @@ images come in these flavors:
 
 ## tools
 
-* clang
+* [clang](http://llvm.org/svn/llvm-project/)
 * clnag-format
 * make
-* opencv
+* [opencv](https://opencv.org)
 * vim
-  * ctags
   * global
-  * libc-dev
   * lua
 
 ## global
