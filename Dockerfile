@@ -49,21 +49,19 @@ ENV CC=clang-5.0 \
 
 # opencv
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
     checkinstall \
-    cmake \
     pkg-config \
     libtiff5-dev \
     libjpeg-dev \
     libtbb-dev \
-    unzip \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* \
-  && cd /opt \
-  && git clone --depth 1 -b 3.3.1 https://github.com/opencv/opencv.git \
-  && mkdir -p opencv/build \
-  && cd ./opencv/build \
-  && cmake \
+    unzip && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* && \
+  cd /opt && \
+  git clone --depth 1 -b 3.3.1 https://github.com/opencv/opencv.git && \
+  mkdir -p opencv/build && \
+  cd ./opencv/build && \
+  cmake \
     -G "Unix Makefiles" \
     --build . \
     -D BUILD_CUDA_STUBS=OFF \
@@ -155,12 +153,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     -D WITH_WEBP=ON \
     -D WITH_XIMEA=OFF \
     -D WITH_XINE=OFF \
-    .. \
-  && make -j4 \
-  && make install \
-  && cd .. \
-  && rm -rf opencv \
-  && ldconfig
+    .. && \
+  make -j$(grep processor /proc/cpuinfo | wc -l) && \
+  make install && \
+  cd .. && \
+  rm -rf opencv && \
+  ldconfig
 
 # vim
 RUN apt-get update && \
