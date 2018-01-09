@@ -33,16 +33,7 @@ RUN echo deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-5.0 main >> /et
     libclang-5.0-dev \
     libclang1-5.0 \
     libclang1-5.0-dbg \
-    libllvm5.0 \
-    libllvm5.0-dbg \
-    lldb-5.0 \
-    llvm-5.0 \
-    llvm-5.0-dev \
-    llvm-5.0-runtime \
-    clang-format-5.0 \
-    liblldb-5.0-dev \
-    lld-5.0 \
-    libfuzzer-5.0-dev && \
+    clang-format-5.0 && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 ENV CC=clang-5.0 \
