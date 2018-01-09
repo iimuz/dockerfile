@@ -50,6 +50,7 @@ ENV CC=clang-5.0 \
 # vim
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
+    ctags \
     lua5.2 \
     lua5.2-dev \
     global && \
