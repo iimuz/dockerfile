@@ -4,6 +4,7 @@ LABEL maintainer iimuz
 # set locale
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
+    apt-transport-https \
     apt-utils \
     locales && \
   apt-get clean && \
