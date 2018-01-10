@@ -87,9 +87,9 @@ augroup END
 " Tab文字を半角スペースにする
 set expandtab
 " 行頭以外のTab文字の表示幅（スペースいくつ分）
-set tabstop=4
+set tabstop=2
 " 行頭でのTab文字の表示幅
-set shiftwidth=4
+set shiftwidth=2
 " インデントはスマートインデント
 set smartindent
 " バックスペースが効かなくなる問題への対応
@@ -110,8 +110,6 @@ set hlsearch
 
 " タイトルを表示
 set title
-" カーソル行をハイライト表示します
-set cursorline
 " syntax
 syntax enable
 " カラースキームです
