@@ -26,12 +26,12 @@ RUN apt-get update && \
 RUN echo deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-5.0 main >> /etc/apt/sources.list && \
   echo deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-5.0 main >> /etc/apt/sources.list.d/deb-src.list  && \
   wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-RUN apt-get update && \
-  apt-get install -y --no-install-recommends \
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends \
     clang-5.0 \
-    clang-format-5.0 && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+    clang-format-5.0
+#  apt-get clean && \
+#  rm -rf /var/lib/apt/lists/*
 ENV CC=clang-5.0 \
   CXX=clang++-5.0
 
