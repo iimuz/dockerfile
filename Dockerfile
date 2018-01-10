@@ -29,10 +29,6 @@ RUN echo deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-5.0 main >> /et
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
     clang-5.0 \
-    libclang-common-5.0-dev \
-    libclang-5.0-dev \
-    libclang1-5.0 \
-    libclang1-5.0-dbg \
     clang-format-5.0 && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
