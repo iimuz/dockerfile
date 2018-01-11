@@ -18,6 +18,8 @@ images come in these flavors:
 * make
 * [opencv](https://opencv.org)
 * vim
+  * ctags
+    * unite-outline plugin uses.
   * global
   * lua
 
