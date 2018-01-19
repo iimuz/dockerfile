@@ -9,14 +9,6 @@ RUN apt-get update && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN cd /usr/bin && \
-  ln -s ../lib/llvm-5.0/bin/clang clang && \
-  ln -s ../lib/llvm-5.0/bin/clang++ clang++ && \
-  ln -s ../lib/llvm-5.0/bin/clang-cpp clang-cpp && \
-  ln -s ../lib/llvm-5.0/bin/clang-format clang-format && \
-  ln -s ../lib/llvm-5.0/bin/git-clang-format git-clang-format && \
-  ln -s ./clang-format-diff-5.0 clang-format-diff
-
 RUN cd /opt && \
   git clone --recursive --depth 1 -b boost-1.66.0 https://github.com/boostorg/boost.git && \
   cd /opt/boost && \
