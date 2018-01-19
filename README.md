@@ -8,15 +8,21 @@ images come in these flavors:
 
 * latest: basic tools
 * dev: development tag for latest
+* boost: add boost to basic tools
+* boost-dev: development tag for boost
 * opencv: add opencv to basic tools
 * opencv-dev: develepment tag for opencv
+* full: add all packages to basic tools
+* full-dev: development tag for full
 
 ## tools
 
+* [boost](http://www.boost.org/)
 * [clang](http://llvm.org/svn/llvm-project/)
 * clnag-format
 * make
 * [opencv](https://opencv.org)
+* pkg-config
 * vim
   * ctags
     * unite-outline plugin uses.
@@ -30,6 +36,35 @@ create global tags.
 ```bash
 $ export GTAGSFORCECPP=1
 $ gtags -v
+```
+
+## boost
+
+get flags:
+
+```bash
+# replace xxx to module name. for example: boost_regex
+$ pkg-config --cflags boost_xxx
+$ pkg-config --libs boost_xxx
+```
+
+example:
+
+```cpp
+#include <algorithm>
+#include <boost/lambda/lambda.hpp>
+#include <iostream>
+#include <iterator>
+
+int main()
+{
+    using namespace boost::lambda;
+    typedef std::istream_iterator<int> in;
+
+    std::for_each(in(std::cin), in(), std::cout << (_1 * 3) << " " );
+
+    return EXIT_SUCCESS;
+}
 ```
 
 ## opencv
