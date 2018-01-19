@@ -43,9 +43,16 @@ RUN echo deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-5.0 main >> /et
     lld-5.0 \
     libfuzzer-5.0-dev && \
   apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
-ENV CC=clang-5.0 \
-  CXX=clang++-5.0
+  rm -rf /var/lib/apt/lists/* && \
+  cd /usr/bin && \
+  ln -s ../lib/llvm-5.0/bin/clang clang && \
+  ln -s ../lib/llvm-5.0/bin/clang++ clang++ && \
+  ln -s ../lib/llvm-5.0/bin/clang-cpp clang-cpp && \
+  ln -s ../lib/llvm-5.0/bin/clang-format clang-format && \
+  ln -s ../lib/llvm-5.0/bin/git-clang-format git-clang-format && \
+  ln -s ./clang-format-diff-5.0 clang-format-diff
+ENV CC=clang \
+  CXX=clang++
 
 # vim
 RUN apt-get update && \
