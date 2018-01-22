@@ -1,4 +1,4 @@
-FROM iimuz/cpp-dev:latest
+FROM iimuz/cpp-dev:v1.1.1
 LABEL maintainer iimuz
 
 USER root
