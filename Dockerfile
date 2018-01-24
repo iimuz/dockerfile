@@ -14,12 +14,12 @@ RUN cd /opt && \
   cd /opt/boost && \
   sh bootstrap.sh \
     --with-toolset=clang && \
-  ./b2 -j$(grep processor /proc/cpuinfo | wc -l) \
+  ./b2 -j`expr $(grep processor /proc/cpuinfo | wc -l) + 1` \
     --toolset=clang \
     install \
     --libdir=/usr/local/lib \
     --without-python && \
-  ./b2 -j$(grep processor /proc/cpuinfo | wc -l) \
+  ./b2 -j`expr $(grep processor /proc/cpuinfo | wc -l) + 1` \
     --toolset=clang \
     install \
     --libdir=/usr/local/lib \
