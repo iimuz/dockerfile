@@ -1,4 +1,4 @@
-FROM golang:1.9.2
+FROM golang:1.10.0
 LABEL maintainer iimuz
 
 # set locale
@@ -88,7 +88,7 @@ RUN apt-get update \
   && rm -rf /go/bin/* /go/pkg/* /go/src/* \
   && vim --version
 # neovim
-ENV NVIM_VERSION=v0.2.2
+ENV NVIM_VERSION=nightly
 RUN apt-get update && apt-get install -y --no-install-recommends \
     autoconf \
     automake \
