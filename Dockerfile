@@ -1,12 +1,10 @@
-FROM ubuntu:16.04
-MAINTAINER iimuz
+FROM python:3.6.3-stretch
+LABEL maintainer "iimuz"
 
 # set locale
-RUN sed -i.bak -e "s%http://us.archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list && \
-  apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-utils \
-    language-pack-ja-base \
-    language-pack-ja \
+    task-japanese \
     locales && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
@@ -17,23 +15,13 @@ ENV LANG ja_JP.UTF-8
 
 # install texlive
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    dvipsk-ja \
-    gv \
     texlive \
-    texlive-fonts-extra \
-    texlive-fonts-recommended \
-    texlive-lang-cjk \
-    xdvik-ja && \
+    texlive-lang-japanese && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
 # install sphinx
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    make \
-    python-pip && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  pip install Sphinx==1.5.6
+RUN pip3 install Sphinx==1.5.6
 
 # add dev user
 ENV HOME /home/dev
