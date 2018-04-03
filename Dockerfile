@@ -2,11 +2,11 @@ FROM python:3.6.3-stretch
 LABEL maintainer "iimuz"
 
 # set locale
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt update && apt install -y --no-install-recommends \
     apt-utils \
     task-japanese \
     locales && \
-  apt-get clean && \
+  apt clean && \
   rm -rf /var/lib/apt/lists/* && \
   echo ja_JP.UTF-8 UTF-8 > /etc/locale.gen && \
   locale-gen && \
@@ -14,10 +14,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV LANG ja_JP.UTF-8
 
 # install texlive
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt update && apt install -y --no-install-recommends \
     texlive \
     texlive-lang-japanese && \
-  apt-get clean && \
+  apt clean && \
   rm -rf /var/lib/apt/lists/*
 
 # install sphinx
