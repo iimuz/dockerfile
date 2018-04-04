@@ -16,6 +16,7 @@ ENV LANG ja_JP.UTF-8
 # install texlive
 RUN apt update && apt install -y --no-install-recommends \
     texlive \
+    texlive-formats-extra \
     texlive-lang-japanese && \
   apt clean && \
   rm -rf /var/lib/apt/lists/*
