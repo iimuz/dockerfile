@@ -29,7 +29,17 @@ RUN apt update && apt install -y --no-install-recommends \
   wget https://github.com/motemen/ghq/releases/download/v0.8.0/ghq_linux_amd64.zip && \
   unzip ghq_linux_amd64.zip -d ghq && \
   mv ghq/ghq /usr/bin/ && \
-  rm -rf ghq ghq_linux_amd64.zip .wget-hsts
+  rm -rf ghq ghq_linux_amd64.zip .wget-hsts && \
+  # krypt.co
+  apt update && \
+  wget https://krypt.co/kr -O ./kr && \
+  sed -i -e 's/sudo apt-get/apt-get/g' kr && \
+  sed -i -e 's/sudo apt-key/apt-key/g' kr && \
+  sed -i -e 's/sudo add-apt-repository/add-apt-repository/g' kr && \
+  sh kr || sh kr \
+  rm kr && \
+  apt clean && \
+  rm -rf /var/lib/apt/lists/*
 
 # add dev user
 ENV HOME /home/dev
