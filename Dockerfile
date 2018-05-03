@@ -18,7 +18,6 @@ RUN apt update && apt install -y --no-install-recommends \
     curl \
     git \
     neovim \
-    peco \
     ssh \
     tmux \
     unzip \
@@ -56,6 +55,10 @@ RUN echo "\nif [ -f ~/.bashrc.local ]; then\n  . ~/.bashrc.local\nfi\n" >> ~/.ba
   wget https://raw.githubusercontent.com/iimuz/dotfiles/master/.tmux.conf -O ~/.tmux.conf && \
   wget https://raw.githubusercontent.com/iimuz/dotfiles/master/.inputrc -O ~/.inputrc && \
   wget https://raw.githubusercontent.com/iimuz/dotfiles/master/.vimrc -O ~/.config/nvim/init.vim && \
-  echo "\n[ghq]\n  root = ~/src\n" >> ~/.gitconfig.local
+  echo "\n[ghq]\n  root = ~/src\n" >> ~/.gitconfig.local && \
+  # install fzf
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
+  yes | ~/.fzf/install && \
+  sed -i 's/peco/fzf/g' ~/.bashrc.local
 
 WORKDIR ${HOME}
