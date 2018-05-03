@@ -1,6 +1,19 @@
 FROM ubuntu:18.04
 LABEL maintainer iimuz
 
+# set locale to japanese and install fonts
+RUN apt update && \
+  apt install -y --no-install-recommends \
+    apt-utils \
+    fonts-takao \
+    locales && \
+  apt clean && \
+  rm -rf /var/lib/apt/lists/* && \
+  echo ja_JP.UTF-8 UTF-8 > /etc/locale.gen && \
+  locale-gen && \
+  update-locale LANG=ja_JP.UTF-8
+ENV LANG=ja_JP.UTF-8
+
 # install mendeley desktop
 RUN apt update && \
   apt install -y --no-install-recommends \
