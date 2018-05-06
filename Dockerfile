@@ -17,6 +17,7 @@ RUN apt update && apt install -y --no-install-recommends \
     ca-certificates \
     curl \
     git \
+    make \
     neovim \
     ssh \
     tmux \
