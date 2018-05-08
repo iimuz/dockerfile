@@ -31,27 +31,35 @@ RUN fetchDeps=' \
   apt purge -y --auto-remove $fetchDeps
 
 # install tools and settings
-ENV HOME /home/dev
+ENV HOME=/home/dev
 COPY config.toml /home/dev/.config/memo/config.toml
-RUN apt update && \
+RUN adduser dev --disabled-password --gecos "" && \
+  apt update && \
   apt install -y --no-install-recommends \
     neovim \
     peco && \
   fetchDeps=' \
     ca-certificates \
+    git \
     wget \
   ' && \
   apt install -y --no-install-recommends $fetchDeps && \
   # memo settings
   mkdir -p ${HOME}/.config/memo/_posts && \
+  # get settings
+  git clone --depth=1 https://github.com/iimuz/dotfiles.git ${HOME}/dotfiles && \
   # neovim settings
   mkdir -p ${HOME}/.config/nvim && \
-  wget https://raw.githubusercontent.com/iimuz/dotfiles/master/.vimrc -O ~/.config/nvim/init.vim && \
-  # home permission
-  chmod -R 777 /home/dev && \
+  mv ${HOME}/dotfiles/.vimrc ~/.config/nvim/init.vim && \
   # cleanup
   apt clean && \
   rm -rf /var/lib/apt/lists/* && \
-  apt purge -y --auto-remove $fetchDeps
+  apt purge -y --auto-remove $fetchDeps && \
+  apt autoremote -y && \
+  rm -rf ${HOME}/dotfiles && \
+  # permission
+  chown -R dev:dev /home/dev
 
+USER dev
+WORKDIR /home/dev
 CMD ["memo"]
