@@ -1,10 +1,6 @@
 FROM debian:9.4
 LABEL maintainer "iimuz"
 
-# add user
-ENV HOME /home/dev
-RUN adduser dev --disabled-password --gecos ""
-
 # set locale
 RUN apt update && apt install -y --no-install-recommends \
     apt-utils \
@@ -17,9 +13,14 @@ RUN apt update && apt install -y --no-install-recommends \
 ENV LANG en_US.UTF-8
 
 # tools for development
-ENV GHQ_VERSION=0.8.0 \
+ENV USER_NAME=dev \
+  HOME=/home/dev \
+  USER_ID=1000 \
+  GROUP_ID=1000 \
+  GHQ_VERSION=0.8.0 \
   GOSU_VERSION=1.10
-RUN apt update && apt install -y --no-install-recommends \
+RUN adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos "" && \
+  apt update && apt install -y --no-install-recommends \
     ca-certificates \
     curl \
     make \
@@ -68,10 +69,10 @@ RUN apt update && apt install -y --no-install-recommends \
   apt autoremove -y && \
   rm -rf ${HOME}/.dotfiles && \
   # for named volume
-  gosu dev mkdir ~/src && \
-  # change permission
-  chown -R dev:dev /home/dev
+  gosu dev mkdir ~/src
 
-USER dev
+ADD ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 WORKDIR ${HOME}
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
