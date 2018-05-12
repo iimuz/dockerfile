@@ -12,53 +12,79 @@ RUN apt update && apt install -y --no-install-recommends \
   update-locale LANG=en_US.UTF-8
 ENV LANG en_US.UTF-8
 
-# tools for development
-RUN apt update && apt install -y --no-install-recommends \
+# gosu
+ENV GOSU_VERSION=1.10
+RUN fetchDeps=' \
     ca-certificates \
-    curl \
-    git \
-    neovim \
-    ssh \
-    tmux \
-    unzip \
-    wget && \
+    wget \
+  ' && \
+  apt update && \
+  apt install -y --no-install-recommends $fetchDeps && \
+  dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" && \
+  wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" && \
+  chmod +x /usr/local/bin/gosu && \
+  gosu nobody true && \
   apt clean && \
   rm -rf /var/lib/apt/lists/* && \
+  apt autoremove -y
+
+# tools for development
+ENV USER_NAME=dev \
+  HOME=/home/dev \
+  USER_ID=1000 \
+  GROUP_ID=1000 \
+  GHQ_VERSION=0.8.0
+RUN adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos "" && \
+  fetchDeps=' \
+    curl \
+    wget \
+  ' && \
+  apt update && \
+  apt install -y --no-install-recommends $fetchDeps && \
+  # ssh
+  apt install -y --no-install-recommends ssh && \
+  # git
+  apt install -y --no-install-recommends ca-certificates git && \
+  git clone --depth=1 https://github.com/iimuz/dotfiles.git ${HOME}/.dotfiles && \
+  mv ${HOME}/.dotfiles/.gitconfig ${HOME}/ && \
+  # bash
+  echo "\nif [ -f ~/.bashrc.local ]; then\n  . ~/.bashrc.local\nfi\n" >> ${HOME}/.bashrc && \
+  mv ${HOME}/.dotfiles/.bashrc ${HOME}/.bashrc.local && \
+  mv ${HOME}/.dotfiles/.inputrc ${HOME}/ && \
+  # neovim
+  apt install -y --no-install-recommends neovim && \
+  mkdir -p ${HOME}/.config/nvim && \
+  mv ${HOME}/.dotfiles/.vimrc ${HOME}/.config/nvim/init.vim && \
   # ghq
-  wget https://github.com/motemen/ghq/releases/download/v0.8.0/ghq_linux_amd64.zip && \
+  apt install -y --no-install-recommends unzip && \
+  wget https://github.com/motemen/ghq/releases/download/v${GHQ_VERSION}/ghq_linux_amd64.zip && \
   unzip ghq_linux_amd64.zip -d ghq && \
   mv ghq/ghq /usr/bin/ && \
-  rm -rf ghq ghq_linux_amd64.zip .wget-hsts && \
+  rm -rf ghq ghq_linux_amd64.zip && \
+  echo "\n[ghq]\n  root = ~/src\n" >> ${HOME}/.gitconfig.local && \
+  # fzf
+  git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf && \
+  bash -c "yes | ${HOME}/.fzf/install" && \
+  rm -rf ${HOME}/.fzf/.git && \
   # krypt.co
-  apt update && \
   wget https://krypt.co/kr -O ./kr && \
-  sed -i -e 's/sudo apt-get/apt-get/g' kr && \
-  sed -i -e 's/sudo apt-key/apt-key/g' kr && \
-  sed -i -e 's/sudo add-apt-repository/add-apt-repository/g' kr && \
-  sh kr || sh kr \
-  rm kr && \
+  sed -i -e 's/sudo apt-get/apt-get/g' ./kr && \
+  sed -i -e 's/sudo apt-key/apt-key/g' ./kr && \
+  sed -i -e 's/sudo add-apt-repository/add-apt-repository/g' ./kr && \
+  sh ./kr || sh /kr \
+  rm ./kr && \
+  # cleanup
+  apt purge -y --autoremove $fetchDeps && \
   apt clean && \
-  rm -rf /var/lib/apt/lists/*
+  rm -rf /var/lib/apt/lists/* && \
+  apt autoremove -y && \
+  rm -rf ${HOME}/.dotfiles && \
+  rm ${HOME}/.wget-hsts && \
+  # for volumes
+  mkdir ${HOME}/src ${HOME}/pkg ${HOME}/bin
 
-# add dev user
-ENV HOME /home/dev
-RUN adduser dev --disabled-password --gecos "" && \
-  echo "ALL ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-  mkdir -p ${HOME}/.config/nvim && \
-  chown -R dev:dev /home/dev
-USER dev
-
-# set config
-RUN echo "\nif [ -f ~/.bashrc.local ]; then\n  . ~/.bashrc.local\nfi\n" >> ~/.bashrc && \
-  wget https://raw.githubusercontent.com/iimuz/dotfiles/master/.bashrc -O ~/.bashrc.local && \
-  wget https://raw.githubusercontent.com/iimuz/dotfiles/master/.gitconfig -O ~/.gitconfig && \
-  wget https://raw.githubusercontent.com/iimuz/dotfiles/master/.tmux.conf -O ~/.tmux.conf && \
-  wget https://raw.githubusercontent.com/iimuz/dotfiles/master/.inputrc -O ~/.inputrc && \
-  wget https://raw.githubusercontent.com/iimuz/dotfiles/master/.vimrc -O ~/.config/nvim/init.vim && \
-  echo "\n[ghq]\n  root = ~/src\n" >> ~/.gitconfig.local && \
-  # install fzf
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
-  yes | ~/.fzf/install && \
-  sed -i 's/peco/fzf/g' ~/.bashrc.local
-
+ADD ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 WORKDIR ${HOME}
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["bash"]
