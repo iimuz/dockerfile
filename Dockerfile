@@ -28,13 +28,13 @@ RUN fetchDeps=' \
   rm -rf /var/lib/apt/lists/* && \
   apt-get autoremove -y
 
-ENV USER_NAME=dev \
-  HOME=/home/dev \
+ENV USER_NAME=gcloud \
+  HOME=/home/gcloud \
   USER_ID=1000 \
   GROUP_ID=1000 \
   GHQ_VERSION=0.8.0 \
   TERRAFORM_VERSION=0.11.7
-RUN adduser dev --disabled-password --gecos "" && \
+RUN adduser ${USER_NAME} --disabled-password --gecos "" && \
   fetchDeps=' \
     ca-certificates \
     curl \
