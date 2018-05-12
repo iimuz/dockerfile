@@ -12,6 +12,29 @@ RUN apt update && apt install -y --no-install-recommends \
   update-locale LANG=en_US.UTF-8
 ENV LANG en_US.UTF-8
 
+# gosu
+ENV GOSU_VERSION=1.10
+RUN fetchDeps=' \
+    ca-certificates \
+    wget \
+  ' && \
+  apt update && \
+  apt install -y --no-install-recommends $fetchDeps && \
+  dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" && \
+  wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" && \
+  chmod +x /usr/local/bin/gosu && \
+  gosu nobody true && \
+  apt clean && \
+  rm -rf /var/lib/apt/lists/* && \
+  apt autoremove -y
+
+# add user
+ENV USER_NAME=memo \
+  HOME=/home/memo \
+  USER_ID=1000 \
+  GROUP_ID=1000
+RUN adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos ""
+
 # install memo
 ENV MEMO_VER=v0.0.4 \
   MEMO_ARCHIVE=memo_linux_amd64.zip
@@ -26,12 +49,11 @@ RUN fetchDeps=' \
   unzip ${MEMO_ARCHIVE} && \
   mv memo /usr/bin/ && \
   rm ${MEMO_ARCHIVE} && \
+  apt purge -y --auto-remove $fetchDeps && \
   apt clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  apt purge -y --auto-remove $fetchDeps
+  rm -rf /var/lib/apt/lists/*
 
 # install tools and settings
-ENV HOME /home/dev
 COPY config.toml /home/dev/.config/memo/config.toml
 RUN apt update && \
   apt install -y --no-install-recommends \
@@ -39,19 +61,26 @@ RUN apt update && \
     peco && \
   fetchDeps=' \
     ca-certificates \
+    git \
     wget \
   ' && \
   apt install -y --no-install-recommends $fetchDeps && \
   # memo settings
   mkdir -p ${HOME}/.config/memo/_posts && \
+  # get settings
+  git clone --depth=1 https://github.com/iimuz/dotfiles.git ${HOME}/dotfiles && \
   # neovim settings
   mkdir -p ${HOME}/.config/nvim && \
-  wget https://raw.githubusercontent.com/iimuz/dotfiles/master/.vimrc -O ~/.config/nvim/init.vim && \
-  # home permission
-  chmod -R 777 /home/dev && \
+  mv ${HOME}/dotfiles/.vimrc ~/.config/nvim/init.vim && \
   # cleanup
+  apt purge -y --auto-remove $fetchDeps && \
+  apt autoremove -y && \
   apt clean && \
   rm -rf /var/lib/apt/lists/* && \
-  apt purge -y --auto-remove $fetchDeps
+  rm -rf ${HOME}/dotfiles
 
+ADD ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+WORKDIR ${HOME}
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["memo"]
