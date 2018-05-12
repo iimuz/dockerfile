@@ -12,6 +12,29 @@ RUN apt update && apt install -y --no-install-recommends \
   update-locale LANG=en_US.UTF-8
 ENV LANG en_US.UTF-8
 
+# gosu
+ENV GOSU_VERSION=1.10
+RUN fetchDeps=' \
+    ca-certificates \
+    wget \
+  ' && \
+  apt update && \
+  apt install -y --no-install-recommends $fetchDeps && \
+  dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" && \
+  wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" && \
+  chmod +x /usr/local/bin/gosu && \
+  gosu nobody true && \
+  apt clean && \
+  rm -rf /var/lib/apt/lists/* && \
+  apt autoremove -y
+
+# add user
+ENV USER_NAME=memo \
+  HOME=/home/memo \
+  USER_ID=1000 \
+  GROUP_ID=1000
+RUN adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos ""
+
 # install memo
 ENV MEMO_VER=v0.0.4 \
   MEMO_ARCHIVE=memo_linux_amd64.zip
@@ -26,15 +49,13 @@ RUN fetchDeps=' \
   unzip ${MEMO_ARCHIVE} && \
   mv memo /usr/bin/ && \
   rm ${MEMO_ARCHIVE} && \
+  apt purge -y --auto-remove $fetchDeps && \
   apt clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  apt purge -y --auto-remove $fetchDeps
+  rm -rf /var/lib/apt/lists/*
 
 # install tools and settings
-ENV HOME=/home/dev
 COPY config.toml /home/dev/.config/memo/config.toml
-RUN adduser dev --disabled-password --gecos "" && \
-  apt update && \
+RUN apt update && \
   apt install -y --no-install-recommends \
     neovim \
     peco && \
@@ -52,14 +73,14 @@ RUN adduser dev --disabled-password --gecos "" && \
   mkdir -p ${HOME}/.config/nvim && \
   mv ${HOME}/dotfiles/.vimrc ~/.config/nvim/init.vim && \
   # cleanup
+  apt purge -y --auto-remove $fetchDeps && \
+  apt autoremove -y && \
   apt clean && \
   rm -rf /var/lib/apt/lists/* && \
-  apt purge -y --auto-remove $fetchDeps && \
-  apt autoremote -y && \
-  rm -rf ${HOME}/dotfiles && \
-  # permission
-  chown -R dev:dev /home/dev
+  rm -rf ${HOME}/dotfiles
 
-USER dev
-WORKDIR /home/dev
+ADD ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+WORKDIR ${HOME}
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["memo"]
