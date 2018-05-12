@@ -12,7 +12,26 @@ RUN apt-get update && apt install -y --no-install-recommends \
   update-locale LANG=en_US.UTF-8
 ENV LANG en_US.UTF-8
 
-ENV HOME=/home/dev \
+# gosu
+ENV GOSU_VERSION=1.10
+RUN fetchDeps=' \
+    ca-certificates \
+    wget \
+  ' && \
+  apt-get update && \
+  apt-get install -y --no-install-recommends $fetchDeps && \
+  dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" && \
+  wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" && \
+  chmod +x /usr/local/bin/gosu && \
+  gosu nobody true && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* && \
+  apt-get autoremove -y
+
+ENV USER_NAME=dev \
+  HOME=/home/dev \
+  USER_ID=1000 \
+  GROUP_ID=1000 \
   GHQ_VERSION=0.8.0 \
   TERRAFORM_VERSION=0.11.7
 RUN adduser dev --disabled-password --gecos "" && \
@@ -47,13 +66,11 @@ RUN adduser dev --disabled-password --gecos "" && \
   rm -rf /var/lib/apt/lists/* && \
   apt-get autoremove -y && \
   rm -rf ${HOME}/.dotfiles && \
-  # for named volume
-  mkdir ${HOME}/src && \
-  mkdir ${HOME}/pkg && \
-  mkdir ${HOME}/bin && \
-  # change permission
-  chown -R dev:dev /home/dev
+  # for volumes
+  mkdir ${HOME}/src ${HOME}/pkg ${HOME}/bin
 
-USER dev
+ADD ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 WORKDIR ${HOME}
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
