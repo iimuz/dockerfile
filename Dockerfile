@@ -1,3 +1,8 @@
+FROM iimuz/golang-dev:v1.10.2-1.2.0 AS build
+LABEL maintainer iimuz
+
+RUN go get github.com/mattn/memo
+
 FROM debian:9.4
 LABEL maintainer iimuz
 
@@ -35,23 +40,8 @@ ENV USER_NAME=memo \
   GROUP_ID=1000
 RUN adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos ""
 
-# install memo
-ENV MEMO_VER=v0.0.4 \
-  MEMO_ARCHIVE=memo_linux_amd64.zip
-RUN fetchDeps=' \
-    ca-certificates \
-    unzip \
-    wget \
-  ' && \
-  apt update && \
-  apt install -y --no-install-recommends $fetchDeps && \
-  wget https://github.com/mattn/memo/releases/download/${MEMO_VER}/${MEMO_ARCHIVE} && \
-  unzip ${MEMO_ARCHIVE} && \
-  mv memo /usr/bin/ && \
-  rm ${MEMO_ARCHIVE} && \
-  apt purge -y --auto-remove $fetchDeps && \
-  apt clean && \
-  rm -rf /var/lib/apt/lists/*
+# memo
+COPY --from=build /go/bin/memo /usr/bin/
 
 # install tools and settings
 COPY config.toml /home/dev/.config/memo/config.toml
