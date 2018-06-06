@@ -59,6 +59,6 @@ RUN set -x && mkdir -p ${SOURCE_DIR}
 
 ADD ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
-WORKDIR ${HOME}
+WORKDIR ${SOURCE_DIR}
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["hugo", "server", "-b", "http://localhost/", "-p", "1313", "--bind", "0.0.0.0"]
