@@ -1,8 +1,8 @@
-memodir = "/home/dev/.config/memo/_posts"
+memodir = "/src/_posts"
 editor = "nvim"
 column = 20
 selectcmd = "peco"
 grepcmd = "grep -nH ${PATTERN} ${FILES}"
-assetsdir = "/home/dev/.config/memo/assets"
-pluginsdir = "/home/dev/.config/memo/plugins"
+assetsdir = "/src/assets"
+pluginsdir = "/src/plugins"
 

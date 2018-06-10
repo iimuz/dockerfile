@@ -16,5 +16,7 @@ if [ ${GROUP_ID} != $(id ${USER_NAME} -g) ]; then
 fi
 
 chown -R ${USER_NAME}:${USER_NAME} ${HOME}
+chown ${USER_NAME}:${USER_NAME} /src
+chown ${USER_NAME}:${USER_NAME} /src/_posts
 
 exec gosu ${USER_NAME} "$@"
