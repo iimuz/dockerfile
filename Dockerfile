@@ -1,17 +1,18 @@
 FROM debian:9.4
 LABEL maintainer iimuz
 
-# set locale
+# set locale and fonts
 RUN set -x && \
   apt update && apt-get install -y --no-install-recommends \
     apt-utils \
+    fonts-takao \
     locales && \
   apt clean && \
   rm -rf /var/lib/apt/lists/* && \
-  echo en_US.UTF-8 UTF-8 > /etc/locale.gen && \
+  echo ja_JP.UTF-8 UTF-8 > /etc/locale.gen && \
   locale-gen && \
-  update-locale LANG=en_US.UTF-8
-ENV LANG en_US.UTF-8
+  update-locale LANG=ja_JP.UTF-8
+ENV LANG ja_JP.UTF-8
 
 # gosu
 ENV GOSU_VERSION=1.10
