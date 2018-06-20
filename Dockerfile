@@ -12,6 +12,6 @@ RUN set -x && \
   apt autoremove -y
 
 # plugins
-COPY .vim ${HOME}/.vim
+COPY .vim /opt/.vim
 RUN set -x && \
   gosu ${USER_NAME} nvim +":silent! call dein#install()" +qall
