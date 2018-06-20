@@ -1,4 +1,4 @@
-FROM iimuz/neovim:v0.2.2
+FROM iimuz/neovim:v0.3.0-2
 LABEL maintainer iimuz
 
 # plugins
