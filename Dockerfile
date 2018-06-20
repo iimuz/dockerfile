@@ -39,8 +39,8 @@ RUN set -x && \
   adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos ""
 
 # neovim
-ENV NEOVIM_VERSION=0.2.2-3
-COPY .vim ${HOME}/.vim
+ENV NEOVIM_VERSION=0.3.0-2
+COPY .vim /opt/.vim
 RUN set -x && \
   echo "deb http://ftp.debian.org/debian unstable main" >> /etc/apt/sources.list && \
   apt update && \
@@ -62,12 +62,18 @@ RUN set -x && \
   mkdir -p ${HOME}/.config/nvim && \
   mv ${HOME}/dotfiles/.config/nvim/init.vim ~/.config/nvim/ && \
   mv ${HOME}/dotfiles/.config/nvim/dein.vim ~/.config/nvim/ && \
-  mkdir -p ${HOME}/.cache/dein && \
+  sed -i -e 's/~\/.cache\/dein/\/opt\/.cache\/dein/' ~/.config/nvim/dein.vim && \
+  sed -i -e 's/~\/.vim\/rc/\/opt\/.vim\/rc/' ~/.config/nvim/dein.vim && \
   curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh && \
   chown -R ${USER_NAME}:${USER_NAME} ${HOME} && \
-  gosu ${USER_NAME} sh $HOME/installer.sh $HOME/.cache/dein && \
-  rm $HOME/installer.sh && \
+  mkdir -p /opt/.cache/dein && \
+  chmod -R 777 /opt/.cache && \
+  chmod -R 777 /opt/.vim && \
+  gosu ${USER_NAME} sh ${HOME}/installer.sh /opt/.cache/dein && \
+  rm ${HOME}/installer.sh && \
   gosu ${USER_NAME} nvim +":silent! call dein#install()" +qall && \
+  chmod -R 777 /opt/.cache && \
+  chmod -R 777 /opt/.vim && \
   : "cleanup" && \
   apt purge -y $fetchDeps && \
   apt autoremove -y && \
