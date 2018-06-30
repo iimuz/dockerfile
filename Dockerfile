@@ -46,7 +46,14 @@ RUN set -x && \
   apt update && \
   apt -t unstable install -y --no-install-recommends \
     neovim=${NEOVIM_VERSION} \
-    python3-neovim && \
+    python-neovim \
+    python-pip \
+    python3-neovim \
+    python3-pip && \
+  pip install --no-cache setuptools && \
+  pip install --no-cache neovim==0.2.6 && \
+  pip3 install --no-cache setuptools && \
+  pip3 install --no-cache neovim==0.2.6 && \
   : "dein requirements" && \
   apt install -y --no-install-recommends \
     ca-certificates \
