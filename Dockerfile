@@ -1,34 +1,10 @@
-FROM debian:9.4
+FROM alpine:3.8
 LABEL maintainer iimuz
 
-# set locale
-RUN set -x && \
-  apt update && apt-get install -y --no-install-recommends \
-    apt-utils \
-    locales && \
-  apt clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  echo en_US.UTF-8 UTF-8 > /etc/locale.gen && \
-  locale-gen && \
-  update-locale LANG=en_US.UTF-8
-ENV LANG en_US.UTF-8
-
-# gosu
-ENV GOSU_VERSION=1.10
-RUN set -x && \
-  fetchDeps=' \
-    ca-certificates \
-    wget \
-  ' && \
-  apt update && \
-  apt install -y --no-install-recommends $fetchDeps && \
-  dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" && \
-  wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" && \
-  chmod +x /usr/local/bin/gosu && \
-  gosu nobody true && \
-  apt clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  apt autoremove -y
+# language and locale
+ENV LANG="ja_JP.UTF-8" \
+  LANGUAGE="ja_JP:ja" \
+  LC_ALL="ja_JP.UTF-8"
 
 # add user
 ENV USER_NAME=nvim \
@@ -36,57 +12,56 @@ ENV USER_NAME=nvim \
   USER_ID=1000 \
   GROUP_ID=1000
 RUN set -x && \
+  apk update && \
+  apk add --no-cache su-exec shadow && \
+  rm -rf /var/cache/apk/* && \
   adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos ""
 
 # neovim
-ENV NEOVIM_VERSION=0.3.0-2
-COPY .vim /opt/.vim
+ENV NEOVIM_VERSION=0.3.0-r0
 RUN set -x && \
-  echo "deb http://ftp.debian.org/debian unstable main" >> /etc/apt/sources.list && \
-  apt update && \
-  apt -t unstable install -y --no-install-recommends \
+  apk update && \
+  apk add --no-cache --virtual .build-deps \
+    gcc \
+    linux-headers \
+    musl-dev && \
+  apk add --no-cache \
     neovim=${NEOVIM_VERSION} \
-    python-neovim \
-    python-pip \
-    python3-neovim \
-    python3-pip && \
+    python-dev \
+    py-pip \
+    python3-dev \
+    py3-pip && \
   pip install --no-cache setuptools && \
   pip install --no-cache neovim==0.2.6 && \
   pip3 install --no-cache setuptools && \
   pip3 install --no-cache neovim==0.2.6 && \
-  : "dein requirements" && \
-  apt install -y --no-install-recommends \
-    ca-certificates \
-    git && \
-  : "temp packages" && \
-  fetchDeps=' \
-    curl \
-  ' && \
-  apt install -y --no-install-recommends $fetchDeps && \
+  apk del .build-deps && \
+  rm -rf /var/cache/apk/*
+
+COPY .vim /opt/.vim
+RUN set -x && \
+  apk update && \
+  apk add --no-cache git && \
+  apk add --no-cache --virtual .fetch-deps curl && \
   : "get settings" && \
-  git clone --depth=1 -b v0.1.0 https://github.com/iimuz/dotfiles.git ${HOME}/dotfiles && \
+  su-exec ${USER_NAME} git clone --depth=1 -b v0.1.0 https://github.com/iimuz/dotfiles.git ${HOME}/dotfiles && \
   : "neovim settings" && \
-  mkdir -p ${HOME}/.config/nvim && \
-  mv ${HOME}/dotfiles/.config/nvim/init.vim ~/.config/nvim/ && \
-  mv ${HOME}/dotfiles/.config/nvim/dein.vim ~/.config/nvim/ && \
-  sed -i -e 's/~\/.cache\/dein/\/opt\/.cache\/dein/' ~/.config/nvim/dein.vim && \
-  sed -i -e 's/~\/.vim\/rc/\/opt\/.vim\/rc/' ~/.config/nvim/dein.vim && \
-  curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh && \
-  chown -R ${USER_NAME}:${USER_NAME} ${HOME} && \
-  mkdir -p /opt/.cache/dein && \
-  chmod -R 777 /opt/.cache && \
-  chmod -R 777 /opt/.vim && \
-  gosu ${USER_NAME} sh ${HOME}/installer.sh /opt/.cache/dein && \
-  rm ${HOME}/installer.sh && \
-  gosu ${USER_NAME} nvim +":silent! call dein#install()" +qall && \
-  chmod -R 777 /opt/.cache && \
-  chmod -R 777 /opt/.vim && \
+  su-exec ${USER_NAME} mkdir -p ${HOME}/.config/nvim && \
+  su-exec ${USER_NAME} mv ${HOME}/dotfiles/.config/nvim/init.vim ${HOME}/.config/nvim/ && \
+  : "dein" && \
+  su-exec ${USER_NAME} mv ${HOME}/dotfiles/.config/nvim/dein.vim ${HOME}/.config/nvim/ && \
+  su-exec ${USER_NAME} sed -i -e 's/~\/.cache\/dein/\/opt\/.cache\/dein/' ${HOME}/.config/nvim/dein.vim && \
+  su-exec ${USER_NAME} sed -i -e 's/~\/.vim\/rc/\/opt\/.vim\/rc/' ${HOME}/.config/nvim/dein.vim && \
+  su-exec ${USER_NAME} curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ${HOME}/installer.sh && \
+  chown -R ${USER_NAME}:${USER_GROUP} /opt && \
+  su-exec ${USER_NAME} sh ${HOME}/installer.sh /opt/.cache/dein && \
+  su-exec ${USER_NAME} nvim +":silent! call dein#install()" +qall && \
+  chmod -R 777 /opt/.vim /opt/.cache && \
   : "cleanup" && \
-  apt purge -y $fetchDeps && \
-  apt autoremove -y && \
-  apt clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  rm -rf ${HOME}/dotfiles
+  rm ${HOME}/installer.sh && \
+  rm -rf ${HOME}/dotfiles && \
+  apk del .fetch-deps && \
+  rm -rf /var/cache/apk/*
 
 ENV SOURCE_DIR=/src
 RUN set -x && mkdir ${SOURCE_DIR}
@@ -96,4 +71,3 @@ RUN chmod +x /entrypoint.sh
 WORKDIR ${SOURCE_DIR}
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["nvim"]
-

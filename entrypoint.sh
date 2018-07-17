@@ -17,4 +17,4 @@ fi
 
 chown ${USER_NAME}:${USER_NAME} ${SOURCE_DIR}
 
-exec gosu ${USER_NAME} "$@"
+exec su-exec ${USER_NAME}:${GROUP_ID} "$@"
