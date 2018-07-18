@@ -2,13 +2,11 @@ FROM iimuz/neovim:v0.3.0-4
 LABEL maintainer iimuz
 
 RUN set -x && \
-  apt update && \
-  apt install -y --no-install-recommends ctags && \
+  apk update && \
+  apk add --no-cache ctags && \
   pip3 install --no-cache \
     flake8==3.5.0 && \
-  apt clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  apt autoremove -y
+  rm -rf /var/cache/apk/*
 
 # plugins
 COPY .vim /opt/.vim
