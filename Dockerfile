@@ -1,4 +1,4 @@
-FROM iimuz/neovim:v0.3.0-3
+FROM iimuz/neovim:v0.3.0-4
 LABEL maintainer iimuz
 
 RUN set -x && \
@@ -13,4 +13,4 @@ RUN set -x && \
 # plugins
 COPY .vim /opt/.vim
 RUN set -x && \
-  gosu ${USER_NAME} nvim +":silent! call dein#install()" +qall
+  su-exec ${USER_NAME} nvim +":silent! call dein#install()" +qall
