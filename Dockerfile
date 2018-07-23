@@ -1,10 +1,14 @@
 FROM alpine:3.8
 LABEL maintainer iimuz
 
-# language and locale
+# locale and timezone
 ENV LANG="ja_JP.UTF-8" \
   LANGUAGE="ja_JP:ja" \
   LC_ALL="ja_JP.UTF-8"
+RUN set -x && \
+  apk update && \
+  apk add --no-cache tzdata && \
+  rm -rf /var/cache/apk/*
 
 # add user
 ENV USER_NAME=nvim \
