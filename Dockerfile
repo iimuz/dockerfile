@@ -1,4 +1,4 @@
-FROM iimuz/neovim:v0.3.0-4
+FROM iimuz/neovim:v0.3.0-5
 LABEL maintainer iimuz
 
 # packages
