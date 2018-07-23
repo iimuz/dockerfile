@@ -1,76 +1,49 @@
-FROM iimuz/golang-dev:v1.10.2-1.2.0 AS build
+FROM iimuz/golang-dev:v1.10.2-1.2.0 AS build-memo
 LABEL maintainer iimuz
 
-RUN go get github.com/mattn/memo
+RUN set -x && \
+  go get github.com/mattn/memo
 
-FROM debian:9.4
+FROM iimuz/golang-dev:v1.10.2-1.2.0 AS build-peco
 LABEL maintainer iimuz
 
-# set locale
-RUN apt update && apt install -y --no-install-recommends \
-    apt-utils \
-    locales && \
-  apt clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  echo en_US.UTF-8 UTF-8 > /etc/locale.gen && \
-  locale-gen && \
-  update-locale LANG=en_US.UTF-8
-ENV LANG en_US.UTF-8
+RUN set -x && \
+  go get -d github.com/peco/peco && \
+  cd /go/src/github.com/peco/peco && \
+  git checkout refs/tags/v0.5.3 && \
+  glide install && \
+  go build cmd/peco/peco.go && \
+  mv ./peco /go/bin/peco
 
-# gosu
-ENV GOSU_VERSION=1.10
-RUN fetchDeps=' \
-    ca-certificates \
-    wget \
-  ' && \
-  apt update && \
-  apt install -y --no-install-recommends $fetchDeps && \
-  dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" && \
-  wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" && \
-  chmod +x /usr/local/bin/gosu && \
-  gosu nobody true && \
-  apt clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  apt autoremove -y
+FROM iimuz/neovim:v0.3.0-md5
+LABEL maintainer iimuz
 
-# add user
+# change username
+RUN set -x && \
+  export NEW_USER_NAME=memo && \
+  apk update && \
+  apk add --no-cache --virtual .fetch-deps shadow && \
+  usermod -l ${NEW_USER_NAME} ${USER_NAME} && \
+  usermod -m -d /home/${NEW_USER_NAME} ${NEW_USER_NAME} && \
+  groupmod -n ${NEW_USER_NAME} ${USER_NAME} && \
+  rm -rf /home/${USER_NAME} && \
+  apk del .fetch-deps && \
+  rm -rf /var/cache/apk/*
 ENV USER_NAME=memo \
-  HOME=/home/memo \
-  USER_ID=1000 \
-  GROUP_ID=1000
-RUN adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos ""
+  HOME=/home/memo
+
 
 # memo
-COPY --from=build /go/bin/memo /usr/bin/
-
-# install tools and settings
+COPY --from=build-memo /go/bin/memo /usr/bin/
 COPY config.toml /home/dev/.config/memo/config.toml
-RUN apt update && \
-  apt install -y --no-install-recommends \
-    neovim \
-    peco && \
-  fetchDeps=' \
-    ca-certificates \
-    git \
-    wget \
-  ' && \
-  apt install -y --no-install-recommends $fetchDeps && \
-  # memo settings
-  mkdir -p ${HOME}/.config/memo/_posts && \
-  # get settings
-  git clone --depth=1 https://github.com/iimuz/dotfiles.git ${HOME}/dotfiles && \
-  # neovim settings
-  mkdir -p ${HOME}/.config/nvim && \
-  mv ${HOME}/dotfiles/.vimrc ~/.config/nvim/init.vim && \
-  # cleanup
-  apt purge -y --auto-remove $fetchDeps && \
-  apt autoremove -y && \
-  apt clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  rm -rf ${HOME}/dotfiles
+RUN set -x && \
+  apk add --no-cache ca-certificates && \
+  mkdir /lib64 && \
+  ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
+  mkdir -p /src/_posts && \
+  rm -rf /var/cache/apk/*
 
-ADD ./entrypoint.sh /
-RUN chmod +x /entrypoint.sh
-WORKDIR ${HOME}
-ENTRYPOINT ["/entrypoint.sh"]
+# peco
+COPY --from=build-peco /go/bin/peco /usr/bin/
+
 CMD ["memo"]
