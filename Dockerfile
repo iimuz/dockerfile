@@ -75,4 +75,4 @@ ADD ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 WORKDIR ${SOURCE_DIR}
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["nvim"]
+CMD ["ash"]
