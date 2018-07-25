@@ -46,6 +46,7 @@ RUN set -x && \
     ca-certificates \
     diffutils \
     less \
+    netcat-openbsd \
     openssh \
     subversion && \
   : "ssh" && \
