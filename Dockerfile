@@ -45,14 +45,16 @@ RUN set -x && \
   apk add --no-cache \
     ca-certificates \
     diffutils \
+    git \
+    git-svn \
     less \
     netcat-openbsd \
     openssh \
+    perl-git \
     subversion && \
   : "ssh" && \
   mkdir ~/.ssh && \
   : "git" && \
-  apk add --no-cache git && \
   git clone --depth=1 -b v0.1.0 https://github.com/iimuz/dotfiles.git ${HOME}/dotfiles && \
   mv ~/dotfiles/.gitconfig ${HOME}/ && \
   : "neovim" && \
