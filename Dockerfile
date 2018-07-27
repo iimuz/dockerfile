@@ -48,8 +48,7 @@ RUN set -x && \
     git \
     less \
     netcat-openbsd \
-    openssh \
-    subversion && \
+    openssh && \
   : "ssh" && \
   mkdir ~/.ssh && \
   : "git" && \
