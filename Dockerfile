@@ -46,9 +46,12 @@ RUN set -x && \
     ca-certificates \
     diffutils \
     git \
+    git-svn \
     less \
     netcat-openbsd \
-    openssh && \
+    openssh \
+    perl-git \
+    subversion && \
   : "ssh" && \
   mkdir ~/.ssh && \
   : "git" && \
