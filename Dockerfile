@@ -8,11 +8,29 @@ RUN set -x && \
   go build -v -o ./pt ./cmd/pt/main.go && \
   mv ./pt /go/bin/
 
+FROM golang:1.10.3-stretch AS build-tools
+
+RUN set -x && \
+  go get github.com/golang/lint/golint && \
+  go get github.com/jstemmer/gotags && \
+  go get github.com/nsf/gocode && \
+  go get github.com/rogpeppe/godef && \
+  go get golang.org/x/tools/cmd/godoc && \
+  go get golang.org/x/tools/cmd/goimports && \
+  go get golang.org/x/tools/cmd/gorename
+
 FROM iimuz/neovim:v0.3.0-5
 LABEL maintainer iimuz
 
+# go
+RUN set -x && \
+  apk update && \
+  apk add --no-cache go && \
+  rm -rf /var/cache/apk/*
+
 # tools
 COPY --from=build-pt /go/bin/pt /usr/bin/
+COPY --from=build-tools /go/bin/* /usr/bin/
 RUN set -x && \
   apk add --no-cache ca-certificates && \
   mkdir /lib64 && \
