@@ -15,7 +15,6 @@ if [ ${GROUP_ID} != $(id ${USER_NAME} -g) ]; then
   groupmod -g ${GROUP_ID} ${USER_NAME}
 fi
 
-chown -R ${USER_NAME}:${USER_NAME} ${HOME}
-chown -R ${USER_NAME}:${USER_NAME} /go
+chown ${USER_NAME}:${USER_NAME} /go
 
-exec gosu ${USER_NAME} "$@"
+exec su-exec ${USER_NAME} "$@"
