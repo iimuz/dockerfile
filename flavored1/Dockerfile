@@ -1,4 +1,4 @@
-FROM iimuz/dockerhub-sample:dev
+FROM iimuz/dockerhub-sample:latest
 
 RUN set -x && \
   apk update && \
