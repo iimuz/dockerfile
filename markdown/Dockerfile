@@ -20,7 +20,17 @@ RUN set -x && \
   mkdir -p /src/_posts && \
   rm -rf /var/cache/apk/*
 
+# packages
+COPY .globalrc ${HOME}/.globalrc
+RUN set -x && \
+  apk update && \
+  apk add --no-cache ctags && \
+  apk add --no-cache global --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing && \
+  rm -rf /var/cache/apk/*
+
 # plugins
 COPY .vim /opt/.vim
 RUN set -x && \
-  su-exec ${USER_NAME} nvim +":silent! call dein#install()" +qall
+  apk update && \
+  su-exec ${USER_NAME} nvim +":silent! call dein#install()" +qall && \
+  rm -rf /var/cache/apk/*
