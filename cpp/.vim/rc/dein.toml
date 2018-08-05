@@ -39,4 +39,3 @@ repo = 'Shougo/neomru.vim'
 
 [[plugins]]
 repo = 'Shougo/neoinclude.vim'
-
