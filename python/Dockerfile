@@ -20,6 +20,13 @@ RUN set -x && \
   mkdir -p /src/_posts && \
   rm -rf /var/cache/apk/*
 
+RUN set -x && \
+  apk update && \
+  apk add --no-cache ctags && \
+  pip3 install --no-cache \
+    flake8==3.5.0 && \
+  rm -rf /var/cache/apk/*
+
 # plugins
 COPY .vim /opt/.vim
 RUN set -x && \
