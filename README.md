@@ -5,6 +5,7 @@ Golang development tools in docker container.
 # flavor
 
 * basic: default development environment.
+* docs: add documentation tools.
 * latest: maybe equal to basic. no tags version.
 * dev: development version. unstable.
 
