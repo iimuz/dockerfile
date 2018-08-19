@@ -1,5 +1,4 @@
-# FROM golang:1.10.3-stretch AS build-tools
-FROM localhost:go-base AS build-tools
+FROM iimuz/golang-dev:v1.10.3-2 AS build-tools
 
 # tools for go lang
 RUN set -x && \
@@ -7,7 +6,7 @@ RUN set -x && \
   go get github.com/Masterminds/glide && \
   go get github.com/Songmu/make2help/cmd/make2help
 
-FROM localhost:go-base
+FROM iimuz/golang-dev:v1.10.3-2
 LABEL maintainer iimuz
 
 # tools
