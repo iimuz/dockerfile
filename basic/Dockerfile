@@ -1,4 +1,5 @@
-FROM golang:1.10.3-stretch AS build-tools
+# FROM golang:1.10.3-stretch AS build-tools
+FROM localhost:go-base AS build-tools
 
 # tools for go lang
 RUN set -x && \
@@ -19,8 +20,6 @@ RUN set -x && \
   rm -rf /var/cache/apk/*
 RUN set -x && \
   apk update && \
-  apk add --no-cache \
-    git \
-    make && \
+  apk add --no-cache make && \
   rm -rf /var/cache/apk/*
 
