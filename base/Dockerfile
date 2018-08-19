@@ -21,6 +21,12 @@ RUN set -x && \
   rm -rf /var/cache/apk/* && \
   adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos ""
 
+# tools
+RUN set -x && \
+  apk update && \
+  apk add --no-cache git && \
+  rm -rf /var/cache/apk/*
+
 ADD ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 WORKDIR /go
