@@ -43,6 +43,11 @@ RUN set -x && \
   ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
   rm -rf /var/cache/apk/*
 
+# tools
+RUN set -x && \
+  apk add --no-cache make && \
+  rm -rf /var/cache/apk/*
+
 # source directory
 ENV SOURCE_DIR=/src
 RUN set -x && mkdir ${SOURCE_DIR}
