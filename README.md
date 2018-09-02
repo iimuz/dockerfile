@@ -12,8 +12,8 @@ images come in these flavors:
 * boost-dev: development tag for boost
 * opencv: add opencv to basic tools
 * opencv-dev: develepment tag for opencv
-* full: add all packages to basic tools
-* full-dev: development tag for full
+* atcoder: build tools for atcoder.(not complete)
+* atcoder-dev: development tag for atcoder.(not complete)
 
 ## tools
 
