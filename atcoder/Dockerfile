@@ -37,7 +37,9 @@ ENV CC=clang \
 # tools
 RUN set -x && \
   apk update && \
-  apk add --no-cache make && \
+  apk add --no-cache \
+    cmake \
+    make && \
   rm -rf /var/cache/apk/*
 
 ENV SOURCE_DIR=/src
