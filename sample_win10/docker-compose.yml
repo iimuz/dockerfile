@@ -1,0 +1,38 @@
+version: "2.3"
+services:
+  windows10:
+    container_name: win10
+    image: iimuz/kvm:latest
+    privileged: true
+    ports:
+      - 3389:3389
+      - 5900:5900
+    volumes:
+      - ./_mnt:/mnt/vm
+    command: >
+      qemu-system-x86_64
+      -name win10
+      -machine type=q35,accel=kvm
+      -cpu host,kvm=off
+      -smp 4,sockets=1,cores=2,threads=2
+      -m 4096
+      -vga qxl
+      -rtc clock=host,base=localtime
+      -balloon none
+      -serial none
+      -parallel none
+      -boot order=dc
+      -drive if=pflash,format=raw,readonly,file=/usr/share/OVMF/OVMF_CODE.fd
+      -drive if=pflash,format=raw,file=/usr/share/OVMF/OVMF_VARS.fd
+      -drive file=/mnt/vm/primary.raw,if=virtio,index=1
+      -drive file=/mnt/vm/win10.iso,media=cdrom,index=2
+      -drive file=/mnt/vm/virtio-win-0.1.149.iso,media=cdrom,index=3
+      -spice port=5900,disable-ticketing,agent-mouse=off
+      -redir tcp:3389::3389
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 192.168.1.0/25
+
