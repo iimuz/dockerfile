@@ -1,61 +1,32 @@
-FROM node:9.1.0
+FROM node:10.11.0-alpine
 LABEL maintainer "iimuz"
 
-# set locale
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    apt-utils \
-    locales \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* \
-  && echo en_US.UTF-8 UTF-8 > /etc/locale.gen \
-  && locale-gen \
-  && update-locale LANG=en_US.UTF-8
-ENV LANG en_US.UTF-8
+# locale and timezone
+ENV LANG="ja_JP.UTF-8" \
+  LANGUAGE="ja_JP:ja" \
+  LC_ALL="ja_JP.UTF-8"
+RUN set -x && \
+  apk update && \
+  apk add --no-cache tzdata && \
+  rm -rf /var/cache/apk/*
 
-# vim
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    libc-dev \
-    lua5.2 \
-    lua5.2-dev \
-    luajit \
-    ctags \
-    gcc \
-    global \
-    ncurses-dev \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* \
-  && cd /opt/ \
-  && git clone --depth=1 -b v8.0.1365 https://github.com/vim/vim vim \
-  && cd ./vim \
-  && ./configure \
-    --with-features=huge \
-    --enable-multibyte \
-    --enable-luainterp=dynamic \
-    --enable-gpm \
-    --enable-cscope \
-    --enable-fontset \
-    --enable-fail-if-missing \
-    --prefix=/usr/local \
-  && make && make install \
-  && cd .. \
-  && rm -rf vim \
-  && vim --version
+# add user
+ENV USER_NAME=node \
+  HOME=/home/node \
+  USER_ID=1000 \
+  GROUP_ID=1000
+RUN set -x && \
+  apk update && \
+  apk add --no-cache su-exec shadow && \
+  rm -rf /var/cache/apk/*
+# adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos ""
 
-# add dev user
-ENV HOME /home/dev
-COPY ./home $HOME
-RUN adduser dev --disabled-password --gecos "" \
-  && echo "ALL ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers \
-  && chown -R dev:dev $HOME
-USER dev
+ENV SOURCE_DIR=/src
+RUN set -x && mkdir ${SOURCE_DIR}
 
-# install dein.vim
-RUN mkdir -p ${HOME}/.cache/dein \
-  && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh \
-  && sh $HOME/installer.sh $HOME/.cache/dein \
-  && rm $HOME/installer.sh \
-  && vim +":silent! call dein#install()" +qall
-
-WORKDIR ${HOME}
+ADD ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+WORKDIR $SOURCE_DIR
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["node"]
 
