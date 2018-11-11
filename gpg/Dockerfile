@@ -6,6 +6,8 @@ RUN set -x && \
   apk update && \
   apk add --no-cache gnupg && \
   : "setting for gnupg" && \
+  echo -e "GPG_TTY=\$(tty)" >> $HOME/.profile && \
+  echo -e "export GPG_TTY" >> $HOME/.profile && \
   echo -e "\nalias gpg='gpg --pinentry-mode=loopback'\n" >> $HOME/.profile && \
   : "install git contrib" && \
   apk add --no-cache git-perl && \

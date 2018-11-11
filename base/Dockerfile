@@ -41,6 +41,7 @@ RUN set -x && \
   : "git" && \
   git clone --depth=1 -b develop https://github.com/iimuz/dotfiles.git ${HOME}/dotfiles && \
   mv ~/dotfiles/.gitconfig ${HOME}/ && \
+  sed -i -e "s/~\/src/\/src/g" $HOME/.gitconfig && \
   : "neovim" && \
   apk add --no-cache neovim && \
   ln -s /usr/bin/nvim /usr/bin/vim && \
