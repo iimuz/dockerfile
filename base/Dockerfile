@@ -39,7 +39,7 @@ RUN set -x && \
   : "ssh" && \
   mkdir ~/.ssh && \
   : "git" && \
-  git clone --depth=1 -b develop https://github.com/iimuz/dotfiles.git ${HOME}/dotfiles && \
+  git clone --depth=1 -b v0.2.0 https://github.com/iimuz/dotfiles.git ${HOME}/dotfiles && \
   mv ~/dotfiles/.gitconfig ${HOME}/ && \
   sed -i -e "s/~\/src/\/src/g" $HOME/.gitconfig && \
   : "neovim" && \
