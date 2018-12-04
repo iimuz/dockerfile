@@ -29,7 +29,6 @@ RUN conda install --quiet --yes \
 # extensions
 RUN conda install --quiet --yes -c conda-forge jupyter_cms \
   && conda install --quiet --yes -c conda-forge jupyter_contrib_nbextensions \
-  && conda remove --quiet --yes --force qt pyqt \
   && conda clean -tipsy \
   && npm cache clean \
   && rm -rf $CONDA_DIR/share/jupyter/lab/staging \
