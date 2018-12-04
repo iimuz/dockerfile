@@ -20,7 +20,6 @@ USER $NB_USER
 RUN conda install --quiet --yes \
     pandas-datareader \
     tqdm \
-  && conda remove --quiet --yes --force qt pyqt \
   && conda clean -tipsy \
   && npm cache clean \
   && rm -rf $CONDA_DIR/share/jupyter/lab/staging \
