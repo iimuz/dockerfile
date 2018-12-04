@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook:0b3ec811c968
+FROM jupyter/scipy-notebook:14fdfbf9cfc1
 LABEL maintainer "iimuz"
 
 USER root
