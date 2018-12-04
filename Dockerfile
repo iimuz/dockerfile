@@ -21,7 +21,7 @@ RUN conda install --quiet --yes \
     pandas-datareader \
     tqdm \
   && conda clean -tipsy \
-  && npm cache clean \
+  && npm cache clean --force \
   && rm -rf $CONDA_DIR/share/jupyter/lab/staging \
   && fix-permissions $CONDA_DIR
 
@@ -29,7 +29,7 @@ RUN conda install --quiet --yes \
 RUN conda install --quiet --yes -c conda-forge jupyter_cms \
   && conda install --quiet --yes -c conda-forge jupyter_contrib_nbextensions \
   && conda clean -tipsy \
-  && npm cache clean \
+  && npm cache clean --force \
   && rm -rf $CONDA_DIR/share/jupyter/lab/staging \
   && fix-permissions $CONDA_DIR \
   && jupyter contrib nbextension install --sys-prefix \
