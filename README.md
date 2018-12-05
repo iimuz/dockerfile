@@ -10,6 +10,14 @@ This container includes some packages and extensions.
 [scipy-nb]: https://hub.docker.com/r/jupyter/scipy-notebook/
 [scipy-dc]: https://github.com/jupyter/docker-stacks
 
+## tags
+
+Images come in these flavors:
+
+* latest: basic tools
+* dev: development tag for latest
+* vx.x.x: versioning tags of latest
+
 ## added packages
 
 These packages add in this container.

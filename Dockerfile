@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook:0b3ec811c968
+FROM jupyter/scipy-notebook:14fdfbf9cfc1
 LABEL maintainer "iimuz"
 
 USER root
@@ -20,18 +20,16 @@ USER $NB_USER
 RUN conda install --quiet --yes \
     pandas-datareader \
     tqdm \
-  && conda remove --quiet --yes --force qt pyqt \
   && conda clean -tipsy \
-  && npm cache clean \
+  && npm cache clean --force \
   && rm -rf $CONDA_DIR/share/jupyter/lab/staging \
   && fix-permissions $CONDA_DIR
 
 # extensions
 RUN conda install --quiet --yes -c conda-forge jupyter_cms \
   && conda install --quiet --yes -c conda-forge jupyter_contrib_nbextensions \
-  && conda remove --quiet --yes --force qt pyqt \
   && conda clean -tipsy \
-  && npm cache clean \
+  && npm cache clean --force \
   && rm -rf $CONDA_DIR/share/jupyter/lab/staging \
   && fix-permissions $CONDA_DIR \
   && jupyter contrib nbextension install --sys-prefix \
