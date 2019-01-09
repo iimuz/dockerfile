@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook:14fdfbf9cfc1
+FROM jupyter/scipy-notebook:a95cb64dfe10
 LABEL maintainer "iimuz"
 
 USER root
@@ -52,3 +52,11 @@ RUN conda install --quiet --yes -c conda-forge jupyter_cms \
   && jupyter nbextension enable varInspector/main \
   && jupyter nbextension enable zenmode/main
 
+# extensions lab
+RUN conda install --quiet --yes -c conda-forge jupytext && \
+  conda clean -tipsy && \
+  npm cache clean --force && \
+  rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
+  fix-permissions $CONDA_DIR && \
+  jupyter labextension install @jupyterlab/toc && \
+  jupyter labextension install jupyterlab_vim
