@@ -1,4 +1,4 @@
-FROM google/cloud-sdk:229.0.0
+FROM google/cloud-sdk:232.0.0-slim
 LABEL maintainer "iimuz"
 
 # set locale
