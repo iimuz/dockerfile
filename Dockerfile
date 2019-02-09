@@ -68,13 +68,15 @@ RUN adduser ${USER_NAME} --disabled-password --gecos "" && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
   apt-get autoremove -y && \
-  rm -rf ${HOME}/.dotfiles && \
-  # for volumes
-  mkdir ${HOME}/src ${HOME}/pkg ${HOME}/bin
+  rm -rf ${HOME}/.dotfiles
+
+ENV SOURCE_DIR=/src
+RUN set -x && \
+  mkdir -p $SOURCE_DIR
 
 ADD ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
-WORKDIR ${HOME}
+WORKDIR $SOURCE_DIR
 VOLUME ["/home/gcloud/.config"]
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["gcloud"]
