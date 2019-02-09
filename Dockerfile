@@ -68,7 +68,8 @@ RUN adduser ${USER_NAME} --disabled-password --gecos "" && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
   apt-get autoremove -y && \
-  rm -rf ${HOME}/.dotfiles
+  rm -rf ${HOME}/.dotfiles && \
+  chown -R ${USER_NAME}:${USER_NAME} $HOME
 
 ENV SOURCE_DIR=/src
 RUN set -x && \
