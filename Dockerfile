@@ -75,5 +75,6 @@ RUN adduser ${USER_NAME} --disabled-password --gecos "" && \
 ADD ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 WORKDIR ${HOME}
+VOLUME ["/home/gcloud/.config"]
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["bash"]
+CMD ["gcloud"]
