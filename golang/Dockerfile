@@ -9,7 +9,7 @@ RUN set -x && \
   go get golang.org/x/tools/cmd/goimports && \
   go get golang.org/x/tools/cmd/gorename
 
-FROM localhost:nvim
+FROM iimuz/neovim:v0.3.1-1
 LABEL maintainer iimuz
 
 # tools
