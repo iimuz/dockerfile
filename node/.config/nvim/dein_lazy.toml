@@ -15,8 +15,12 @@ repo = 'posva/vim-vue'
 on_ft = ['vue']
 
 [[plugins]]
+repo = 'HerringtonDarkholme/yats.vim'
+on_ft = ['typescript', 'typescript.tsx']
+
+[[plugins]]
 repo = 'w0rp/ale'
-on_ft = ['javascript', 'javascript.jsx', 'vue']
+on_ft = ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx', 'vue']
 hook_source = '''
   " エラー行にカーソルをあわせた際に表示されるメッセージフォーマット
   let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'

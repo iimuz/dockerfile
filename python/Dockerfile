@@ -1,33 +1,19 @@
-FROM golang:1.10.3-stretch AS build-pt
-
-RUN set -x && \
-  go get -d github.com/monochromegane/the_platinum_searcher
-WORKDIR /go/src/github.com/monochromegane/the_platinum_searcher
-RUN set -x && \
-  git checkout refs/tags/v2.1.6 && \
-  go build -v -o ./pt ./cmd/pt/main.go && \
-  mv ./pt /go/bin/
-
-FROM iimuz/neovim:v0.3.0-5
+FROM localhost:nvim
 LABEL maintainer iimuz
 
-# tools
-COPY --from=build-pt /go/bin/pt /usr/bin/
 RUN set -x && \
-  apk add --no-cache ca-certificates && \
-  mkdir /lib64 && \
-  ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
-  mkdir -p /src/_posts && \
-  rm -rf /var/cache/apk/*
-
-RUN set -x && \
+  : "install linter packages" && \
   apk update && \
   apk add --no-cache ctags && \
   pip3 install --no-cache \
-    flake8==3.5.0 && \
+    flake8==3.7.6 && \
   rm -rf /var/cache/apk/*
 
-# plugins
-COPY .vim /opt/.vim
+COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/
 RUN set -x && \
-  su-exec ${USER_NAME} nvim +":silent! call dein#install()" +qall
+  : "install plugins" && \
+  nvim +"call dein#install()" +qall && \
+  nvim +"UpdateRemotePlugin" +qall && \
+  : "setting for normal user" && \
+  chmod -R 777 $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME
+
