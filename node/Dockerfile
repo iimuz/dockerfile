@@ -1,4 +1,4 @@
-FROM localhost:nvim
+FROM iimuz/neovim:v0.3.1-1
 LABEL maintainer iimuz
 
 RUN set -x && \

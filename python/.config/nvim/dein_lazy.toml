@@ -1,38 +1,4 @@
 [[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = 'toml'
-
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-if = '''has('nvim')'''
-on_i = 1
-hook_source = '''
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_smart_case = 1
-  let g:deoplete#disable_auto_complete = 1
-  inoremap <expr> <C-n> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
-  if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-  endif
-  autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-'''
-
-[[plugins]]
-repo = 'Shougo/neocomplete.nvim'
-if = '''! has('nvim')'''
-on_i = 1
-hook_source = '''
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#enable_smart_case = 1
-  let g:neocomplete#disable_auto_complete = 1
-  inoremap <expr> <C-n> pumvisible() ? "\<C-n>" : neocomplete#mappings#manual_complete()
-  if !exists('g:neocomplete#omni#input_patterns')
-    let g:neocomplete#omni#input_patterns = {}
-  endif
-  autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-'''
-
-[[plugins]]
 repo = 'Vimjas/vim-python-pep8-indent'
 on_i = 1
 on_ft = ['python']
@@ -56,28 +22,19 @@ hook_source = '''
   let g:ale_set_quickfix = 0
   let g:ale_open_list = 0
   let g:ale_keep_list_window_open = 0
-  " 有効にするlinter
+  " 有効にするlinters & fixers
   let g:ale_linters = { 'python': ['flake8'] }
-  " ALE用プレフィックス
-  nmap [ale] <Nop>
-  map <C-k> [ale]
+  let g:ale_fixers = {
+    \ 'python': ['autopep8', 'black', 'isort']
+  \ }
+'''
+hook_add = '''
+  " Prefix key
+  nnoremap [ale] <Nop>
+  nmap <Space>a [ale]
   " エラー行にジャンプ
-  nmap <silent> [ale]<C-P> <Plug>(ale_previous)
-  nmap <silent> [ale]<C-N> <Plug>(ale_next)
+  nmap <silent> [ale]p :<C-u>ALEPreviousWrap<CR>
+  nmap <silent> [ale]n :<C-u>ALENextWrap<CR>
+  nmap <silent> [ale]f :<C-u>ALEFix<CR>
 '''
 
-[[plugins]]
-repo = 'zchee/deoplete-jedi'
-depends = ['deoplete.nvim']
-if = '''has('nvim')'''
-on_ft = ['python']
-on_i = 1
-hook_source = '''
-  let g:python_host_prog = 'python'
-  let g:python3_host_prog = 'python3'
-  let g:deoplete#sources#jedi#statement_length = 0
-  let g:deoplete#sources#jedi#short_types = 0
-  let g:deoplete#sources#jedi#show_docstring = 0
-  let g:deoplete#sources#jedi#worker_threads = 2
-  let g:deoplete#sources#jedi#python_path = g:python3_host_prog
-'''
