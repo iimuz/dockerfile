@@ -1,4 +1,41 @@
 [[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+depends = ['async.vim']
+on_ft = ['python']
+hook_add = '''
+  " register pyls to vim-lsp
+  if (executable('pyls'))
+    autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'pyls',
+      \ 'cmd': { server_info -> ['pyls'] },
+      \ 'whitelist': ['python']
+    \ })
+  endif
+
+  " Prefix key
+  nnoremap [lsp] <Nop>
+  nmap <Space>l [lsp]
+
+  nmap <silent> [lsp]b :<C-u>Denite buffer -highlight-mode-insert=Search<CR>
+  nmap <silent> [lsp]d :<C-u>LspDefinition<CR>
+  nmap <silent> [lsp]r :<C-u>LspReferences<CR>
+  nmap <silent> [lsp]s :<C-u>LspDocumentSymbol<CR>
+  nmap <silent> [lsp]w :<C-u>LspWorkspaceSymbol<CR>
+  nmap <silent> [lsp]f :<C-u>LspDocumentFormat<CR>
+  nmap <silent> [lsp]m :LspDocumentRangeFormat<CR>
+  nmap <silent> [lsp]h :<C-u>LspHover<CR>
+  nmap <silent> [lsp]i :<C-u>LspImplementation<CR>
+  nmap <silent> [lsp]n :<C-u>LspRename<CR>
+'''
+
+[[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
   map <C-n> :NERDTreeToggle<CR>
@@ -39,3 +76,4 @@ repo = 'Shougo/neomru.vim'
 
 [[plugins]]
 repo = 'Shougo/neoinclude.vim'
+

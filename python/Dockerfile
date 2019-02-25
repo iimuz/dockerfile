@@ -6,7 +6,7 @@ RUN set -x && \
   apk update && \
   apk add --no-cache ctags && \
   pip3 install --no-cache \
-    flake8==3.7.6 && \
+    python-language-server==0.24.0 && \
   rm -rf /var/cache/apk/*
 
 COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/
