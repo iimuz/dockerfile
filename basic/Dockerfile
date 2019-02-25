@@ -10,17 +10,6 @@ RUN set -x && \
   apk add --no-cache tzdata && \
   rm -rf /var/cache/apk/*
 
-# add user
-ENV USER_NAME=nvim \
-  HOME=/home/nvim \
-  USER_ID=1000 \
-  GROUP_ID=1000
-RUN set -x && \
-  apk update && \
-  apk add --no-cache su-exec shadow && \
-  rm -rf /var/cache/apk/* && \
-  adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos ""
-
 # neovim
 ENV NEOVIM_VERSION=0.3.0-r0
 RUN set -x && \
@@ -42,36 +31,37 @@ RUN set -x && \
   apk del .build-deps && \
   rm -rf /var/cache/apk/*
 
-COPY .vim /opt/.vim
+ENV XDG_CACHE_HOME=/.cache \
+  XDG_CONFIG_DIRS=/etc/xdg \
+  XDG_CONFIG_HOME=/.config \
+  XDG_DATA_DIRS=/usr/local/share:/usr/share:$XDG_DATA_DIRS \
+  XDG_DATA_HOME=/.local/share
+COPY .vim /.vim
 RUN set -x && \
   apk update && \
   apk add --no-cache git && \
   apk add --no-cache --virtual .fetch-deps curl && \
   : "get settings" && \
-  su-exec ${USER_NAME} git clone --depth=1 -b v0.1.0 https://github.com/iimuz/dotfiles.git ${HOME}/dotfiles && \
+  git clone --depth=1 -b v0.1.0 https://github.com/iimuz/dotfiles.git /opt/dotfiles && \
   : "neovim settings" && \
-  su-exec ${USER_NAME} mkdir -p ${HOME}/.config/nvim && \
-  su-exec ${USER_NAME} mv ${HOME}/dotfiles/.config/nvim/init.vim ${HOME}/.config/nvim/ && \
+  mkdir -p $XDG_DATA_HOME && \
+  mkdir -p $XDG_CONFIG_HOME/nvim && \
+  mv /opt/dotfiles/.config/nvim/init.vim $XDG_CONFIG_HOME/nvim/ && \
   : "dein" && \
-  su-exec ${USER_NAME} mv ${HOME}/dotfiles/.config/nvim/dein.vim ${HOME}/.config/nvim/ && \
-  su-exec ${USER_NAME} sed -i -e 's/~\/.cache\/dein/\/opt\/.cache\/dein/' ${HOME}/.config/nvim/dein.vim && \
-  su-exec ${USER_NAME} sed -i -e 's/~\/.vim\/rc/\/opt\/.vim\/rc/' ${HOME}/.config/nvim/dein.vim && \
-  su-exec ${USER_NAME} curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ${HOME}/installer.sh && \
-  chown -R ${USER_NAME}:${USER_GROUP} /opt && \
-  su-exec ${USER_NAME} sh ${HOME}/installer.sh /opt/.cache/dein && \
-  su-exec ${USER_NAME} nvim +":silent! call dein#install()" +qall && \
-  chmod -R 777 /opt/.vim /opt/.cache && \
+  mv /opt/dotfiles/.config/nvim/dein.vim $XDG_CONFIG_HOME/nvim/ && \
+  curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /opt/installer.sh && \
+  sh /opt/installer.sh $XDG_CACHE_HOME/dein && \
+  nvim +":silent! call dein#install()" +qall && \
+  : "setting for normal user" && \
+  chmod -R 777 $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME && \
   : "cleanup" && \
-  rm ${HOME}/installer.sh && \
-  rm -rf ${HOME}/dotfiles && \
+  rm /opt/installer.sh && \
+  rm -rf /opt/dotfiles && \
   apk del .fetch-deps && \
   rm -rf /var/cache/apk/*
 
 ENV SOURCE_DIR=/src
 RUN set -x && mkdir ${SOURCE_DIR}
 
-ADD ./entrypoint.sh /
-RUN chmod +x /entrypoint.sh
 WORKDIR ${SOURCE_DIR}
-ENTRYPOINT ["/entrypoint.sh"]
 CMD ["nvim"]
