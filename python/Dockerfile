@@ -5,6 +5,7 @@ RUN set -x && \
   : "install packages" && \
   apk update && \
   apk add --no-cache \
+    ctags=5.8-r5 \
     git=2.20.1-r0 \
     vimdiff=8.1.0630-r0 && \
   pip3 install --no-cache \
