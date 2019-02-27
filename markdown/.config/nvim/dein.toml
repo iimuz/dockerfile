@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
   map <C-n> :NERDTreeToggle<CR>
@@ -41,25 +44,18 @@ repo = 'Shougo/neomru.vim'
 repo = 'Shougo/neoinclude.vim'
 
 [[plugins]]
-repo = 'Shougo/unite.vim'
-depends = ['vimproc']
+repo = 'tpope/vim-fugitive'
 hook_add = '''
-  let g:unite_enable_start_insert = 0
-  let g:unite_enable_ignore_case = 1
-  let g:unite_enable_smart_case = 1
-  let g:unite_split_rule = 'botright'
-'''
+  set diffopt=vertical
 
-[[plugins]]
-repo = 'Shougo/unite-outline'
-depends = ['unite']
-hook_add = '''
-  nnoremap <silent> [denite]o :Denite unite:outline<CR>
-'''
+  nnoremap [fugitive] <Nop>
+  nmap <space>g [fugitive]
 
-[[plugins]]
-repo = 'Shougo/vimproc.vim'
-hook_post_update = '''
-  let g:dein#plugin.build = 'make CC=gcc'
+  nnoremap <silent> [fugitive]s :Gstatus<CR>
+  nnoremap <silent> [fugitive]a :Gwrite<CR>
+  nnoremap <silent> [fugitive]c :Gcommit<CR>
+  nnoremap <silent> [fugitive]b :Gblame<CR>
+  nnoremap <silent> [fugitive]d :Gdiff<CR>
+  nnoremap <silent> [fugitive]m :Gmerge<CR>
 '''
 
