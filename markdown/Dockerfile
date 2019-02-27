@@ -1,6 +1,15 @@
 FROM iimuz/neovim:v0.3.1-1
 LABEL maintainer iimuz
 
+RUN set -x && \
+  : "install packages" && \
+  apk update && \
+  apk add --no-cache \
+    ctags=5.8-r5 \
+    git=2.20.1-r0 \
+    vimdiff=8.1.0630-r0 && \
+  rm -rf /var/cache/apk/*
+
 COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/
 RUN set -x && \
   : "add packages for build" && \
@@ -12,6 +21,6 @@ RUN set -x && \
   : "setting for normal user" && \
   chmod -R 777 $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME && \
   : "clean" && \
-  # apk del .build-deps && \
+  apk del .build-deps && \
   rm -rf /var/cache/apk/*
 

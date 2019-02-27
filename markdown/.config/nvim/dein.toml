@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
   map <C-n> :NERDTreeToggle<CR>
@@ -39,4 +42,20 @@ repo = 'Shougo/neomru.vim'
 
 [[plugins]]
 repo = 'Shougo/neoinclude.vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+  set diffopt=vertical
+
+  nnoremap [fugitive] <Nop>
+  nmap <space>g [fugitive]
+
+  nnoremap <silent> [fugitive]s :Gstatus<CR>
+  nnoremap <silent> [fugitive]a :Gwrite<CR>
+  nnoremap <silent> [fugitive]c :Gcommit<CR>
+  nnoremap <silent> [fugitive]b :Gblame<CR>
+  nnoremap <silent> [fugitive]d :Gdiff<CR>
+  nnoremap <silent> [fugitive]m :Gmerge<CR>
+'''
 
