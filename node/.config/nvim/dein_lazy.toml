@@ -39,10 +39,12 @@ hook_source = '''
   let g:ale_keep_list_window_open = 0
   " 有効にするlinter
   let g:ale_linters = {'javascript': ['eslint']}
+'''
+hook_add = '''
   " ALE用プレフィックス
   nmap [ale] <Nop>
-  map <C-k> [ale]
+  map <Space>a [ale]
   " エラー行にジャンプ
-  nmap <silent> [ale]<C-P> <Plug>(ale_previous)
-  nmap <silent> [ale]<C-N> <Plug>(ale_next)
+  nmap <silent> [ale]p <Plug>(ale_previous)
+  nmap <silent> [ale]n <Plug>(ale_next)
 '''
