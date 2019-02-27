@@ -1,14 +1,10 @@
 [[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = 'toml'
-
-[[plugins]]
 repo = 'ozelentok/denite-gtags'
 on_ft = 'cpp'
 hook_source = '''
   " Prefix key
   nnoremap [denite-gtags] <Nop>
-  nmap <space>g [denite-gtags]
+  nmap <space>l [denite-gtags]
 
   nmap <silent> [denite-gtags]a :<C-u>DeniteCursorWord -buffer-name=gtags_context gtags_context<CR>
   nmap <silent> [denite-gtags]d :<C-u>DeniteCursorWord -buffer-name=gtags_def gtags_def<CR>
