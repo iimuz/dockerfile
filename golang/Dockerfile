@@ -18,7 +18,11 @@ COPY --from=build-tools /go/bin/* /usr/bin/
 RUN set -x && \
   : "install golng" && \
   apk update && \
-  apk add --no-cache go && \
+  apk add --no-cache \
+    ctags=5.8-r5 \
+    git=2.20.1-r0 \
+    go=1.11.5-r0 \
+    vimdiff=8.1.0630-r0 && \
   rm -rf /var/cache/apk/*
 
 COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/
