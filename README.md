@@ -2,20 +2,16 @@
 
 docker image for git
 
-# Usage
+## Usage
 
 ```sh
-$ docker run --rm -it -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) iimuz/git:latest
+$ docker run --rm -it -u $(id -u):$(id -g) iimuz/git:latest
 ```
 
-if you use root user:
+## Flavor
 
-```sh
-$ docker run --rm -it -e USER_ID=0 -e GROUP_ID=0 iimuz/git:latest
-```
-
-# Flavor
-
-* svn: add subversion packages for git-svn.
-* latest: maybe equal to slim. no tags version.
 * dev: development version. unstable.
+* gpg: add gnupg packages.
+* latest: maybe equal to slim. no tags version.
+* svn: add subversion packages for git-svn.
+
