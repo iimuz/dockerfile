@@ -1,0 +1,28 @@
+[alias]
+  lg = log --graph --oneline --decorate=full --branches --tags --remotes
+
+[core]
+  editor = nvim
+  quotepath = false
+
+[diff]
+  tool = nvimdiff
+
+[difftool]
+  prompt = false
+
+[difftool "nvimdiff"]
+  cmd = "nvim -R -d -c \"wincmd l\" -d \"$LOCAL\" \"$REMOTE\""
+
+[merge]
+  tool = nvimdiff
+
+[mergetool]
+  keepBackup = false
+
+[mergetool "nvimdiff"]
+  cmd = "nvim -d -c \"4wincmd w | wincmd J\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"  \"$MERGED\""
+
+[include]
+  path = ~/.config/git/local.config
+
