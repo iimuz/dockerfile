@@ -1,14 +1,11 @@
-FROM iimuz/git:v1.1.0
+FROM iimuz/git:v2.0.0
 LABEL maintainer iimuz
 
 # tools
+COPY .profile /.profile
 RUN set -x && \
   apk update && \
   apk add --no-cache gnupg && \
-  : "setting for gnupg" && \
-  echo -e "GPG_TTY=\$(tty)" >> $HOME/.profile && \
-  echo -e "export GPG_TTY" >> $HOME/.profile && \
-  echo -e "\nalias gpg='gpg --pinentry-mode=loopback'\n" >> $HOME/.profile && \
   : "install git contrib" && \
   apk add --no-cache git-perl && \
   mkdir -p /usr/share/doc/git && \
@@ -17,9 +14,7 @@ RUN set -x && \
   CREDENTIAL_SCRIPT=/usr/share/doc/git/contrib/credential/netrc/git-credential-netrc && \
   chmod +x $CREDENTIAL_SCRIPT && \
   : "set git credential helper" && \
-  GIT_CONFIG_DIR=$HOME/.config/git && \
-  mkdir -p $GIT_CONFIG_DIR && \
-  echo -e "\n[credential]\nhelper = $CREDENTIAL_SCRIPT\n" >> $GIT_CONFIG_DIR/local.config && \
+  echo -e "\n[credential]\nhelper = $CREDENTIAL_SCRIPT\n" >> /.gitconfig && \
   : "clean" && \
   rm -rf /var/cache/apk/*
 

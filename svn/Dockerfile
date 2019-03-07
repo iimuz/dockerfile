@@ -1,4 +1,4 @@
-FROM iimuz/git:v1.1.0
+FROM iimuz/git:v2.0.0
 LABEL maintainer iimuz
 
 # tools
