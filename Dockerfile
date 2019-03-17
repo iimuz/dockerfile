@@ -1,17 +1,5 @@
-FROM python:3.7.2-alpine
+FROM python:3.7.2-stretch
 LABEL maintainer "iimuz"
-
-RUN set -x && \
-  apk update && \
-  apk add --no-cache \
-    musl \
-    linux-headers \
-    gcc \
-    g++ \
-    make \
-    gfortran \
-    openblas-dev && \
-  rm -rf /var/cache/apk/*
 
 # install pipenv
 RUN set -x && \
