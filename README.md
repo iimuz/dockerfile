@@ -6,6 +6,7 @@ docker image for neovim
 
 * basic: default neovim using no plugins.
 * slim: neovim with small plugins.
+* golang: neovim for golang.
 * md: neovim for markdown.
 * py: neovim for python.
 * cpp: neovim for c++.
@@ -15,5 +16,5 @@ docker image for neovim
 # Usage
 
 ```sh
-$ docker run --rm -it -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) iimuz/neovim:latest
+$ docker run --rm -it -u $(id -u):$(id -g) iimuz/neovim:latest
 ```
