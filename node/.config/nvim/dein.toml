@@ -56,3 +56,10 @@ hook_add = '''
   nnoremap <silent> [fugitive]m :Gmerge<CR>
 '''
 
+[[plugins]]
+repo = 'tomasr/molokai'
+hook_add = '''
+  set background=dark
+  autocmd! VimEnter * nested colorscheme molokai
+'''
+
