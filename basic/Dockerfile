@@ -32,7 +32,7 @@ RUN set -x && \
   apk add --no-cache --virtual .build-deps \
     gcc=8.2.0-r2 \
     linux-headers=4.18.13-r1 \
-    musl-dev=1.1.20-r3 && \
+    musl-dev=1.1.20-r4 && \
   apk add --no-cache \
     neovim=0.3.1-r1 \
     python-dev=2.7.15-r3 \
