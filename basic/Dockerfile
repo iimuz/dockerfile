@@ -30,14 +30,14 @@ RUN set -x && \
   : "install neovim" && \
   apk update && \
   apk add --no-cache --virtual .build-deps \
-    gcc=8.2.0-r2 \
+    gcc=8.3.0-r0 \
     linux-headers=4.18.13-r1 \
     musl-dev=1.1.20-r4 && \
   apk add --no-cache \
     neovim=0.3.1-r1 \
     python-dev=2.7.15-r3 \
     py-pip=18.1-r0 \
-    python3-dev=3.6.8-r1 && \
+    python3-dev=3.6.8-r2 && \
   pip install --upgrade pip && \
   pip install --no-cache setuptools==40.8.0 && \
   pip install --no-cache neovim==0.3.1 && \
