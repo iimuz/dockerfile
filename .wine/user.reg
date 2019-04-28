@@ -1,0 +1,694 @@
+WINE REGISTRY Version 2
+;; All keys relative to \\User\\S-1-5-21-0-0-0-1000
+
+#arch=win32
+
+[AppEvents\\Schemes\\Apps\\Explorer\\Navigating\\.Current] 1556451402
+#time=1d4fdb6a6897be2
+@=""
+
+[Control Panel\\Accessibility\\AudioDescription] 1556451362
+#time=1d4fdb68ee5261c
+"Locale"=dword:00000000
+"On"="0"
+
+[Control Panel\\Accessibility\\Blind Access] 1556451362
+#time=1d4fdb68ee4ace6
+"On"="0"
+
+[Control Panel\\Accessibility\\Keyboard Preference] 1556451362
+#time=1d4fdb68ee4125e
+"On"="1"
+
+[Control Panel\\Accessibility\\ShowSounds] 1556451362
+#time=1d4fdb68ee4de3c
+"On"="0"
+
+[Control Panel\\Colors] 1556451362
+#time=1d4fdb68f165a52
+
+[Control Panel\\Desktop] 1556451362
+#time=1d4fdb68ee4feee
+"ActiveWndTrackTimeout"=dword:00000000
+"BlockSendInputResets"="0"
+"CaretWidth"=dword:00000001
+"ClickLockTime"=dword:000004b0
+"DoubleClickHeight"="4"
+"DoubleClickWidth"="4"
+"DragFullWindows"="0"
+"DragHeight"="4"
+"DragWidth"="4"
+"FocusBorderHeight"=dword:00000001
+"FocusBorderWidth"=dword:00000001
+"FontSmoothing"="2"
+"FontSmoothingGamma"=dword:00000000
+"FontSmoothingOrientation"=dword:00000001
+"FontSmoothingType"=dword:00000001
+"ForegroundFlashCount"=dword:00000003
+"ForegroundLockTimeout"=dword:00000000
+"IconTitleWrap"="1"
+"LowPowerActive"="0"
+"MenuShowDelay"="400"
+"UserPreferencesMask"=hex:30,00,00,80,10,00,00,00
+"Wallpaper"=""
+"WheelScrollChars"="3"
+"WheelScrollLines"="3"
+
+[Control Panel\\Desktop\\WindowMetrics] 1556451362
+#time=1d4fdb68ee4e54e
+"BorderWidth"="-15"
+"CaptionHeight"="-270"
+"CaptionWidth"="-270"
+"IconSpacing"="-1125"
+"IconTitleWrap"="1"
+"IconVerticalSpacing"="-1125"
+"MenuHeight"="-270"
+"MenuWidth"="-270"
+"PaddedBorderWidth"="0"
+"ScrollHeight"="-240"
+"ScrollWidth"="-240"
+"SmCaptionHeight"="-225"
+"SmCaptionWidth"="-225"
+
+[Control Panel\\International] 1556451361
+#time=1d4fdb68e97b8aa
+"iCalendarType"="1"
+"iCountry"="1"
+"iCurrDigits"="2"
+"iCurrency"="0"
+"iDate"="0"
+"iDigits"="2"
+"iFirstDayOfWeek"="6"
+"iFirstWeekOfYear"="0"
+"iLDate"="0"
+"iLZero"="1"
+"iMeasure"="1"
+"iNegCurr"="0"
+"iNegNumber"="1"
+"iPaperSize"="1"
+"iTime"="0"
+"iTimePrefix"="0"
+"iTLZero"="0"
+"LC_CTYPE"="00000409"
+"LC_MEASUREMENT"="00000409"
+"LC_MONETARY"="00000409"
+"LC_NUMERIC"="00000409"
+"LC_PAPER"="00000409"
+"LC_TELEPHONE"="00000409"
+"LC_TIME"="00000409"
+"Locale"="00000409"
+"Numshape"="1"
+"s1159"="AM"
+"s2359"="PM"
+"sCountry"="United States"
+"sCurrency"="$"
+"sDate"="/"
+"sDecimal"="."
+"sGrouping"="3;0"
+"sLanguage"="ENU"
+"sList"=","
+"sLongDate"="dddd, MMMM dd, yyyy"
+"sMonDecimalSep"="."
+"sMonGrouping"="3;0"
+"sMonThousandSep"=","
+"sNativeDigits"="0123456789"
+"sNegativeSign"="-"
+"sPositiveSign"=""
+"sShortDate"="M/d/yyyy"
+"sThousand"=","
+"sTime"=":"
+"sTimeFormat"="h:mm:ss tt"
+"sYearMonth"="MMMM, yyyy"
+
+[Control Panel\\Keyboard] 1556451362
+#time=1d4fdb68ee41e16
+"KeyboardDelay"="1"
+"KeyboardSpeed"="31"
+
+[Control Panel\\Mouse] 1556451362
+#time=1d4fdb68ee4e99a
+"ActiveWindowTracking"=dword:00000000
+"DoubleClickHeight"="4"
+"DoubleClickSpeed"="500"
+"DoubleClickWidth"="4"
+"MouseHoverHeight"="4"
+"MouseHoverTime"="400"
+"MouseHoverWidth"="4"
+"MouseSensitivity"="10"
+"MouseSpeed"="1"
+"MouseThreshold1"="6"
+"MouseThreshold2"="10"
+"SnapToDefaultButton"="0"
+"SwapMouseButtons"="0"
+
+[Control Panel\\Sound] 1556451362
+#time=1d4fdb68ee270ca
+"Beep"="Yes"
+
+[Environment] 1556451368
+#time=1d4fdb692750d74
+"TEMP"="C:\\users\\1000\\Temp"
+"TMP"="C:\\users\\1000\\Temp"
+
+[Keyboard Layout\\Preload] 1556451362
+#time=1d4fdb68f008ba0
+"1"="00000409"
+
+[Software\\MetaQuotes Software] 1556451423
+#time=1d4fdb6b320f240
+"API"="api6.mql5.com=18;api5.mql5.com=56;api2.mql5.com=61;api10.mql5.com=75;api14.mql5.com=134;api11.mql5.com=153;api3.mql5.com=163;api12.mql5.com=164;api15.mql5.com=212;api8.mql5.com=268;api1.mql5.com=273;api13.mql5.com=284;api4.mql5.com=297;api7.mql5.com=325;api9.mql5.com=421"
+"API.Time"="1556451411"
+"ID"="DC8F7654-29FB-T-190428"
+"Install.Time"="1556451403"
+
+[Software\\MetaQuotes Software\\MetaTrader 4] 1556451454
+#time=1d4fdb6c5c44a50
+"PackagePath"="Z:\\src\\bigboss4setup.exe"
+
+[Software\\MetaQuotes Software\\MetaTrader 4\\BarState-Summary] 1556451454
+#time=1d4fdb6c5c44a50
+
+[Software\\MetaQuotes Software\\MetaTrader 4\\Settings] 1556451434
+#time=1d4fdb6b99834a8
+
+[Software\\MetaQuotes Software\\Settings] 1556451464
+#time=1d4fdb6cbcf4fee
+"City"="Sagamihara"
+"Country"="Japan"
+"IP"="122.18.19.212"
+"Time"="1556451464"
+
+[Software\\Microsoft\\Installer\\Features\\56577682FAAC6284180637DF4D8E87D7] 1556451387
+#time=1d4fdb69e1b99e0
+"wine_mono"=""
+
+[Software\\Microsoft\\Installer\\Features\\79BDB9BB742C02F47B01B876566F1750] 1556451400
+#time=1d4fdb6a59c26ee
+"wine_gecko"=""
+
+[Software\\Microsoft\\Installer\\Products\\56577682FAAC6284180637DF4D8E87D7] 1556451387
+#time=1d4fdb69e1c603c
+"AdvertiseFlags"=dword:00000184
+"Assignment"=dword:00000000
+"AuthorizedLUAApp"=dword:00000000
+"Clients"=":"
+"InstanceType"=dword:00000000
+"Language"=dword:00000000
+"PackageCode"="EA3E61E77FBCAFF4BB3392BE189615C1"
+"ProductName"="Wine Mono"
+"Version"=dword:04070005
+
+[Software\\Microsoft\\Installer\\Products\\56577682FAAC6284180637DF4D8E87D7\\SourceList] 1556451387
+#time=1d4fdb69e1ce12e
+"LastUsedSource"="n;1;C:\\users\\1000\\Local Settings\\Temporary Internet Files\\Content.IE5\\8DLLW4ZH\\"
+"PackageName"="wine-mono-4.7.5[0]"
+
+[Software\\Microsoft\\Installer\\Products\\56577682FAAC6284180637DF4D8E87D7\\SourceList\\Media] 1556451387
+#time=1d4fdb69e1cf3e4
+"1"=";"
+"DiskPrompt"=""
+"MediaPackage"=""
+
+[Software\\Microsoft\\Installer\\Products\\56577682FAAC6284180637DF4D8E87D7\\SourceList\\Net] 1556451387
+#time=1d4fdb69e1cac86
+"1"=str(2):"C:\\users\\1000\\Local Settings\\Temporary Internet Files\\Content.IE5\\8DLLW4ZH\\"
+
+[Software\\Microsoft\\Installer\\Products\\79BDB9BB742C02F47B01B876566F1750] 1556451400
+#time=1d4fdb6a59c5e98
+"AdvertiseFlags"=dword:00000184
+"Assignment"=dword:00000000
+"AuthorizedLUAApp"=dword:00000000
+"Clients"=":"
+"InstanceType"=dword:00000000
+"Language"=dword:00000000
+"PackageCode"="97B82D3EB3EB6B94791820F1DA58F645"
+"ProductName"="Wine Gecko (32-bit)"
+"Version"=dword:022f0000
+
+[Software\\Microsoft\\Installer\\Products\\79BDB9BB742C02F47B01B876566F1750\\SourceList] 1556451400
+#time=1d4fdb6a59c8076
+"LastUsedSource"="n;1;C:\\users\\1000\\Local Settings\\Temporary Internet Files\\Content.IE5\\8DLLW4ZH\\"
+"PackageName"="wine_gecko-2.47-x86[0]"
+
+[Software\\Microsoft\\Installer\\Products\\79BDB9BB742C02F47B01B876566F1750\\SourceList\\Media] 1556451400
+#time=1d4fdb6a59c8404
+"1"=";"
+"DiskPrompt"=""
+"MediaPackage"=""
+
+[Software\\Microsoft\\Installer\\Products\\79BDB9BB742C02F47B01B876566F1750\\SourceList\\Net] 1556451400
+#time=1d4fdb6a59c7176
+"1"=str(2):"C:\\users\\1000\\Local Settings\\Temporary Internet Files\\Content.IE5\\8DLLW4ZH\\"
+
+[Software\\Microsoft\\Installer\\UpgradeCodes\\906426ED5B6CA6842947FEB058F4B65C] 1556451387
+#time=1d4fdb69e1c2f86
+"56577682FAAC6284180637DF4D8E87D7"=""
+
+[Software\\Microsoft\\Installer\\UpgradeCodes\\ADF909AA16ED9784E920D37B806499E7] 1556451400
+#time=1d4fdb6a59c43fe
+"79BDB9BB742C02F47B01B876566F1750"=""
+
+[Software\\Microsoft\\Internet Explorer\\Main] 1556451401
+#time=1d4fdb6a66a32e6
+"Search Page"="https://www.google.com"
+"Start Page"="https://www.winehq.org"
+
+[Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl] 1556451367
+#time=1d4fdb69203f7c4
+
+[Software\\Microsoft\\Internet Explorer\\Settings] 1556451401
+#time=1d4fdb6a66a3494
+"Text Color"="0,0,0"
+
+[Software\\Microsoft\\Protected Storage System Provider] 1556451402
+#time=1d4fdb6a6898538
+
+[Software\\Microsoft\\SystemCertificates\\CA\\Certificates] 1556451403
+#time=1d4fdb6a789dcee
+
+[Software\\Microsoft\\SystemCertificates\\CA\\CRLs] 1556451403
+#time=1d4fdb6a789e694
+
+[Software\\Microsoft\\SystemCertificates\\CA\\CTLs] 1556451403
+#time=1d4fdb6a789f06c
+
+[Software\\Microsoft\\SystemCertificates\\My\\Certificates] 1556451403
+#time=1d4fdb6a78a418e
+
+[Software\\Microsoft\\SystemCertificates\\My\\CRLs] 1556451403
+#time=1d4fdb6a78a5048
+
+[Software\\Microsoft\\SystemCertificates\\My\\CTLs] 1556451403
+#time=1d4fdb6a78a5aca
+
+[Software\\Microsoft\\SystemCertificates\\Root\\Certificates\\CF55CFAC3B8880BE9B77DED4392CB321B319531C] 1556451435
+#time=1d4fdb6ba307e84
+"Blob"=hex:03,00,00,00,01,00,00,00,14,00,00,00,cf,55,cf,ac,3b,88,80,be,9b,77,\
+  de,d4,39,2c,b3,21,b3,19,53,1c,20,00,00,00,01,00,00,00,99,05,00,00,30,82,05,\
+  95,30,82,04,7d,a0,03,02,01,02,02,10,4c,cd,9a,9e,bc,a3,74,d4,3d,13,d6,c3,97,\
+  27,76,fe,30,0d,06,09,2a,86,48,86,f7,0d,01,01,0b,05,00,30,81,dc,31,24,30,22,\
+  06,03,55,04,03,13,1b,4d,65,74,61,51,75,6f,74,65,73,20,53,6f,66,74,77,61,72,\
+  65,20,52,6f,6f,74,20,43,41,31,0f,30,0d,06,03,55,04,07,13,06,4e,61,73,73,61,\
+  75,31,22,30,20,06,03,55,04,0a,13,19,4d,65,74,61,51,75,6f,74,65,73,20,53,6f,\
+  66,74,77,61,72,65,20,43,6f,72,70,2e,31,27,30,25,06,03,55,04,0b,13,1e,43,65,\
+  72,74,69,66,69,63,61,74,65,73,20,53,65,72,76,69,63,65,73,20,44,65,76,69,73,\
+  69,6f,6e,31,25,30,23,06,09,2a,86,48,86,f7,0d,01,09,01,16,16,73,75,70,70,6f,\
+  72,74,40,6d,65,74,61,71,75,6f,74,65,73,2e,6e,65,74,31,0b,30,09,06,03,55,04,\
+  06,13,02,42,53,31,22,30,20,06,0a,09,92,26,89,93,f2,2c,64,01,19,16,12,77,77,\
+  77,2e,6d,65,74,61,71,75,6f,74,65,73,2e,6e,65,74,30,1e,17,0d,31,35,30,34,31,\
+  35,30,38,34,33,35,30,5a,17,0d,32,37,30,34,31,35,30,38,34,33,35,30,5a,30,81,\
+  dc,31,24,30,22,06,03,55,04,03,13,1b,4d,65,74,61,51,75,6f,74,65,73,20,53,6f,\
+  66,74,77,61,72,65,20,52,6f,6f,74,20,43,41,31,0f,30,0d,06,03,55,04,07,13,06,\
+  4e,61,73,73,61,75,31,22,30,20,06,03,55,04,0a,13,19,4d,65,74,61,51,75,6f,74,\
+  65,73,20,53,6f,66,74,77,61,72,65,20,43,6f,72,70,2e,31,27,30,25,06,03,55,04,\
+  0b,13,1e,43,65,72,74,69,66,69,63,61,74,65,73,20,53,65,72,76,69,63,65,73,20,\
+  44,65,76,69,73,69,6f,6e,31,25,30,23,06,09,2a,86,48,86,f7,0d,01,09,01,16,16,\
+  73,75,70,70,6f,72,74,40,6d,65,74,61,71,75,6f,74,65,73,2e,6e,65,74,31,0b,30,\
+  09,06,03,55,04,06,13,02,42,53,31,22,30,20,06,0a,09,92,26,89,93,f2,2c,64,01,\
+  19,16,12,77,77,77,2e,6d,65,74,61,71,75,6f,74,65,73,2e,6e,65,74,30,82,01,22,\
+  30,0d,06,09,2a,86,48,86,f7,0d,01,01,01,05,00,03,82,01,0f,00,30,82,01,0a,02,\
+  82,01,01,00,90,81,fe,90,ba,0a,d2,44,ca,35,f4,25,22,59,a5,4e,dd,cf,29,bc,58,\
+  35,66,7a,1c,7f,7b,b1,eb,f2,09,d1,8c,ab,05,69,7b,d8,d5,dd,6f,b7,a0,a4,5e,d5,\
+  cb,96,98,46,83,cb,7d,f7,7a,c3,84,df,f2,a2,ba,da,90,a7,95,5f,c0,7a,63,c6,fc,\
+  50,1c,2d,3b,8f,5f,ef,61,3b,f0,33,dd,8c,17,ea,04,d2,ba,cd,68,32,18,8d,c3,6c,\
+  e4,ec,4f,9e,4d,c2,2f,71,9c,d6,96,7e,6e,14,92,6c,1f,39,98,74,f0,db,74,42,54,\
+  03,01,16,ab,20,f0,94,29,0e,3f,bf,36,38,28,f2,0a,d6,24,8f,8c,d7,08,69,4a,28,\
+  2e,33,d0,d5,67,62,bb,fb,6d,df,c5,f0,0d,a5,b1,a2,90,52,ac,64,25,9f,e7,83,d8,\
+  4f,07,04,b6,0f,4e,f0,60,15,53,2b,8e,ad,48,c9,39,01,37,9c,87,5e,30,86,b1,7d,\
+  df,51,d6,79,a1,11,5a,61,4b,3c,3a,cc,7f,df,c6,41,2c,66,01,76,91,4b,21,25,18,\
+  51,08,f5,77,b6,83,83,8a,f8,de,ba,c4,e2,59,47,96,c2,95,42,52,f7,18,e1,02,c7,\
+  ad,dd,86,61,3e,be,fe,e5,57,95,02,03,01,00,01,a3,82,01,4f,30,82,01,4b,30,1d,\
+  06,03,55,1d,0e,04,16,04,14,1f,b0,40,9e,a2,8f,f6,64,75,73,48,cf,e0,2e,11,2f,\
+  cf,76,ac,4c,30,0f,06,03,55,1d,13,01,01,ff,04,05,30,03,01,01,ff,30,82,01,17,\
+  06,03,55,1d,01,04,82,01,0e,30,82,01,0a,80,14,1f,b0,40,9e,a2,8f,f6,64,75,73,\
+  48,cf,e0,2e,11,2f,cf,76,ac,4c,a1,81,df,30,81,dc,31,24,30,22,06,03,55,04,03,\
+  13,1b,4d,65,74,61,51,75,6f,74,65,73,20,53,6f,66,74,77,61,72,65,20,52,6f,6f,\
+  74,20,43,41,31,0f,30,0d,06,03,55,04,07,13,06,4e,61,73,73,61,75,31,22,30,20,\
+  06,03,55,04,0a,13,19,4d,65,74,61,51,75,6f,74,65,73,20,53,6f,66,74,77,61,72,\
+  65,20,43,6f,72,70,2e,31,27,30,25,06,03,55,04,0b,13,1e,43,65,72,74,69,66,69,\
+  63,61,74,65,73,20,53,65,72,76,69,63,65,73,20,44,65,76,69,73,69,6f,6e,31,25,\
+  30,23,06,09,2a,86,48,86,f7,0d,01,09,01,16,16,73,75,70,70,6f,72,74,40,6d,65,\
+  74,61,71,75,6f,74,65,73,2e,6e,65,74,31,0b,30,09,06,03,55,04,06,13,02,42,53,\
+  31,22,30,20,06,0a,09,92,26,89,93,f2,2c,64,01,19,16,12,77,77,77,2e,6d,65,74,\
+  61,71,75,6f,74,65,73,2e,6e,65,74,82,10,4c,cd,9a,9e,bc,a3,74,d4,3d,13,d6,c3,\
+  97,27,76,fe,30,0d,06,09,2a,86,48,86,f7,0d,01,01,0b,05,00,03,82,01,01,00,54,\
+  04,ed,45,d8,49,12,c2,fc,a3,03,5c,4e,af,a0,66,b6,53,aa,2b,5a,a7,7a,a2,fb,ac,\
+  5d,3f,ae,6f,df,f4,c9,0c,6f,41,4d,b4,70,e9,82,95,67,06,c1,0f,a4,6f,35,03,e5,\
+  f8,9c,37,36,eb,4d,2f,ea,45,26,be,0b,ed,db,ab,0b,97,46,fe,d7,b0,07,d5,61,5f,\
+  03,91,ae,16,1f,5e,88,2c,80,9e,44,4e,d6,d8,b4,1a,10,e0,d4,43,10,40,ab,62,43,\
+  cd,4f,96,d1,b6,a2,af,b5,68,16,21,50,8d,df,c8,76,ea,91,7b,d1,2f,d5,a2,ce,ac,\
+  75,24,45,3c,28,b0,ee,c3,8b,92,a6,b4,2a,3b,de,52,8d,fe,8d,1b,4e,e2,09,6b,85,\
+  e8,c6,48,0b,68,59,22,ce,ca,65,28,3f,92,6f,af,5f,5e,04,55,b6,bf,9b,e6,aa,7b,\
+  b6,5a,2d,81,83,dc,1b,57,44,a1,42,b5,c0,f2,2d,cb,8d,ae,dc,05,b9,5b,c6,a1,02,\
+  25,0f,25,fd,a9,50,ca,1b,5c,58,66,3b,c2,35,cc,a3,0c,92,22,97,55,5e,b7,0a,e7,\
+  3a,ad,b4,bc,80,83,82,fe,40,20,c6,5e,2e,2a,36,4c,f8,55,ef,72,4a,e1,30,df,02,\
+  fe,ce,a9,89,78
+
+[Software\\Microsoft\\SystemCertificates\\Root\\CRLs] 1556451403
+#time=1d4fdb6a7844900
+
+[Software\\Microsoft\\SystemCertificates\\Root\\CTLs] 1556451403
+#time=1d4fdb6a7845670
+
+[Software\\Microsoft\\SystemCertificates\\Trust\\Certificates] 1556451403
+#time=1d4fdb6a78a9fb2
+
+[Software\\Microsoft\\SystemCertificates\\Trust\\CRLs] 1556451403
+#time=1d4fdb6a78aa8e0
+
+[Software\\Microsoft\\SystemCertificates\\Trust\\CTLs] 1556451403
+#time=1d4fdb6a78ab68c
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders] 1556451368
+#time=1d4fdb69271bb88
+"Administrative Tools"="C:\\users\\1000\\Start Menu\\Programs\\Administrative Tools"
+"AppData"="C:\\users\\1000\\Application Data"
+"Cache"="C:\\users\\1000\\Local Settings\\Temporary Internet Files"
+"Cookies"="C:\\users\\1000\\Cookies"
+"Desktop"="C:\\users\\1000\\Desktop"
+"Favorites"="C:\\users\\1000\\Favorites"
+"Fonts"="C:\\windows\\Fonts"
+"History"="C:\\users\\1000\\Local Settings\\History"
+"Local AppData"="C:\\users\\1000\\Local Settings\\Application Data"
+"My Music"="C:\\users\\1000\\My Music"
+"My Pictures"="C:\\users\\1000\\My Pictures"
+"My Videos"="C:\\users\\1000\\My Videos"
+"NetHood"="C:\\users\\1000\\NetHood"
+"Personal"="C:\\users\\1000\\My Documents"
+"PrintHood"="C:\\users\\1000\\PrintHood"
+"Programs"="C:\\users\\1000\\Start Menu\\Programs"
+"Recent"="C:\\users\\1000\\Recent"
+"SendTo"="C:\\users\\1000\\SendTo"
+"Start Menu"="C:\\users\\1000\\Start Menu"
+"StartUp"="C:\\users\\1000\\Start Menu\\Programs\\StartUp"
+"Templates"="C:\\users\\1000\\Templates"
+"{374DE290-123F-4565-9164-39C4925E467B}"="C:\\users\\1000\\Downloads"
+"{4C5C32FF-BB9D-43B0-B5B4-2D72E54EAAA4}"="C:\\users\\1000\\Saved Games"
+"{56784854-C6CB-462B-8169-88E350ACB882}"="C:\\users\\1000\\Contacts"
+"{7D1D3A04-DEBB-4115-95CF-2F29DA2920DA}"="C:\\users\\1000\\Searches"
+"{A520A1A4-1780-4FF6-BD18-167343C5AF16}"="C:\\users\\1000\\AppData\\LocalLow"
+"{BFB9D5E0-C6A9-404C-B2B2-AE6DB6AF4968}"="C:\\users\\1000\\Links"
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders] 1556451368
+#time=1d4fdb69271aaee
+"Administrative Tools"=str(2):"%USERPROFILE%\\Start Menu\\Programs\\Administrative Tools"
+"AppData"=str(2):"%USERPROFILE%\\Application Data"
+"Cache"=str(2):"%USERPROFILE%\\Local Settings\\Temporary Internet Files"
+"Cookies"=str(2):"%USERPROFILE%\\Cookies"
+"Desktop"=str(2):"%USERPROFILE%\\Desktop"
+"Favorites"=str(2):"%USERPROFILE%\\Favorites"
+"Fonts"=str(2):"C:\\windows\\Fonts"
+"History"=str(2):"%USERPROFILE%\\Local Settings\\History"
+"Local AppData"=str(2):"%USERPROFILE%\\Local Settings\\Application Data"
+"My Music"=str(2):"%USERPROFILE%\\My Music"
+"My Pictures"=str(2):"%USERPROFILE%\\My Pictures"
+"My Videos"=str(2):"%USERPROFILE%\\My Videos"
+"NetHood"=str(2):"%USERPROFILE%\\NetHood"
+"Personal"=str(2):"%USERPROFILE%\\My Documents"
+"PrintHood"=str(2):"%USERPROFILE%\\PrintHood"
+"Programs"=str(2):"%USERPROFILE%\\Start Menu\\Programs"
+"Recent"=str(2):"%USERPROFILE%\\Recent"
+"SendTo"=str(2):"%USERPROFILE%\\SendTo"
+"Start Menu"=str(2):"%USERPROFILE%\\Start Menu"
+"StartUp"=str(2):"%USERPROFILE%\\Start Menu\\Programs\\StartUp"
+"Templates"=str(2):"%USERPROFILE%\\Templates"
+"{374DE290-123F-4565-9164-39C4925E467B}"=str(2):"%USERPROFILE%\\Downloads"
+"{4C5C32FF-BB9D-43B0-B5B4-2D72E54EAAA4}"=str(2):"%USERPROFILE%\\Saved Games"
+"{56784854-C6CB-462B-8169-88E350ACB882}"=str(2):"%USERPROFILE%\\Contacts"
+"{7D1D3A04-DEBB-4115-95CF-2F29DA2920DA}"=str(2):"%USERPROFILE%\\Searches"
+"{A520A1A4-1780-4FF6-BD18-167343C5AF16}"=str(2):"%USERPROFILE%\\AppData\\LocalLow"
+"{BFB9D5E0-C6A9-404C-B2B2-AE6DB6AF4968}"=str(2):"%USERPROFILE%\\Links"
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings] 1556451401
+#time=1d4fdb6a6195088
+"ProxyEnable"=dword:00000000
+"User Agent"="Mozilla/4.0 (compatible; MSIE 8.0; Win32)"
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap] 1556451401
+#time=1d4fdb6a6194c28
+@=""
+"IntranetName"=dword:00000001
+"ProxyByPass"=dword:00000001
+"UNCAsIntranet"=dword:00000001
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\Domains] 1556451401
+#time=1d4fdb6a61949f8
+@=""
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults] 1556451401
+#time=1d4fdb6a619470a
+@=""
+"@ivt"=dword:00000001
+"file"=dword:00000003
+"ftp"=dword:00000003
+"http"=dword:00000003
+"https"=dword:00000003
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\Ranges] 1556451401
+#time=1d4fdb6a6194c96
+@=""
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\Zones] 1556451401
+#time=1d4fdb6a61d1e52
+@=""
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\Zones\\0] 1556451401
+#time=1d4fdb6a61a0cb2
+@=""
+"1001"=dword:00000000
+"1004"=dword:00000000
+"1200"=dword:00000000
+"1201"=dword:00000001
+"1400"=dword:00000000
+"1402"=dword:00000000
+"1405"=dword:00000000
+"1406"=dword:00000000
+"1407"=dword:00000000
+"1601"=dword:00000000
+"1604"=dword:00000000
+"1605"=dword:00000000
+"1606"=dword:00000000
+"1607"=dword:00000000
+"1608"=dword:00000000
+"1609"=dword:00000001
+"1800"=dword:00000000
+"1802"=dword:00000000
+"1803"=dword:00000000
+"1804"=dword:00000000
+"1805"=dword:00000000
+"1A00"=dword:00000000
+"1A02"=dword:00000000
+"1A03"=dword:00000000
+"1A04"=dword:00000000
+"1A05"=dword:00000000
+"1A06"=dword:00000000
+"1A10"=dword:00000000
+"1C00"=dword:00020000
+"1E05"=dword:00030000
+"CurrentLevel"=dword:00000000
+"Description"="Your computer"
+"DisplayName"="My Computer"
+"Flags"=dword:00000021
+"Icon"="explorer.exe#0100"
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\Zones\\1] 1556451401
+#time=1d4fdb6a61af6f4
+@=""
+"1001"=dword:00000001
+"1004"=dword:00000003
+"1200"=dword:00000000
+"1201"=dword:00000003
+"1400"=dword:00000000
+"1402"=dword:00000000
+"1405"=dword:00000000
+"1406"=dword:00000001
+"1407"=dword:00000000
+"1601"=dword:00000000
+"1604"=dword:00000000
+"1605"=dword:00000000
+"1606"=dword:00000000
+"1607"=dword:00000000
+"1608"=dword:00000000
+"1609"=dword:00000001
+"1800"=dword:00000001
+"1802"=dword:00000000
+"1803"=dword:00000000
+"1804"=dword:00000001
+"1805"=dword:00000000
+"1A00"=dword:00020000
+"1A02"=dword:00000000
+"1A03"=dword:00000000
+"1A04"=dword:00000000
+"1A05"=dword:00000000
+"1A06"=dword:00000000
+"1A10"=dword:00000000
+"1C00"=dword:00020000
+"1E05"=dword:00020000
+"CurrentLevel"=dword:00010500
+"Description"="This zone contains all Web sites that are on your organization's intranet."
+"DisplayName"="Local intranet"
+"Flags"=dword:000000db
+"Icon"="shell32.dll#0018"
+"MinLevel"=dword:00010000
+"RecommendedLevel"=dword:00010500
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\Zones\\2] 1556451401
+#time=1d4fdb6a61bb95e
+@=""
+"1001"=dword:00000000
+"1004"=dword:00000001
+"1200"=dword:00000000
+"1201"=dword:00000001
+"1400"=dword:00000000
+"1402"=dword:00000000
+"1405"=dword:00000000
+"1406"=dword:00000000
+"1407"=dword:00000000
+"1601"=dword:00000000
+"1604"=dword:00000000
+"1605"=dword:00000000
+"1606"=dword:00000000
+"1607"=dword:00000000
+"1608"=dword:00000000
+"1609"=dword:00000001
+"1800"=dword:00000000
+"1802"=dword:00000000
+"1803"=dword:00000000
+"1804"=dword:00000000
+"1805"=dword:00000000
+"1A00"=dword:00000000
+"1A02"=dword:00000000
+"1A03"=dword:00000000
+"1A04"=dword:00000000
+"1A05"=dword:00000000
+"1A06"=dword:00000000
+"1A10"=dword:00000000
+"1C00"=dword:00030000
+"1E05"=dword:00030000
+"CurrentLevel"=dword:00010000
+"Description"="This zone contains Web sites that you trust not to damage your computer or data."
+"DisplayName"="Trusted sites"
+"Flags"=dword:00000047
+"Icon"="inetcpl.cpl#00004480"
+"MinLevel"=dword:00010000
+"RecommendedLevel"=dword:00010000
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\Zones\\3] 1556451401
+#time=1d4fdb6a61d046c
+@=""
+"1001"=dword:00000001
+"1004"=dword:00000003
+"1200"=dword:00000000
+"1201"=dword:00000003
+"1400"=dword:00000000
+"1402"=dword:00000000
+"1405"=dword:00000000
+"1406"=dword:00000003
+"1407"=dword:00000000
+"1601"=dword:00000001
+"1604"=dword:00000000
+"1605"=dword:00000000
+"1606"=dword:00000000
+"1607"=dword:00000000
+"1608"=dword:00000000
+"1609"=dword:00000001
+"1800"=dword:00000001
+"1802"=dword:00000000
+"1803"=dword:00000000
+"1804"=dword:00000001
+"1805"=dword:00000001
+"1A00"=dword:00020000
+"1A02"=dword:00000000
+"1A03"=dword:00000000
+"1A04"=dword:00000003
+"1A05"=dword:00000001
+"1A06"=dword:00000000
+"1A10"=dword:00000001
+"1C00"=dword:00010000
+"1E05"=dword:00020000
+"CurrentLevel"=dword:00011000
+"Description"="This zone contains all Web sites you haven't placed in other zones"
+"DisplayName"="Internet"
+"Flags"=dword:00000001
+"Icon"="inetcpl.cpl#001313"
+"MinLevel"=dword:00011000
+"RecommendedLevel"=dword:00011000
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\Zones\\4] 1556451401
+#time=1d4fdb6a621db54
+@=""
+"1001"=dword:00000003
+"1004"=dword:00000003
+"1200"=dword:00000003
+"1201"=dword:00000003
+"1400"=dword:00000003
+"1402"=dword:00000003
+"1405"=dword:00000003
+"1406"=dword:00000003
+"1407"=dword:00000003
+"1601"=dword:00000001
+"1604"=dword:00000001
+"1605"=dword:00000000
+"1606"=dword:00000003
+"1607"=dword:00000003
+"1608"=dword:00000003
+"1609"=dword:00000001
+"1800"=dword:00000003
+"1802"=dword:00000001
+"1803"=dword:00000003
+"1804"=dword:00000003
+"1805"=dword:00000001
+"1A00"=dword:00010000
+"1A02"=dword:00000003
+"1A03"=dword:00000003
+"1A04"=dword:00000003
+"1A05"=dword:00000003
+"1A06"=dword:00000003
+"1A10"=dword:00000003
+"1C00"=dword:00000000
+"1E05"=dword:00010000
+"CurrentLevel"=dword:00012000
+"Description"="This zone contains Web sites that could potentially damage your computer or data."
+"DisplayName"="Restricted sites"
+"Flags"=dword:00000003
+"Icon"="inetcpl.cpl#00004481"
+"MinLevel"=dword:00012000
+"RecommendedLevel"=dword:00012000
+
+[Software\\Microsoft\\Windows\\CurrentVersion\\Run] 1556451401
+#time=1d4fdb6a67f0fb8
+
+[Software\\Wine\\Debug] 1556451401
+#time=1d4fdb6a681af52
+"RelayExclude"="ntdll.RtlEnterCriticalSection;ntdll.RtlTryEnterCriticalSection;ntdll.RtlLeaveCriticalSection;kernel32.48;kernel32.49;kernel32.94;kernel32.95;kernel32.96;kernel32.97;kernel32.98;kernel32.TlsGetValue;kernel32.TlsSetValue;kernel32.FlsGetValue;kernel32.FlsSetValue;kernel32.SetLastError"
+"RelayFromExclude"="winex11.drv;winemac.drv;user32;gdi32;advapi32;kernel32"
+
+[Software\\Wine\\Drivers\\winealsa.drv] 1556451458
+#time=1d4fdb6c84952f2
+
+[Software\\Wine\\FileOpenAssociations] 1556451423
+#time=1d4fdb6b33a48c6
+
+[Software\\Wine\\Fonts] 1556451362
+#time=1d4fdb68edf45da
+"Codepages"="1252,437"
+"LogPixels"=dword:00000060
+
+[Software\\Wine\\Fonts\\External Fonts] 1556451362
+#time=1d4fdb68ee04f48
+"DejaVu Sans (TrueType)"="Z:\\usr\\share\\fonts\\truetype\\dejavu\\DejaVuSans.ttf"
+"DejaVu Sans Bold (TrueType)"="Z:\\usr\\share\\fonts\\truetype\\dejavu\\DejaVuSans-Bold.ttf"
+"DejaVu Sans Mono (TrueType)"="Z:\\usr\\share\\fonts\\truetype\\dejavu\\DejaVuSansMono.ttf"
+"DejaVu Sans Mono Bold (TrueType)"="Z:\\usr\\share\\fonts\\truetype\\dejavu\\DejaVuSansMono-Bold.ttf"
+"DejaVu Serif (TrueType)"="Z:\\usr\\share\\fonts\\truetype\\dejavu\\DejaVuSerif.ttf"
+"DejaVu Serif Bold (TrueType)"="Z:\\usr\\share\\fonts\\truetype\\dejavu\\DejaVuSerif-Bold.ttf"
+"Marlett (TrueType)"="Z:\\opt\\wine-stable\\bin\\..\\share\\wine\\fonts\\marlett.ttf"
+"Symbol (TrueType)"="Z:\\opt\\wine-stable\\bin\\..\\share\\wine\\fonts\\symbol.ttf"
+"Tahoma (TrueType)"="Z:\\opt\\wine-stable\\bin\\..\\share\\wine\\fonts\\tahoma.ttf"
+"Tahoma Bold (TrueType)"="Z:\\opt\\wine-stable\\bin\\..\\share\\wine\\fonts\\tahomabd.ttf"
+"Wingdings (TrueType)"="Z:\\opt\\wine-stable\\bin\\..\\share\\wine\\fonts\\wingding.ttf"
+
+[Software\\Wine\\MenuFiles] 1556451461
+#time=1d4fdb6ca1591ae
+"//.wine/dosdevices/c:/users/1000/Desktop/Big Boss MetaTrader 4.desktop"="//.wine/dosdevices/c:/users/Public/Desktop/Big Boss MetaTrader 4.lnk"
+"//.wine/dosdevices/c:/users/1000/Desktop/MetaEditor 4.desktop"="//.wine/dosdevices/c:/users/Public/Desktop/MetaEditor 4.lnk"

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Big Boss MetaTrader 4
+Exec=env WINEPREFIX="//.wine" wine C:\\\\windows\\\\command\\\\start.exe /Unix //.wine/dosdevices/c:/users/Public/Desktop/Big\\ Boss\\ MetaTrader\\ 4.lnk
+Type=Application
+StartupNotify=true
+Path=//.wine/dosdevices/c:/Program Files/Big Boss MetaTrader 4
+StartupWMClass=terminal.exe
