@@ -1,0 +1,21 @@
+0	11:37:13.733	Migration: data to 'C:\Program Files\Big Boss MetaTrader 4' migration started
+0	11:37:13.733	Migration: experts migration from 'C:\Program Files\Big Boss MetaTrader 4' to 'C:\Program Files\Big Boss MetaTrader 4' started
+0	11:37:13.734	Migration: experts folder updated from 'C:\Program Files\Big Boss MetaTrader 4\experts' to 'C:\Program Files\Big Boss MetaTrader 4\MQL4\Experts'
+0	11:37:13.734	Migration: include folder updated from 'C:\Program Files\Big Boss MetaTrader 4\experts\include' to 'C:\Program Files\Big Boss MetaTrader 4\MQL4\Include'
+0	11:37:13.734	Migration: indicators folder updated from 'C:\Program Files\Big Boss MetaTrader 4\experts\indicators' to 'C:\Program Files\Big Boss MetaTrader 4\MQL4\Indicators'
+0	11:37:13.734	Migration: scripts folder updated from 'C:\Program Files\Big Boss MetaTrader 4\experts\scripts' to 'C:\Program Files\Big Boss MetaTrader 4\MQL4\Scripts'
+0	11:37:13.734	Migration: expert logs folder updated from 'C:\Program Files\Big Boss MetaTrader 4\experts\logs' to 'C:\Program Files\Big Boss MetaTrader 4\MQL4\Logs'
+0	11:37:13.734	Migration: expert files folder updated from 'C:\Program Files\Big Boss MetaTrader 4\experts\files' to 'C:\Program Files\Big Boss MetaTrader 4\MQL4\Files'
+0	11:37:13.734	Migration: libraries folder updated from 'C:\Program Files\Big Boss MetaTrader 4\experts\libraries' to 'C:\Program Files\Big Boss MetaTrader 4\MQL4\Libraries'
+0	11:37:13.734	Migration: expert presets folder updated from 'C:\Program Files\Big Boss MetaTrader 4\experts\presets' to 'C:\Program Files\Big Boss MetaTrader 4\MQL4\Presets'
+0	11:37:13.734	Migration: expert images folder updated from 'C:\Program Files\Big Boss MetaTrader 4\experts\images' to 'C:\Program Files\Big Boss MetaTrader 4\MQL4\Images'
+0	11:37:13.734	Migration: experts migration finished
+0	11:37:13.735	Migration: data migration finished, no virtual folder
+0	11:37:13.736	LiveUpdate: update C:\Program Files\Big Boss MetaTrader 4\MQL4 folder started
+0	11:37:13.906	LiveUpdate: update C:\Program Files\Big Boss MetaTrader 4\MQL4 folder finished
+0	11:37:14.059	Big Boss MetaTrader 4 build 1170 started (Big Boss Holdings Company Limited)
+0	11:37:14.065	Microsoft Windows 7 x86, IE 11, 2 x Intel Pentium 4  2.40GHz, Memory: 1242 / 3947 Mb, Disk: 46 / 62 Gb, GMT+0
+0	11:37:14.065	Data Folder: C:\Program Files\Big Boss MetaTrader 4
+0	11:37:15.022	Sources recompilation started
+0	11:37:31.109	Sources recompilation finished (28 compiled in 16087 msec)
+0	11:37:48.397	Big Boss MetaTrader 4 build 1170 stopped
