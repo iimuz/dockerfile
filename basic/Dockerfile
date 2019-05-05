@@ -13,11 +13,36 @@ RUN apt-get update && \
   update-locale LANG=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 
+# gosu
+ENV GOSU_VERSION=1.10
+RUN set -x && \
+  fetchDeps=' \
+    ca-certificates \
+    wget \
+  ' && \
+  apt update && \
+  apt install -y --no-install-recommends $fetchDeps && \
+  dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" && \
+  wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" && \
+  chmod +x /usr/local/bin/gosu && \
+  gosu nobody true && \
+  apt clean && \
+  rm -rf /var/lib/apt/lists/* && \
+  apt autoremove -y
+
+ENV USER_NAME=cppdev \
+  HOME=/home/cppdev \
+  USER_ID=1000 \
+  GROUP_ID=1000
+RUN set -x && \
+  adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos ""
+
 # setup tools
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
     cmake \
     make && \
+  apt-get install -y autoconf && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
@@ -54,43 +79,11 @@ RUN echo deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-5.0 main >> /et
 ENV CC=clang \
   CXX=clang++
 
-# vim
-RUN apt-get update && \
-  apt-get install -y --no-install-recommends \
-    ctags \
-    lua5.2 \
-    lua5.2-dev \
-    global && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  cd /opt/ && \
-  git clone --depth=1 -b v8.0.1365 https://github.com/vim/vim vim && \
-  cd ./vim && \
-  ./configure \
-    --with-features=huge \
-    --enable-multibyte \
-    --enable-luainterp \
-    --enable-fail-if-missing \
-    --prefix=/usr/local && \
-  make && \
-  make install && \
-  cd .. && \
-  rm -rf vim && \
-  vim --version
+ENV SOURCE_DIR=/src
+RUN set -x && mkdir ${SOURCE_DIR}
 
-# add dev user
-ENV HOME /home/dev
-COPY ./home $HOME
-RUN adduser dev --disabled-password --gecos "" && \
-  echo "ALL ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-  chown -R dev:dev $HOME
-USER dev
-
-# install dein.vim
-RUN mkdir -p ${HOME}/.cache/dein && \
-  curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh && \
-  sh $HOME/installer.sh $HOME/.cache/dein && \
-  rm $HOME/installer.sh && \
-  vim +":silent! call dein#install()" +qall
-
+ADD ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 WORKDIR ${HOME}
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["clang"]
