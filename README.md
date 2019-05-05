@@ -2,9 +2,22 @@
 
 ## Usage
 
+### X11 Forwarding type
+
 ```sh
 $ docker run --rm -it -e DISPLAY=$DISPLAY -v ~/.Xauthority:/root/.Xauthority:ro iimuz/metatrader:latest
 ```
+
+### Ubuntu Desktop
+
+```sh
+$ docker run --rm -p 8080:8080 iimuz/metatrader:desktop
+```
+
+* xvfbによる仮想ディスプレイ
+* xfceによる軽量デスクトップ環境
+* x11vncによるリモートデスクトップ(ポートはコンテナ外に非公開)
+* noVNCによるブラウザによるリモートデスクトップ
 
 ## ビルド手順
 
@@ -29,4 +42,10 @@ $ wine metatrader4.exe
 
 上記のように実行することで、 MT4 のインストーラ画面が転送され、 GUI を利用してインストール作業が行えます。
 インストールすると `$(pwd)/.wine` にバイナリが一式作成できます。
+
+### Ubuntu Desktop 版に関して
+
+元は、 [GitHub uphy/ubuntu-desktop-jp] を利用しています。
+
+[uphy]: https://github.com/uphy/ubuntu-desktop-jp
 
