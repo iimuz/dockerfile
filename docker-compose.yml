@@ -1,0 +1,14 @@
+version: "2"
+services:
+  fswebcam:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: $USER_ID:$GROUP_ID
+    devices:
+      - /dev/video0:/dev/video0
+    volumes:
+      - ./_data/:/workspace:rw
+    working_dir: /workspace
+    command: fswebcam -p YUYV -r 640x480 --no-banner image.jpg
+
