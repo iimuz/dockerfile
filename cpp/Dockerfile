@@ -9,7 +9,6 @@ RUN set -x && \
     ctags \
     git \
     vimdiff && \
-  apk add --no-cache global --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing && \
   rm -rf /var/cache/apk/*
 
 COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/
