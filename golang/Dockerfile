@@ -1,4 +1,4 @@
-FROM golang:1.10.3-stretch AS build-tools
+FROM golang:1.13.0-stretch AS build-tools
 
 RUN set -x && \
   go get github.com/golang/lint/golint && \
@@ -9,7 +9,7 @@ RUN set -x && \
   go get golang.org/x/tools/cmd/goimports && \
   go get golang.org/x/tools/cmd/gorename
 
-FROM iimuz/neovim:v0.3.1-1
+FROM iimuz/neovim:v0.3.7-1
 LABEL maintainer iimuz
 
 # tools
@@ -19,10 +19,10 @@ RUN set -x && \
   : "install golng" && \
   apk update && \
   apk add --no-cache \
-    ctags=5.8-r5 \
-    git=2.20.1-r0 \
-    go=1.11.5-r0 \
-    vimdiff=8.1.0630-r0 && \
+    ctags \
+    git \
+    go \
+    vimdiff && \
   rm -rf /var/cache/apk/*
 
 COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/

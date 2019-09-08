@@ -25,7 +25,7 @@ hook_add = '''
   nmap <silent> [denite]g :<C-u>Denite grep -highlight-mode-insert=Search<CR>
   nmap <silent> [denite]h :<C-u>Denite command_history -highlight-mode-insert=Search<CR>
   nmap <silent> [denite]o :<C-u>Denite outline -highlight-mode-insert=Search<CR>
-  nmap <silent> [denite]p :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
+  nmap <silent> [denite]p :<C-u>Denite file/rec -highlight-mode-insert=Search<CR>
   nmap <silent> [denite]r :<C-u>Denite file_mru -highlight-mode-insert=Search<CR>
   nmap <silent> [denite]s :<C-u>Denite -resume<CR>
   nmap <silent> [denite]/ :<C-u>Denite -buffer-name=search -auto-resize line<CR>
