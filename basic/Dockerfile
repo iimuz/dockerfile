@@ -49,7 +49,7 @@ RUN set -x \
   && nvim --version
 
 COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/
-RUN set -x && \
+RUN set -x \
   && : "create xdg base direcotry" \
   && mkdir -p $XDG_CACHE_HOME \
   && mkdir -p $XDG_DATA_HOME \
