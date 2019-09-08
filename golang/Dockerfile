@@ -1,13 +1,13 @@
 FROM golang:1.13.0-stretch AS build-tools
 
-RUN set -x && \
-  go get github.com/golang/lint/golint && \
-  go get github.com/jstemmer/gotags && \
-  go get github.com/nsf/gocode && \
-  go get github.com/rogpeppe/godef && \
-  go get golang.org/x/tools/cmd/godoc && \
-  go get golang.org/x/tools/cmd/goimports && \
-  go get golang.org/x/tools/cmd/gorename
+RUN set -x \
+  && go get github.com/jstemmer/gotags \
+  && go get github.com/nsf/gocode \
+  && go get github.com/rogpeppe/godef \
+  && go get golang.org/x/lint/golint \
+  && go get golang.org/x/tools/cmd/godoc \
+  && go get golang.org/x/tools/cmd/goimports \
+  && go get golang.org/x/tools/cmd/gorename
 
 FROM iimuz/neovim:v0.3.7-1
 LABEL maintainer iimuz
@@ -15,21 +15,21 @@ LABEL maintainer iimuz
 # tools
 COPY --from=build-tools /go/bin/* /usr/bin/
 
-RUN set -x && \
-  : "install golng" && \
-  apk update && \
-  apk add --no-cache \
+RUN set -x \
+  && : "install golng" \
+  && apk update \
+  && apk add --no-cache \
     ctags \
     git \
     go \
-    vimdiff && \
-  rm -rf /var/cache/apk/*
+    vimdiff \
+  && rm -rf /var/cache/apk/*
 
 COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/
-RUN set -x && \
-  : "install plugins" && \
-  nvim +"call dein#install()" +qall && \
-  nvim +"UpdateRemotePlugin" +qall && \
-  : "setting for normal user" && \
-  chmod -R 777 $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME
+RUN set -x \
+  && : "install plugins" \
+  && nvim +"call dein#install()" +qall \
+  && nvim +"UpdateRemotePlugin" +qall \
+  && : "setting for normal user" \
+  && chmod -R 777 $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME
 
