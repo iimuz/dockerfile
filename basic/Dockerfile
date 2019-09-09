@@ -8,7 +8,7 @@ RUN set -x \
   && go build -v -o ./pt ./cmd/pt/main.go \
   && mv ./pt /go/bin/
 
-FROM alpine:3.10
+FROM ubuntu:18.04
 LABEL maintainer iimuz
 
 # xdg base directory
@@ -18,34 +18,49 @@ ENV XDG_CACHE_HOME=/.cache \
   XDG_DATA_DIRS=/usr/local/share:/usr/share \
   XDG_DATA_HOME=/.local/share
 
-COPY --from=build-pt /go/bin/pt /usr/bin/
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN set -x \
-  && : "install for pt" \
-  && apk add --no-cache ca-certificates \
-  && mkdir /lib64 \
-  && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 \
-  && rm -rf /var/cache/apk/*
+  && : "Set locale" \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
+    locales \
+    locales-all \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+ENV LC_ALL=en_US.UTF-8 \
+  LANG=en_US.UTF-8 \
+  LANGUAGE=en_US:en
+
+# install pt
+COPY --from=build-pt /go/bin/pt /usr/bin/
 
 RUN set -x \
   && : "install neovim" \
-  && apk update \
-  && apk add --no-cache --virtual .build-deps \
-    gcc \
-    linux-headers \
-    musl-dev \
-  && apk add --no-cache \
-    neovim \
-    python2-dev \
-    py-pip \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    wget \
+  && wget -q https://github.com/neovim/neovim/releases/download/v0.3.8/nvim.appimage \
+  && chmod u+x ./nvim.appimage \
+  && ./nvim.appimage --appimage-extract \
+  && rm nvim.appimage \
+  && mv ./squashfs-root /opt/nvim \
+  && chmod -R +rx /opt/nvim \
+  && ln -s /opt/nvim/usr/bin/nvim /usr/local/bin/nvim \
+  && apt-get install -y --no-install-recommends \
+    python \
+    python-pip \
     python3-dev \
-  && pip install --upgrade pip \
+    python3-pip \
+  && : "ignore pip upgrade warning" \
   && pip install --no-cache setuptools \
-  && pip install --no-cache neovim \
-  && pip3 install --upgrade pip \
+  && pip install --no-cache pynvim \
   && pip3 install --no-cache setuptools \
-  && pip3 install --no-cache neovim \
-  && apk del .build-deps \
-  && rm -rf /var/cache/apk/* \
+  && pip3 install --no-cache pynvim \
+  && : "Clean" \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* \
   && nvim --version
 
 COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/
@@ -55,9 +70,10 @@ RUN set -x \
   && mkdir -p $XDG_DATA_HOME \
   && mkdir -p $XDG_CONFIG_HOME/nvim \
   && : "install packages" \
-  && apk update \
-  && apk add --no-cache git \
-  && apk add --no-cache --virtual .fetch-deps curl \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
+    curl \
+    git \
   && : "install dein" \
   && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /opt/installer.sh \
   && sh /opt/installer.sh $XDG_CACHE_HOME/dein \
@@ -65,9 +81,8 @@ RUN set -x \
   && chmod -R 777 $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME \
   && : "cleanup" \
   && rm /opt/installer.sh \
-  && rm -rf /opt/dotfiles \
-  && apk del .fetch-deps \
-  && rm -rf /var/cache/apk/*
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 ENV SOURCE_DIR=/src
 RUN set -x && mkdir -p ${SOURCE_DIR}
