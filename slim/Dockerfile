@@ -1,14 +1,15 @@
-FROM iimuz/neovim:v0.3.7-1
+FROM iimuz/neovim:v0.3.8-1
 LABEL maintainer iimuz
 
 RUN set -x \
   && : "install packages" \
-  && apk update \
-  && apk add --no-cache \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
     ctags \
     git \
-    vimdiff \
-  && rm -rf /var/cache/apk/*
+    vim-common \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/
 RUN set -x \

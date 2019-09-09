@@ -1,15 +1,15 @@
-FROM iimuz/neovim:v0.3.7-1
+FROM iimuz/neovim:v0.3.8-1
 LABEL maintainer iimuz
 
 RUN set -x \
   && : "install packages" \
-  && apk update \
-  && apk add --no-cache \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
     ctags \
     git \
     nodejs \
     npm \
-    vimdiff \
+    vim-common \
   && : "install eslint" \
   && npm install -g \
     babel-eslint \
@@ -20,7 +20,8 @@ RUN set -x \
     eslint-plugin-react \
     eslint-config-airbnb \
     @typescript-eslint/parser \
-  && rm -rf /var/cache/apk/*
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 COPY .eslintrc /.eslintrc
 
 COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/
