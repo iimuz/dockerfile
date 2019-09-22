@@ -41,7 +41,7 @@ RUN set -x \
   && apt-get install -y --no-install-recommends \
     ca-certificates \
     wget \
-  && wget -q https://github.com/neovim/neovim/releases/download/v0.3.8/nvim.appimage \
+  && wget -q https://github.com/neovim/neovim/releases/download/v0.4.2/nvim.appimage \
   && chmod u+x ./nvim.appimage \
   && ./nvim.appimage --appimage-extract \
   && rm nvim.appimage \
