@@ -1,0 +1,85 @@
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+  map <C-n> :NERDTreeToggle<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+depends = ['neomru.vim', 'neoinclude.vim']
+hook_add = '''
+  " Define mappings
+  autocmd FileType denite call s:denite_my_settings()
+  function! s:denite_my_settings() abort
+    nnoremap <silent><buffer><expr> <CR>
+    \ denite#do_map('do_action')
+    nnoremap <silent><buffer><expr> d
+    \ denite#do_map('do_action', 'delete')
+    nnoremap <silent><buffer><expr> p
+    \ denite#do_map('do_action', 'preview')
+    nnoremap <silent><buffer><expr> q
+    \ denite#do_map('quit')
+    nnoremap <silent><buffer><expr> i
+    \ denite#do_map('open_filter_buffer')
+    nnoremap <silent><buffer><expr> <Space>
+    \ denite#do_map('toggle_select').'j'
+  endfunction
+
+  " Use the platinum searcher
+  call denite#custom#var('file/rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
+  call denite#custom#var('grep', 'command', ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
+  call denite#custom#var('grep', 'default_opts', [])
+  call denite#custom#var('grep', 'recursive_opts', [])
+
+  " Prefix key
+  nnoremap [denite] <Nop>
+  nmap <Space>d [denite]
+
+  nmap <silent> [denite]b :<C-u>Denite buffer<CR>
+  nmap <silent> [denite]g :<C-u>Denite grep<CR>
+  nmap <silent> [denite]h :<C-u>Denite command_history<CR>
+  nmap <silent> [denite]o :<C-u>Denite outline<CR>
+  nmap <silent> [denite]p :<C-u>Denite file/rec<CR>
+  nmap <silent> [denite]r :<C-u>Denite file_mru<CR>
+  nmap <silent> [denite]s :<C-u>Denite -resume<CR>
+  nmap <silent> [denite]/ :<C-u>Denite -buffer-name=search -auto-resize line<CR>
+
+  nmap <silent> [denite]] :<C-u>DeniteCursorWord grep<CR>
+  nmap <silent> [denite]* :<C-u>DeniteCursorWord -buffer-name=search -auto-resize line<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/neoinclude.vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+  set diffopt=vertical
+
+  nnoremap [fugitive]  <Nop>
+  nmap <space>g [fugitive]
+
+  nnoremap <silent> [fugitive]s :Gstatus<CR>
+  nnoremap <silent> [fugitive]a :Gwrite<CR>
+  nnoremap <silent> [fugitive]c :Gcommit<CR>
+  nnoremap <silent> [fugitive]b :Gblame<CR>
+  nnoremap <silent> [fugitive]d :Gdiff<CR>
+  nnoremap <silent> [fugitive]m :Gmerge<CR>
+'''
+
+[[plugins]]
+repo = 'tomasr/molokai'
+hook_add = '''
+  set background=dark
+  autocmd! VimEnter * nested colorscheme molokai
+'''
+

@@ -1,0 +1,31 @@
+[[plugins]]
+repo = 'ozelentok/denite-gtags'
+on_ft = 'cpp'
+hook_source = '''
+  " Prefix key
+  nnoremap [denite-gtags] <Nop>
+  nmap <space>l [denite-gtags]
+
+  nmap <silent> [denite-gtags]a :<C-u>DeniteCursorWord -buffer-name=gtags_context gtags_context<CR>
+  nmap <silent> [denite-gtags]d :<C-u>DeniteCursorWord -buffer-name=gtags_def gtags_def<CR>
+  nmap <silent> [denite-gtags]r :<C-u>DeniteCursorWord -buffer-name=gtags_ref gtags_ref<CR>
+  nmap <silent> [denite-gtags]g :<C-u>DeniteCursorWord -buffer-name=gtags_grep gtags_grep<CR>
+  nmap <silent> [denite-gtags]t :<C-u>Denite -buffer-name=gtags_completion gtags_completion<CR>
+  nmap <silent> [denite-gtags]f :<C-u>Denite -buffer-name=gtags_file gtags_file<CR>
+  nmap <silent> [denite-gtags]p :<C-u>Denite -buffer-name=gtags_path gtags_path<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+on_i = 1
+hook_source = '''
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_smart_case = 1
+  let g:deoplete#disable_auto_complete = 1
+  inoremap <expr> <C-n> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+  if !exists('g:deoplete#omni#input_patterns')
+    let g:deoplete#omni#input_patterns = {}
+  endif
+  autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+'''
+
