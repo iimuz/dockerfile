@@ -64,6 +64,7 @@ RUN set -x \
   && : "setting python environment" \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
+    build-essentials \
     ctags \
     git \
     vim-common \
