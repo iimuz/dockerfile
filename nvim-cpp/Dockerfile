@@ -1,4 +1,4 @@
-FROM iimuz/neovim:v0.4.2-1
+FROM iimuz/neovim:v0.4.3-1
 LABEL maintainer iimuz
 
 COPY .globalrc /.globalrc

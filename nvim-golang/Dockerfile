@@ -1,4 +1,4 @@
-FROM golang:1.13.0-stretch AS build-tools
+FROM golang:1.13.4-buster AS build-tools
 
 RUN set -x \
   && go get github.com/jstemmer/gotags \
@@ -9,7 +9,7 @@ RUN set -x \
   && go get golang.org/x/tools/cmd/goimports \
   && go get golang.org/x/tools/cmd/gorename
 
-FROM iimuz/neovim:v0.4.2-1
+FROM iimuz/neovim:v0.4.3-1
 LABEL maintainer iimuz
 
 # tools
