@@ -5,6 +5,7 @@ RUN set -x \
   && : "install packages" \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
+    build-essential \
     ctags \
     git \
     vim-common \

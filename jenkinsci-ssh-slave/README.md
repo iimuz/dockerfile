@@ -1,0 +1,1 @@
+# docker-jenkinsci-ssh-slave
