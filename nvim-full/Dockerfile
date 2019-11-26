@@ -1,4 +1,4 @@
-FROM golang:1.13.0-stretch AS build-go-tools
+FROM golang:1.13.4-buster AS build-go-tools
 
 RUN set -x \
   && go get github.com/jstemmer/gotags \
