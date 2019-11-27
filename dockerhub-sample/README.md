@@ -1,2 +1,0 @@
-# dockerhub-sample
-dockerhub samples
