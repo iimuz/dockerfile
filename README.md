@@ -1,7 +1,8 @@
-# docker-travis-client
+# docker travis client
 
 ## usage
 
 ```bash
-$ docker run --rm -it -v /path/to/repository:/src:rw iimuz/travis-client:latest bash
+$ docker run --rm -it -v /path/to/repository:/src:rw -u $(id -u):$(id -g) imuz/travis-client:latest bash
 ```
+
