@@ -67,6 +67,7 @@ RUN set -x \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
     npm \
+  && npm -g install yarn \
   && : "Clean" \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
