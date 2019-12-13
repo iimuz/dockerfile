@@ -1,5 +1,4 @@
-# FROM iimuz/neovim:v0.4.3-1
-FROM izumi/neovim:base
+FROM iimuz/neovim:v0.4.3-1
 LABEL maintainer iimuz
 
 RUN set -x \
