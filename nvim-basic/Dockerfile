@@ -8,7 +8,7 @@ RUN set -x \
   && go build -v -o ./pt ./cmd/pt/main.go \
   && mv ./pt /go/bin/
 
-FROM ubuntu:18.04
+FROM debian:buster
 LABEL maintainer iimuz
 
 # xdg base directory
@@ -36,18 +36,20 @@ ENV LC_ALL=en_US.UTF-8 \
 COPY --from=build-pt /go/bin/pt /usr/bin/
 
 RUN set -x \
-  && : "Install neovim" \
+  && : "Install basic tools" \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
     ca-certificates \
+    curl \
+    git \
     wget \
-  && wget -q https://github.com/neovim/neovim/releases/download/v0.4.3/nvim.appimage \
-  && chmod u+x ./nvim.appimage \
-  && ./nvim.appimage --appimage-extract \
-  && rm nvim.appimage \
-  && mv ./squashfs-root /opt/nvim \
-  && chmod -R +rx /opt/nvim \
-  && ln -s /opt/nvim/usr/bin/nvim /usr/local/bin/nvim \
+  && : "Clean" \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN set -x \
+  && : "Install python" \
+  && apt-get update \
   && apt-get install -y --no-install-recommends \
     python \
     python-pip \
@@ -55,13 +57,49 @@ RUN set -x \
     python3-pip \
   && : "Ignore pip upgrade warning" \
   && pip install --no-cache setuptools \
-  && pip install --no-cache pynvim \
   && pip3 install --no-cache setuptools \
-  && pip3 install --no-cache pynvim \
   && : "Clean" \
   && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* \
-  && nvim --version
+  && rm -rf /var/lib/apt/lists/*
+
+RUN set -x \
+  && : "Install node.js" \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
+    npm \
+  && npm -g install yarn \
+  && : "Clean" \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN set -x \
+  && : "Install ruby" \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
+    gcc \
+    make \
+    ruby \
+    ruby-dev \
+  && : "Clean" \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+
+RUN set -x \
+  && : "Install neovim" \
+  && wget -q https://github.com/neovim/neovim/releases/download/v0.4.3/nvim.appimage \
+  && chmod u+x ./nvim.appimage \
+  && ./nvim.appimage --appimage-extract \
+  && mv ./squashfs-root /opt/nvim \
+  && chmod -R +rx /opt/nvim \
+  && ln -s /opt/nvim/usr/bin/nvim /usr/local/bin/nvim \
+  && : "Install nvim tool" \
+  && pip install --no-cache pynvim \
+  && pip3 install --no-cache pynvim \
+  && npm install -g neovim \
+  && gem install neovim \
+  && : "Clean" \
+  && rm nvim.appimage
 
 COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/
 RUN set -x \
@@ -69,25 +107,18 @@ RUN set -x \
   && mkdir -p $XDG_CACHE_HOME \
   && mkdir -p $XDG_DATA_HOME \
   && mkdir -p $XDG_CONFIG_HOME/nvim \
-  && : "Install packages" \
-  && apt-get update \
-  && apt-get install -y --no-install-recommends \
-    curl \
-    git \
   && : "Install dein" \
   && curl -L https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /opt/installer.sh \
   && sh /opt/installer.sh $XDG_CACHE_HOME/dein \
   && : "Setting for normal user" \
   && chmod -R 777 $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME \
   && : "Cleanup" \
-  && rm /opt/installer.sh \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+  && rm /opt/installer.sh
 
 RUN set -x \
   && : "Create home directory for all user" \
   && mkdir -p /home/dev \
-  && chmod 777 /home/dev
+  && chmod -R 777 /home/dev
 
 ENV SOURCE_DIR=/workspace
 RUN set -x \
@@ -99,3 +130,4 @@ WORKDIR $SOURCE_DIR
 ENV DEBIAN_FRONTEND=dialog \
   SHELL=/bin/bash
 CMD ["nvim"]
+

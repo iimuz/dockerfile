@@ -2,43 +2,87 @@
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
-repo = 'prabirshrestha/async.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-depends = ['async']
-hook_source = '''
-  let g:lsp_diagnostics_enabled = 0
+repo = 'junegunn/fzf'
+build = '''
+  ./install --bin
 '''
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = ['fzf']
 hook_add = '''
-  " register pyls to vim-lsp
-  if (executable('pyls'))
-    autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'pyls',
-      \ 'cmd': { server_info -> ['pyls'] },
-      \ 'whitelist': ['python']
-    \ })
-  endif
+  command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'pt --follow --nocolor --nogroup --hidden --ignore .git/ -g ""'}), <bang>0)
 
   " Prefix key
-  nnoremap [lsp] <Nop>
-  nmap <Space>l [lsp]
+  nnoremap [fzf] <Nop>
+  nmap <Space>f [fzf]
 
-  nmap <silent> [lsp]d :<C-u>LspDefinition<CR>
-  nmap <silent> [lsp]r :<C-u>LspReferences<CR>
-  nmap <silent> [lsp]s :<C-u>LspDocumentSymbol<CR>
-  nmap <silent> [lsp]w :<C-u>LspWorkspaceSymbol<CR>
-  nmap <silent> [lsp]f :<C-u>LspDocumentFormat<CR>
-  nmap <silent> [lsp]m :LspDocumentRangeFormat<CR>
-  nmap <silent> [lsp]h :<C-u>LspHover<CR>
-  nmap <silent> [lsp]i :<C-u>LspImplementation<CR>
-  nmap <silent> [lsp]n :<C-u>LspRename<CR>
+  nmap <silent> [fzf]b :<C-u>Buffers<CR>
+  nmap <silent> [fzf]c :<C-u>Commands<CR>
+  nmap <silent> [fzf]f :<C-u>Files<CR>
+  nmap <silent> [fzf]h :<C-u>History<CR>
+  nmap <silent> [fzf]H: :<C-u>History:<CR>
+  nmap <silent> [fzf]H/ :<C-u>/History<CR>
+  nmap <silent> [fzf]m :<C-u>Marks<CR>
+  nmap <silent> [fzf]p :<C-u>GFiles<CR>
+  nmap <silent> [fzf]t :<C-u>Tags<CR>
+  nmap <silent> [fzf]T :<C-u>BTags<CR>
+  nmap <silent> [fzf]l :<C-u>Lines<CR>
+  nmap <silent> [fzf]L :<C-u>BLines<CR>
+'''
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+build = '''
+  ./install.sh nightly
+'''
+hook_add = '''
+  set hidden
+  set nobackup
+  set nowritebackup
+
+  set cmdheight=2
+  set updatetime=300
+  set shortmess+=c
+  set signcolumn=yes
+
+  " Prefix key
+  nnoremap [coc] <Nop>
+  nmap <Space>l [coc]
+
+  xmap <silent> [coc]a <Plug>(coc-codeaction-selected)
+  nmap <silent> [coc]a <Plug>(coc-codeaction-selected)
+  nmap <silent> [coc]A <Plug>(coc-codeaction)
+  nmap <silent> [coc]d <Plug>(coc-definition)
+  nmap <silent> [coc]f :call CocAction('format')<CR>
+  nmap <silent> [coc]F <Plug>(coc-fix-current)
+  nmap <silent> [coc]i <Plug>(coc-implementation)
+  nnoremap <silent> [coc]j :<C-u>CocNext<CR>
+  nnoremap <silent> [coc]k :<C-u>CocPrev<CR>
+  nnoremap <silent> [coc]Lc :<C-u>CocList commands<CR>
+  nnoremap <silent> [coc]Ld :<C-u>CocList diagnostics<CR>
+  nnoremap <silent> [coc]Le :<C-u>CocList extensions<CR>
+  nnoremap <silent> [coc]Lo :<C-u>CocList outline<CR>
+  nnoremap <silent> [coc]Ls :<C-u>CocList -I symbols<CR>
+  nmap <silent> [coc]n <Plug>(coc-rename)
+  nnoremap <silent> [coc]p :<C-u>CocListResume<CR>
+  nmap <silent> [coc]r <Plug>(coc-references)
+  nmap <silent> [coc]y <Plug>(coc-type-definition)
+  nmap <silent> [coc][ <Plug>(coc-diagnostic-prev)
+  nmap <silent> [coc]] <Plug>(coc-diagnostic-next)
+
+  nnoremap <silent> [coc]K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if &filetype == 'vim'
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
 '''
 
 [[plugins]]
@@ -49,56 +93,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'Shougo/dein.vim'
-
-[[plugins]]
-repo = 'Shougo/denite.nvim'
-depends = ['neomru.vim', 'neoinclude.vim']
-hook_add = '''
-  " Define mappings
-  autocmd FileType denite call s:denite_my_settings()
-  function! s:denite_my_settings() abort
-    nnoremap <silent><buffer><expr> <CR>
-    \ denite#do_map('do_action')
-    nnoremap <silent><buffer><expr> d
-    \ denite#do_map('do_action', 'delete')
-    nnoremap <silent><buffer><expr> p
-    \ denite#do_map('do_action', 'preview')
-    nnoremap <silent><buffer><expr> q
-    \ denite#do_map('quit')
-    nnoremap <silent><buffer><expr> i
-    \ denite#do_map('open_filter_buffer')
-    nnoremap <silent><buffer><expr> <Space>
-    \ denite#do_map('toggle_select').'j'
-  endfunction
-
-  " Use the platinum searcher
-  call denite#custom#var('file/rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
-  call denite#custom#var('grep', 'command', ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
-  call denite#custom#var('grep', 'default_opts', [])
-  call denite#custom#var('grep', 'recursive_opts', [])
-
-  " Prefix key
-  nnoremap [denite] <Nop>
-  nmap <Space>d [denite]
-
-  nmap <silent> [denite]b :<C-u>Denite buffer<CR>
-  nmap <silent> [denite]g :<C-u>Denite grep<CR>
-  nmap <silent> [denite]h :<C-u>Denite command_history<CR>
-  nmap <silent> [denite]o :<C-u>Denite outline<CR>
-  nmap <silent> [denite]p :<C-u>Denite file/rec<CR>
-  nmap <silent> [denite]r :<C-u>Denite file_mru<CR>
-  nmap <silent> [denite]s :<C-u>Denite -resume<CR>
-  nmap <silent> [denite]/ :<C-u>Denite -buffer-name=search -auto-resize line<CR>
-
-  nmap <silent> [denite]] :<C-u>DeniteCursorWord grep<CR>
-  nmap <silent> [denite]* :<C-u>DeniteCursorWord -buffer-name=search -auto-resize line<CR>
-'''
-
-[[plugins]]
-repo = 'Shougo/neomru.vim'
-
-[[plugins]]
-repo = 'Shougo/neoinclude.vim'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
