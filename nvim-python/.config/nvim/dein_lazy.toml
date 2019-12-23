@@ -1,1 +1,4 @@
+[[plugins]]
+repo = 'jmcantrell/vim-virtualenv'
+on_ft = ['python']
 
