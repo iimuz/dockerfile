@@ -38,8 +38,8 @@ RUN set -x \
   && : "Install coc extensions" \
   && mkdir -p $COC_EXTENSION_DIR \
   && cd $COC_EXTENSION_DIR \
-  && yarn add coc-pyls \
-  && nvim +"CocInstall coc-pyls" +qall \
+  && yarn add coc-python \
+  && nvim +"CocInstall coc-python" +qall \
   && : "setting for normal user" \
   && chmod -R 777 $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME
 
