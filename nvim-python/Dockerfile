@@ -10,6 +10,12 @@ RUN set -x \
     git \
     vim-common \
   && pip3 install --no-cache pipenv \
+  && pip3 install --no-cache \
+    black \
+    jedi \
+    pydocstyle \
+    flake8 \
+    mypy \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 

@@ -11,29 +11,16 @@ repo = 'HerringtonDarkholme/yats.vim'
 on_ft = ['typescript', 'typescript.tsx']
 
 [[plugins]]
+repo = 'jmcantrell/vim-virtualenv'
+on_ft = ['python']
+
+[[plugins]]
 repo = 'moll/vim-node'
 on_ft = ['javascript']
 
 [[plugins]]
 repo = 'mxw/vim-jsx'
 on_ft = ['javascript', 'javascript.jsx']
-
-[[plugins]]
-repo = 'ozelentok/denite-gtags'
-on_ft = 'cpp'
-hook_source = '''
-  " Prefix key
-  nnoremap [denite-gtags] <Nop>
-  nmap <space>c [denite-gtags]
-
-  nmap <silent> [denite-gtags]a :<C-u>DeniteCursorWord -buffer-name=gtags_context gtags_context<CR>
-  nmap <silent> [denite-gtags]d :<C-u>DeniteCursorWord -buffer-name=gtags_def gtags_def<CR>
-  nmap <silent> [denite-gtags]r :<C-u>DeniteCursorWord -buffer-name=gtags_ref gtags_ref<CR>
-  nmap <silent> [denite-gtags]g :<C-u>DeniteCursorWord -buffer-name=gtags_grep gtags_grep<CR>
-  nmap <silent> [denite-gtags]t :<C-u>Denite -buffer-name=gtags_completion gtags_completion<CR>
-  nmap <silent> [denite-gtags]f :<C-u>Denite -buffer-name=gtags_file gtags_file<CR>
-  nmap <silent> [denite-gtags]p :<C-u>Denite -buffer-name=gtags_path gtags_path<CR>
-'''
 
 [[plugins]]
 repo = 'pangloss/vim-javascript'
@@ -93,11 +80,6 @@ hook_source = '''
 '''
 
 [[plugins]]
-repo = 'Vimjas/vim-python-pep8-indent'
-on_i = 1
-on_ft = ['python']
-
-[[plugins]]
 repo = 'w0rp/ale'
 on_ft = ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx', 'vue']
 hook_source = '''
@@ -116,14 +98,6 @@ hook_source = '''
   let g:ale_set_quickfix = 0
   let g:ale_open_list = 0
   let g:ale_keep_list_window_open = 0
-  " 有効にするlinter & fixers
-  let g:ale_linters = {
-    \ 'javascript': ['eslint'],
-    \ 'python': ['flake8'] 
-  \ }
-  let g:ale_fixers = {
-    \ 'python': ['autopep8', 'black', 'isort']
-  \ }
 '''
 hook_add = '''
   " Prefix key
