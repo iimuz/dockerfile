@@ -9,22 +9,7 @@ RUN set -x \
     ctags \
     git \
     vim-common \
-  && pip3 install --no-cache \
-    flake8 \
-    pipenv \
-  && : "Install python language server" \
-  && pip3 install --no-cache \
-    black \
-    mccabe \
-    mypy \
-    pycodestyle \
-    pydocstyle \
-    pyflakes \
-    pyls-black \
-    pyls-isort \
-    pyls-mypy \
-    python-language-server \
-    rope \
+  && pip3 install --no-cache pipenv \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -37,8 +22,8 @@ RUN set -x \
   && : "Install coc extensions" \
   && mkdir -p $COC_EXTENSION_DIR \
   && cd $COC_EXTENSION_DIR \
-  && yarn add coc-pyls \
-  && nvim +"CocInstall coc-pyls" +qall \
+  && yarn add coc-python \
+  && nvim +"CocInstall coc-python" +qall \
   && : "setting for normal user" \
   && chmod -R 777 $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME
 
