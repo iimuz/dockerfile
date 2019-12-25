@@ -1,5 +1,4 @@
-# FROM iimuz/neovim:v0.4.3-1
-FROM izumi/neovim:base
+FROM iimuz/neovim:v0.4.3-1
 LABEL maintainer iimuz
 
 RUN set -x \
@@ -10,22 +9,7 @@ RUN set -x \
     ctags \
     git \
     vim-common \
-  && pip3 install --no-cache \
-    flake8 \
-    pipenv \
-  && : "Install python language server" \
-  && pip3 install --no-cache \
-    black \
-    mccabe \
-    mypy \
-    pycodestyle \
-    pydocstyle \
-    pyflakes \
-    pyls-black \
-    pyls-isort \
-    pyls-mypy \
-    python-language-server \
-    rope \
+  && pip3 install --no-cache pipenv \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
