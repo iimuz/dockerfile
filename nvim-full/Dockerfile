@@ -69,12 +69,11 @@ RUN set -x \
     git \
     vim-common \
   && pip3 install --no-cache \
-    autopep8 \
     black \
+    jedi \
+    pydocstyle \
     flake8 \
-    flake8-import-order \
-    isort \
-    python-language-server \
+    mypy \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -87,6 +86,12 @@ RUN set -x \
   && : "install plugins" \
   && nvim +"silent! call dein#install()" +qall \
   && nvim +"UpdateRemotePlugin" +qall \
+  && : "install coc extensions" \
+  && export COC_EXTENSION_DIR=$HOME/.config/coc/extensions \
+  && mkdir -p $COC_EXTENSION_DIR \
+  && cd $COC_EXTENSION_DIR \
+  && yarn add coc-python \
+  && nvim +"CocInstall coc-python" +qall \
   && : "setting for normal user" \
   && chmod -R 777 $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME \
   && : "clean" \
