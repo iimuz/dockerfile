@@ -2,43 +2,47 @@
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
-repo = 'prabirshrestha/async.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-depends = ['async']
-hook_source = '''
-  let g:lsp_diagnostics_enabled = 0
+repo = 'junegunn/fzf'
+build = '''
+  ./install --bin
 '''
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = ['fzf']
 hook_add = '''
-  " register pyls to vim-lsp
-  if (executable('pyls'))
-    autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'pyls',
-      \ 'cmd': { server_info -> ['pyls'] },
-      \ 'whitelist': ['python']
-    \ })
-  endif
+  command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', 'cat {}']}, <bang>0)
+  command! -bang -nargs=? -complete=dir GFiles
+    \ call fzf#vim#gitfiles(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', 'cat {}']}, <bang>0)
+
+  command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
+    \   fzf#vim#with_preview(), <bang>0)
+  command! -bang -nargs=* RgHidden
+    \ call fzf#vim#grep(
+    \   "rg --column --line-number --no-heading --color=always --smart-case --hidden ".shellescape(<q-args>), 1,
+    \   fzf#vim#with_preview(), <bang>0)
 
   " Prefix key
-  nnoremap [lsp] <Nop>
-  nmap <Space>l [lsp]
+  nnoremap [fzf] <Nop>
+  nmap <Space>f [fzf]
 
-  nmap <silent> [lsp]d :<C-u>LspDefinition<CR>
-  nmap <silent> [lsp]r :<C-u>LspReferences<CR>
-  nmap <silent> [lsp]s :<C-u>LspDocumentSymbol<CR>
-  nmap <silent> [lsp]w :<C-u>LspWorkspaceSymbol<CR>
-  nmap <silent> [lsp]f :<C-u>LspDocumentFormat<CR>
-  nmap <silent> [lsp]m :LspDocumentRangeFormat<CR>
-  nmap <silent> [lsp]h :<C-u>LspHover<CR>
-  nmap <silent> [lsp]i :<C-u>LspImplementation<CR>
-  nmap <silent> [lsp]n :<C-u>LspRename<CR>
+  nmap <silent> [fzf]b :<C-u>Buffers<CR>
+  nmap <silent> [fzf]c :<C-u>Commands<CR>
+  nmap <silent> [fzf]f :<C-u>Files<CR>
+  nmap <silent> [fzf]g :<C-u>Rg<CR>
+  nmap <silent> [fzf]G :<C-u>RgHidden<CR>
+  nmap <silent> [fzf]h :<C-u>History<CR>
+  nmap <silent> [fzf]H: :<C-u>History:<CR>
+  nmap <silent> [fzf]H/ :<C-u>/History<CR>
+  nmap <silent> [fzf]m :<C-u>Marks<CR>
+  nmap <silent> [fzf]p :<C-u>GFiles<CR>
+  nmap <silent> [fzf]t :<C-u>Tags<CR>
+  nmap <silent> [fzf]T :<C-u>BTags<CR>
+  nmap <silent> [fzf]l :<C-u>Lines<CR>
+  nmap <silent> [fzf]L :<C-u>BLines<CR>
 '''
 
 [[plugins]]
@@ -49,79 +53,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'Shougo/dein.vim'
-
-[[plugins]]
-repo = 'Shougo/denite.nvim'
-depends = ['neomru.vim', 'neoinclude.vim']
-hook_add = '''
-  " Define mappings
-  autocmd FileType denite call s:denite_my_settings()
-  function! s:denite_my_settings() abort
-    nnoremap <silent><buffer><expr> <CR>
-    \ denite#do_map('do_action')
-    nnoremap <silent><buffer><expr> d
-    \ denite#do_map('do_action', 'delete')
-    nnoremap <silent><buffer><expr> p
-    \ denite#do_map('do_action', 'preview')
-    nnoremap <silent><buffer><expr> q
-    \ denite#do_map('quit')
-    nnoremap <silent><buffer><expr> i
-    \ denite#do_map('open_filter_buffer')
-    nnoremap <silent><buffer><expr> <Space>
-    \ denite#do_map('toggle_select').'j'
-  endfunction
-
-  " Use the platinum searcher
-  call denite#custom#var('file/rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
-  call denite#custom#var('grep', 'command', ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
-  call denite#custom#var('grep', 'default_opts', [])
-  call denite#custom#var('grep', 'recursive_opts', [])
-
-  " Prefix key
-  nnoremap [denite] <Nop>
-  nmap <Space>d [denite]
-
-  nmap <silent> [denite]b :<C-u>Denite buffer<CR>
-  nmap <silent> [denite]g :<C-u>Denite grep<CR>
-  nmap <silent> [denite]h :<C-u>Denite command_history<CR>
-  nmap <silent> [denite]o :<C-u>Denite outline<CR>
-  nmap <silent> [denite]p :<C-u>Denite file/rec<CR>
-  nmap <silent> [denite]r :<C-u>Denite file_mru<CR>
-  nmap <silent> [denite]s :<C-u>Denite -resume<CR>
-  nmap <silent> [denite]/ :<C-u>Denite -buffer-name=search -auto-resize line<CR>
-
-  nmap <silent> [denite]] :<C-u>DeniteCursorWord grep<CR>
-  nmap <silent> [denite]* :<C-u>DeniteCursorWord -buffer-name=search -auto-resize line<CR>
-'''
-
-[[plugins]]
-repo = 'Shougo/neomru.vim'
-
-[[plugins]]
-repo = 'Shougo/neoinclude.vim'
-
-[[plugins]]
-repo = 'Shougo/unite.vim'
-depends = ['vimproc']
-hook_add = '''
-  let g:unite_enable_start_insert = 0
-  let g:unite_enable_ignore_case = 1
-  let g:unite_enable_smart_case = 1
-  let g:unite_split_rule = 'botright'
-'''
-
-[[plugins]]
-repo = 'Shougo/unite-outline'
-depends = ['unite']
-hook_add = '''
-  nnoremap <silent> [denite]o :Denite unite:outline<CR>
-'''
-
-[[plugins]]
-repo = 'Shougo/vimproc.vim'
-hook_post_update = '''
-  let g:dein#plugin.build = 'make CC=gcc'
-'''
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
