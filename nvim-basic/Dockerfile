@@ -1,13 +1,3 @@
-FROM golang:1.13.4-buster AS build-pt
-
-RUN set -x \
-  && go get -d github.com/monochromegane/the_platinum_searcher
-WORKDIR /go/src/github.com/monochromegane/the_platinum_searcher
-RUN set -x \
-  && git checkout refs/tags/v2.2.0 \
-  && go build -v -o ./pt ./cmd/pt/main.go \
-  && mv ./pt /go/bin/
-
 FROM debian:buster
 LABEL maintainer iimuz
 
@@ -31,9 +21,6 @@ RUN set -x \
 ENV LC_ALL=en_US.UTF-8 \
   LANG=en_US.UTF-8 \
   LANGUAGE=en_US:en
-
-# install pt
-COPY --from=build-pt /go/bin/pt /usr/bin/
 
 RUN set -x \
   && : "Install basic tools" \
@@ -84,6 +71,14 @@ RUN set -x \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+RUN set -x \
+  && : "Install ripgrep" \
+  && RIPGREP_VERSION=11.0.2 \
+  && RIPGREP_DEB=ripgrep_${RIPGREP_VERSION}_amd64.deb \
+  && RIPGREP_URL=https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/${RIPGREP_DEB} \
+  && curl -LO $RIPGREP_URL \
+  && dpkg -i $RIPGREP_DEB \
+  && rm $RIPGREP_DEB
 
 RUN set -x \
   && : "Install neovim" \
