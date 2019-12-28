@@ -20,6 +20,12 @@ RUN set -x \
   && : "install plugins" \
   && nvim +"silent! call dein#install()" +qall \
   && nvim +"UpdateRemotePlugin" +qall \
+  && : "Install coc extensions" \
+  && export COC_EXTENSION_DIR=$HOME/.config/coc/extensions \
+  && mkdir -p $COC_EXTENSION_DIR \
+  && cd $COC_EXTENSION_DIR \
+  && yarn add coc-prettier \
+  && nvim +"CocInstall coc-prettier" +qall \
   && : "setting for normal user" \
   && chmod -R 777 $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME \
   && : "clean" \

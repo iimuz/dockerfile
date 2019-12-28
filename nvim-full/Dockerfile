@@ -86,10 +86,14 @@ RUN set -x \
   && : "install plugins" \
   && nvim +"silent! call dein#install()" +qall \
   && nvim +"UpdateRemotePlugin" +qall \
-  && : "install coc extensions" \
+  && : "prepare installing coc extensions" \
   && export COC_EXTENSION_DIR=$HOME/.config/coc/extensions \
   && mkdir -p $COC_EXTENSION_DIR \
   && cd $COC_EXTENSION_DIR \
+  && : "install coc extensions for markdown" \
+  && yarn add coc-prettier \
+  && nvim +"CocInstall coc-prettier" +qall \
+  && : "install coc extensions for python" \
   && yarn add coc-python \
   && nvim +"CocInstall coc-python" +qall \
   && : "setting for normal user" \
