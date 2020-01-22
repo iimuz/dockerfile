@@ -1,32 +1,45 @@
-FROM node:10.11.0-alpine
-LABEL maintainer "iimuz"
+FROM node:13.6.0-buster
+LABEL maintainer iimuz
 
-# locale and timezone
-ENV LANG="ja_JP.UTF-8" \
-  LANGUAGE="ja_JP:ja" \
-  LC_ALL="ja_JP.UTF-8"
-RUN set -x && \
-  apk update && \
-  apk add --no-cache tzdata && \
-  rm -rf /var/cache/apk/*
+# xdg base directory
+ENV HOME=/home/dev
+ENV XDG_CACHE_HOME=$HOME/.cache \
+  XDG_CONFIG_DIRS=$HOME/etc/xdg \
+  XDG_CONFIG_HOME=$HOME/.config \
+  XDG_DATA_DIRS=/usr/local/share:/usr/share \
+  XDG_DATA_HOME=$HOME/.local/share
+ENV DEBIAN_FRONTEND=noninteractive
 
-# add user
-ENV USER_NAME=node \
-  HOME=/home/node \
-  USER_ID=1000 \
-  GROUP_ID=1000
-RUN set -x && \
-  apk update && \
-  apk add --no-cache su-exec shadow && \
-  rm -rf /var/cache/apk/*
-# adduser ${USER_NAME} --uid ${USER_ID} --disabled-password --gecos ""
+RUN set -x \
+  && : "Set locale" \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
+    locales \
+    locales-all \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+ENV LC_ALL=en_US.UTF-8 \
+  LANG=en_US.UTF-8 \
+  LANGUAGE=en_US:en
 
-ENV SOURCE_DIR=/src
-RUN set -x && mkdir ${SOURCE_DIR}
+RUN set -x \
+  && : "Set global install directory for users." \
+  && npm config set prefix "$XDG_DATA_HOME/npm-global"
+ENV PATH=$XDG_DATA_HOME/npm-global/bin:$PATH
 
-ADD ./entrypoint.sh /
-RUN chmod +x /entrypoint.sh
+RUN set -x \
+  && : "Create home directory for all user" \
+  && mkdir -p /home/dev \
+  && chmod -R 777 /home/dev
+
+ENV SOURCE_DIR=/workspace
+RUN set -x \
+  && : "Create workspace for all user" \
+  && mkdir -p $SOURCE_DIR \
+  && chmod 777 $SOURCE_DIR
 WORKDIR $SOURCE_DIR
-ENTRYPOINT ["/entrypoint.sh"]
+
+ENV DEBIAN_FRONTEND=dialog \
+  SHELL=/bin/bash
 CMD ["node"]
 
