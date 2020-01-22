@@ -23,7 +23,7 @@ COPY .config/nvim/* $XDG_CONFIG_HOME/nvim/
 RUN set -x \
   && : "install plugins" \
   && nvim +"call dein#install()" +qall \
-  && nvim +"UpdateRemotePlugin" +qall \
+  && nvim +"UpdateRemotePlugins" +qall \
   && export COC_EXTENSION_DIR=$HOME/.config/coc/extensions \
   && : "Install coc extensions" \
   && mkdir -p $COC_EXTENSION_DIR \

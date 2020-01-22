@@ -19,7 +19,7 @@ RUN set -x \
     make \
   && : "install plugins" \
   && nvim +"silent! call dein#install()" +qall \
-  && nvim +"UpdateRemotePlugin" +qall \
+  && nvim +"UpdateRemotePlugins" +qall \
   && : "Install coc extensions" \
   && export COC_EXTENSION_DIR=$HOME/.config/coc/extensions \
   && mkdir -p $COC_EXTENSION_DIR \
