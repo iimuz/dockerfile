@@ -54,6 +54,59 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'neoclide/coc.nvim'
+build = '''
+  ./install.sh nightly
+'''
+hook_add = '''
+  set hidden
+  set nobackup
+  set nowritebackup
+
+  set cmdheight=2
+  set updatetime=300
+  set shortmess+=c
+  set signcolumn=yes
+
+  " Prefix key
+  nnoremap [coc] <Nop>
+  nmap <Space>l [coc]
+
+  xmap <silent> [coc]a <Plug>(coc-codeaction-selected)
+  nmap <silent> [coc]a <Plug>(coc-codeaction-selected)
+  nmap <silent> [coc]A <Plug>(coc-codeaction)
+  nmap <silent> [coc]d <Plug>(coc-definition)
+  nmap <silent> [coc]f :call CocAction('format')<CR>
+  nmap <silent> [coc]F <Plug>(coc-fix-current)
+  nmap <silent> [coc]i <Plug>(coc-implementation)
+  nnoremap <silent> [coc]j :<C-u>CocNext<CR>
+  nnoremap <silent> [coc]k :<C-u>CocPrev<CR>
+  nnoremap <silent> [coc]Lc :<C-u>CocList commands<CR>
+  nnoremap <silent> [coc]Ld :<C-u>CocList diagnostics<CR>
+  nnoremap <silent> [coc]Le :<C-u>CocList extensions<CR>
+  nnoremap <silent> [coc]Lo :<C-u>CocList outline<CR>
+  nnoremap <silent> [coc]Ls :<C-u>CocList -I symbols<CR>
+  nmap <silent> [coc]n <Plug>(coc-rename)
+  nnoremap <silent> [coc]p :<C-u>CocListResume<CR>
+  nmap <silent> [coc]r <Plug>(coc-references)
+  nmap <silent> [coc]y <Plug>(coc-type-definition)
+  nmap <silent> [coc][ <Plug>(coc-diagnostic-prev)
+  nmap <silent> [coc]] <Plug>(coc-diagnostic-next)
+
+  nnoremap <silent> [coc]K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if &filetype == 'vim'
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+'''
+
+[[plugins]]
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
