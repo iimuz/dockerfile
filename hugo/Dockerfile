@@ -10,7 +10,7 @@ RUN set -x \
     ca-certificates \
     tar \
     wget \
-  && export HUGO_VERSION=0.60.1 \
+  && export HUGO_VERSION=0.63.1 \
   && export HUGO_ARCHIVE=hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz \
   && export HUGO_URL=https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/$HUGO_ARCHIVE \
   && export HUGO_TEMP=hugo_expand \
