@@ -46,19 +46,8 @@ RUN set -x \
     nodejs \
     npm \
     vim-common \
-  && : "install eslint" \
-  && npm install -g \
-    babel-eslint \
-    eslint \
-    eslint-plugin-import \
-    eslint-plugin-jsx-a11y \
-    eslint-plugin-vue \
-    eslint-plugin-react \
-    eslint-config-airbnb \
-    @typescript-eslint/parser \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
-COPY .eslintrc /.eslintrc
 
 RUN set -x \
   && : "setting python environment" \
@@ -93,6 +82,15 @@ RUN set -x \
   && : "install coc extensions for markdown" \
   && yarn add coc-prettier \
   && nvim +"CocInstall coc-prettier" +qall \
+  && : "install coc extensionf for node" \
+  && yarn add coc-css \
+  && nvim +"CocInstall coc-css" +qall \
+  && yarn add coc-html \
+  && nvim +"CocInstall coc-html" +qall \
+  && yarn add coc-json \
+  && nvim +"CocInstall coc-json" +qall \
+  && yarn add coc-tsserver \
+  && nvim +"CocInstall coc-tsserver" +qall \
   && : "install coc extensions for python" \
   && yarn add coc-python \
   && nvim +"CocInstall coc-python" +qall \
