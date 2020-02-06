@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 LABEL maintainer "iimuz"
 
 ENV HOME=/home/dev
@@ -44,12 +44,12 @@ RUN set -x \
   && : "Install pip" \
   && curl -sSL https://bootstrap.pypa.io/get-pip.py | $CMD_PYTHON
 
-RUN set -x && \
-  : "install pipenv" && \
-  pip3 --no-cache-dir install pipenv && \
-  : "set cache dir for pipenv" && \
-  mkdir -p /.cache && \
-  chmod 777 /.cache
+RUN set -x \
+  && : "install pipenv" \
+  && pip --no-cache-dir install pipenv \
+  && : "set cache dir for pipenv" \
+  && mkdir -p /.cache \
+  && chmod 777 /.cache
 ENV PIPENV_VENV_IN_PROJECT=1
 
 ENV PATH=$PATH:$HOME/.poetry/bin
