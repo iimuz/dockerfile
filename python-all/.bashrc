@@ -5,3 +5,4 @@ if [ -d $poerty_bin ]; then
   fi
 fi
 
+export PATH="$PATH:/opt/mssql-tools/bin"
