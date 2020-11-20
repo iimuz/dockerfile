@@ -47,7 +47,9 @@ RUN set -x \
 RUN set -x \
   && : "Install development tools" \
   && apt-get update \
-  && apt-get install -y --no-install-recommends curl \
+  && apt-get install -y --no-install-recommends \
+    curl \
+    git \
   && : "Clean" \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
